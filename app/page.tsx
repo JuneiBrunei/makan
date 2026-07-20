@@ -830,7 +830,7 @@ export default function Home() {
           font-size: clamp(2.3rem, 5.6vw, 4.2rem); line-height: 1.14;
           margin: 0 0 1.4rem; color: var(--parchment);
         }
-        .hero__title em { font-style: italic; font-weight: 600; color: var(--gold-light); }
+        .hero__title em { font-style: italic; font-weight: 600; color: var(--parchment); }
         .hero__text {
           font-size: 1.02rem; line-height: 1.7; color: var(--parchment-dim);
           max-width: 48ch; margin: 0 0 2.3rem; font-weight: 300;
