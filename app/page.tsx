@@ -787,7 +787,7 @@ export default function Home() {
         .mobile-menu--open { opacity: 1; visibility: visible; transform: translateY(0); }
         .mobile-menu__links { display: flex; flex-direction: column; gap: 0.4rem; }
         .mobile-menu__link {
-          display: flex; align-items: baseline; gap: 0.9rem;
+          display: flex; align-items: baseline; gap: 1.1rem;
           font-family: var(--font-display), serif; font-weight: 600;
           font-size: clamp(2rem, 9vw, 2.6rem); color: var(--parchment); text-decoration: none;
           padding: 0.55rem 0; border-bottom: 1px solid var(--hairline);
@@ -796,8 +796,15 @@ export default function Home() {
         }
         .mobile-menu--open .mobile-menu__link { opacity: 1; transform: translateY(0); }
         .mobile-menu__link:hover, .mobile-menu__link:focus-visible { color: var(--gold-light); }
-        .mobile-menu__link-index { font-size: 0.9rem; font-style: italic; color: var(--gold); opacity: 0.6; }
-        .mobile-menu__footer {
+        .mobile-menu__link-index {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--gold);
+  opacity: 0.6;
+  margin-right: 0.4rem;
+  font-variant-numeric: lining-nums;
+}
+  .mobile-menu__footer {
           display: flex; flex-direction: column; gap: 1.2rem;
           opacity: 0; transform: translateY(14px);
           transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);

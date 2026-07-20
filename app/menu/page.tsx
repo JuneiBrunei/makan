@@ -900,8 +900,15 @@ export default function MenuPage() {
         }
         .mobile-menu--open .mobile-menu__link { opacity: 1; transform: translateY(0); }
         .mobile-menu__link:hover, .mobile-menu__link:focus-visible { color: var(--gold-light); }
-        .mobile-menu__link-index { font-size: 0.9rem; font-style: italic; color: var(--gold); opacity: 0.6; margin-right: 0.4rem; }
-        .mobile-menu__footer {
+        .mobile-menu__link-index {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--gold);
+  opacity: 0.6;
+  margin-right: 0.4rem;
+  font-variant-numeric: lining-nums;
+}
+  .mobile-menu__footer {
           display: flex; flex-direction: column; gap: 1.2rem; opacity: 0; transform: translateY(14px);
           transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
         }
