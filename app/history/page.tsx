@@ -1,6 +1,13 @@
 'use client';
 
-import { useEffect, useRef, useState, type MouseEvent as ReactMouseEvent, type ReactNode } from 'react';
+import {
+  useEffect,
+  useRef,
+  useState,
+  type MouseEvent as ReactMouseEvent,
+  type PointerEvent as ReactPointerEvent,
+  type ReactNode,
+} from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Cormorant_Garamond, Manrope } from 'next/font/google';
@@ -23,13 +30,13 @@ import { Cormorant_Garamond, Manrope } from 'next/font/google';
  *  3. Слайдер «До / После» — фото до и после ремонта, которое гость
  *     раскрывает перетаскиванием ползунка.
  *
- * СОДЕРЖАНИЕ — ЗАМЕНИТЕ ПЕРЕД ПУБЛИКАЦИЕЙ:
- *  Годы, факты и текст письма ниже — черновая, придуманная канва
- *  («идея → помещение → ремонт → открытие»), чтобы страница не была
- *  пустой. Замените на реальную историю MAKAN: настоящие даты,
- *  реальные детали ремонта и того, что было в здании раньше.
- *  Фото «до» и «после» — временные стоковые (см. STOCK ниже), при
- *  наличии реальных архивных снимков ремонта — замените на них.
+ * СОДЕРЖАНИЕ:
+ *  Годы и факты — по-прежнему условная канва («идея → помещение →
+ *  ремонт → открытие»), но текст теперь раскрывает главную идею MAKAN:
+ *  воссоздать атмосферу грузинских гор в небольшом городе. При наличии
+ *  реальных дат/деталей — подставьте свои. Фото «до» и «после» — временные
+ *  стоковые (см. STOCK ниже), при наличии реальных архивных снимков
+ *  ремонта — замените на них.
  *
  * ВАЖНО про next/image + fill (тот же принцип, что и в gallery/page.tsx):
  *  Каждый контейнер с fill-картинкой — обычный <div>, написанный прямо
@@ -69,38 +76,28 @@ const STOCK = {
 
 const HERO_IMAGE_FOCUS = 'center 30%';
 
-// Черновая хронология — замените на реальные даты и факты.
+// Хронология MAKAN — идея, стоящая за каждым этапом, всегда одна: горы Кавказа в Талгаре.
 const milestones = [
   {
-    year: '2019',
+    year: '',
     title: 'Идея',
-    text: 'Мысль о месте, где не смотрят на часы, родилась за разговором о кухне, которая объединяет Кавказ, Европу и Восток в одном меню.',
+    text: 'Пришла идея воссоздать атмосферу грузинских гор — тепло очага, щедрость стола и гостеприимство Кавказа — в небольшом городе, где такого ещё не было.',
   },
   {
-    year: '2020',
-    title: 'Помещение',
-    text: 'Нашли кирпичное здание в центре Талгара — с высокими потолками и историей, которую не хотелось прятать под штукатуркой.',
-  },
-  {
-    year: '2021',
-    title: 'Реставрация',
-    text: 'Полгода восстановления: кирпич очищали вручную, латунь и кожаные диваны заказывали по эскизам, ковры искали по всему городу.',
-  },
-  {
-    year: '2022',
+    year: 'Июль 2026',
     title: 'Открытие',
-    text: 'Двери MAKAN открылись для первых гостей — с меню, где встретились шашлык, десерты и авторский кофе.',
+    text: 'Двери MAKAN открылись для первых гостей — с интерьером в духе горного дома и меню, где грузинские традиции встретились с шашлыком, десертами и авторским кофе.',
   },
   {
     year: 'Сегодня',
     title: 'Продолжение',
-    text: 'Место, куда возвращаются не за скоростью, а за атмосферой — и куда каждый год добавляется что-то новое.',
+    text: 'Место, где каждый гость на минуту оказывается в горах Кавказа — и куда возвращаются не за скоростью, а за этим чувством.',
   },
 ];
 
 const explore = [
-  { label: 'Меню', href: '/menu', text: 'Блюда и напитки, которые мы подаём каждый день.' },
-  { label: 'Галерея', href: '/gallery', text: 'Зал, детали интерьера и атмосфера MAKAN.' },
+  { label: 'Меню', href: '/menu', text: 'Грузинские блюда, шашлык и десерты, которые мы подаём каждый день.' },
+  { label: 'Галерея', href: '/gallery', text: 'Зал, детали интерьера и атмосфера гор Кавказа.' },
   { label: 'Контакты', href: '/#contacts', text: 'Адрес, часы работы и как до нас добраться.' },
 ];
 
@@ -214,6 +211,8 @@ export default function HistoryPage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [progress, setProgress] = useState(0);
   const [reveal, setReveal] = useState(50);
+  const [compareDragging, setCompareDragging] = useState(false);
+  const compareFrameRef = useRef<HTMLDivElement>(null);
   const spotlightRef = useRef<HTMLDivElement>(null);
   const status = useOpenStatus();
 
@@ -243,6 +242,33 @@ export default function HistoryPage() {
       document.body.style.overflow = '';
     };
   }, [menuOpen]);
+
+  const updateRevealFromClientX = (clientX: number) => {
+    const el = compareFrameRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    if (rect.width === 0) return;
+    const pct = ((clientX - rect.left) / rect.width) * 100;
+    setReveal(Math.min(100, Math.max(0, pct)));
+  };
+
+  const handleComparePointerDown = (e: ReactPointerEvent<HTMLDivElement>) => {
+    setCompareDragging(true);
+    e.currentTarget.setPointerCapture?.(e.pointerId);
+    updateRevealFromClientX(e.clientX);
+  };
+  const handleComparePointerMove = (e: ReactPointerEvent<HTMLDivElement>) => {
+    if (!compareDragging) return;
+    updateRevealFromClientX(e.clientX);
+  };
+  const handleComparePointerEnd = (e: ReactPointerEvent<HTMLDivElement>) => {
+    setCompareDragging(false);
+    try {
+      e.currentTarget.releasePointerCapture?.(e.pointerId);
+    } catch {
+      // pointer already released
+    }
+  };
 
   const magnetProps = {
     onMouseMove: (e: ReactMouseEvent<HTMLElement>) => {
@@ -339,10 +365,10 @@ export default function HistoryPage() {
         <div className="hero__content">
           <p className="eyebrow">История</p>
           <h1 className="hero__title">
-            От <em>пустых стен</em> до места, где задерживаются
+            Мы принесли <em>дух грузинских гор</em> в Талгар
           </h1>
           <p className="hero__text">
-            Как здание в центре Талгара стало кафе, куда приходят не за скоростью, а за атмосферой.
+            Как желание воссоздать атмосферу Кавказа превратилось в кафе, где горное гостеприимство встречает гостя с первого шага.
           </p>
         </div>
       </section>
@@ -351,7 +377,7 @@ export default function HistoryPage() {
         <div className="marquee__track">
           {Array.from({ length: 2 }).map((_, rep) => (
             <span className="marquee__group" key={rep}>
-              {['MAKAN', 'С 2022 года', 'Кирпич и латунь', 'Реставрация вручную', 'Гостеприимство'].map((w) => (
+              {['MAKAN', 'Дух Кавказа', 'История создания', 'Талгар', 'Горное гостеприимство'].map((w) => (
                 <span className="marquee__item" key={w}>
                   {w}
                   <Swash className="marquee__swash" />
@@ -370,14 +396,15 @@ export default function HistoryPage() {
             <Swash className="letter__swash" />
             <p className="letter__eyebrow">Несколько слов от нас</p>
             <p className="letter__text">
-              Мы не хотели открывать ещё одно кафе с типовым интерьером.
-              Хотелось места, где кирпич остаётся кирпичом, а не прячется
-              за гипсокартоном — и где гостя встречают так, будто он уже
-              свой.
+              Мы хотели, чтобы гость, переступив порог, оказался не в обычном
+              кафе, а будто в горном доме где-то в Сванетии или Кахетии — там,
+              где тепло очага и щедрость стола не показные, а настоящие.
             </p>
             <p className="letter__text">
-              Дальше — то, как это получилось: от идеи до дверей, которые
-              теперь открыты каждый день.
+              Так родилась идея: собрать в одном пространстве дух грузинских
+              гор — камень, дерево, огонь — и подать его через кухню, где
+              кавказские традиции встречаются с шашлыком, десертами и
+              авторским кофе.
             </p>
             <p className="letter__sign">— команда MAKAN</p>
           </div>
@@ -401,7 +428,7 @@ export default function HistoryPage() {
               <span className="timeline__dot" aria-hidden="true" />
               <Reveal>
                 <div className="timeline__card">
-                  <span className="timeline__year">{m.year}</span>
+                  {m.year && <span className="timeline__year">{m.year}</span>}
                   <h3 className="timeline__title">{m.title}</h3>
                   <p className="timeline__text">{m.text}</p>
                 </div>
@@ -420,13 +447,24 @@ export default function HistoryPage() {
 
         <Reveal>
           <div className="compare">
-            <div className="compare__frame">
+            <div
+              className="compare__frame"
+              ref={compareFrameRef}
+              onPointerDown={handleComparePointerDown}
+              onPointerMove={handleComparePointerMove}
+              onPointerUp={handleComparePointerEnd}
+              onPointerCancel={handleComparePointerEnd}
+              onPointerLeave={(e) => {
+                if (compareDragging) handleComparePointerEnd(e);
+              }}
+            >
               <Image
                 src={STOCK.before}
                 alt="Помещение до ремонта: голые стены и пустое пространство"
                 fill
                 sizes="(max-width: 900px) 92vw, 800px"
                 className="compare__img"
+                draggable={false}
               />
               <div className="compare__after" style={{ clipPath: `inset(0 0 0 ${reveal}%)` }}>
                 <Image
@@ -435,6 +473,7 @@ export default function HistoryPage() {
                   fill
                   sizes="(max-width: 900px) 92vw, 800px"
                   className="compare__img"
+                  draggable={false}
                 />
               </div>
 
@@ -486,7 +525,7 @@ export default function HistoryPage() {
             <div className="footer__mark">
               MAKAN <span>кафесі</span>
             </div>
-            <p className="footer__tag">Кофе, десерты и атмосфера, в которой хочется задержаться</p>
+            <p className="footer__tag">Дух гор Кавказа, кофе и десерты — в атмосфере, в которой хочется задержаться</p>
           </div>
 
           <div className="footer__col footer__col--meta">
@@ -704,9 +743,10 @@ export default function HistoryPage() {
           font-family: var(--font-display), serif; font-weight: 600;
           font-size: clamp(2.1rem, 5.2vw, 3.6rem); line-height: 1.14;
           margin: 0 0 1rem; color: var(--parchment);
+          text-shadow: 0 2px 24px rgba(0,0,0,0.55), 0 1px 4px rgba(0,0,0,0.85);
         }
         .hero__title em { font-style: italic; font-weight: 600; color: var(--gold-light); }
-        .hero__text { font-size: 1rem; line-height: 1.7; color: var(--parchment-dim); max-width: 46ch; margin: 0; font-weight: 300; }
+        .hero__text { font-size: 1rem; line-height: 1.7; color: var(--parchment-dim); max-width: 46ch; margin: 0; font-weight: 300; text-shadow: 0 1px 12px rgba(0,0,0,0.5); }
         @media (max-width: 640px) {
           .hero { height: 52vh; }
           .hero__content { padding: 0 1.4rem 3rem; }
@@ -809,7 +849,7 @@ export default function HistoryPage() {
         .compare__frame {
           position: relative; width: min(100%, 800px); aspect-ratio: 16 / 10;
           overflow: hidden; border: 1px solid var(--hairline); cursor: ew-resize;
-          touch-action: pan-y;
+          touch-action: none; user-select: none;
         }
         .compare__img { object-fit: cover; filter: saturate(0.88) brightness(0.85); }
         .compare__after { position: absolute; inset: 0; }
@@ -836,6 +876,7 @@ export default function HistoryPage() {
           position: absolute; inset: 0; width: 100%; height: 100%; z-index: 4;
           margin: 0; opacity: 0; cursor: ew-resize;
           -webkit-appearance: none; appearance: none;
+          pointer-events: none;
         }
         .compare__slider::-webkit-slider-thumb { -webkit-appearance: none; width: 100%; height: 100%; }
         .compare__slider::-moz-range-thumb { width: 100%; height: 100%; border: 0; background: transparent; }
@@ -844,8 +885,8 @@ export default function HistoryPage() {
         }
 
         /* ДАЛЬШЕ ПО САЙТУ */
-        .explore { padding: var(--space-section-sm) 2rem var(--space-section); background: var(--ink); text-align: center; }
-        .explore__list { max-width: 900px; margin: 3rem auto 0; text-align: left; }
+        .explore { padding: var(--space-section-sm) 3vw var(--space-section); background: var(--ink); text-align: center; }
+        .explore__list { max-width: none; width: 100%; margin: 3rem 0 0; text-align: left; }
         .explore__row {
           position: relative; display: grid;
           grid-template-columns: 2.8rem 1fr auto; align-items: center; gap: 1.4rem;
