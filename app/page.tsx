@@ -41,6 +41,15 @@ import { Cormorant_Garamond, Manrope } from 'next/font/google';
  *     images: { remotePatterns: [{ protocol: 'https', hostname: 'images.unsplash.com' }] },
  *   };
  * Когда замените стоки на свои локальные фото — эту настройку можно убрать.
+ *
+ * ФИКС "РАСТЯНУТОГО" HERO-ФОТО (2026-07-19):
+ *  object-fit: cover обрезает фото под размеры блока (почти весь экран).
+ *  Если пропорции кадра сильно отличаются от контейнера, получается сильный
+ *  "зум" — как было со шторами крупным планом. Добавлен objectPosition на
+ *  <Image> в Hero — двигайте значение ('center 35%' и т.п.), пока в кадр не
+ *  попадёт нужная часть интерьера. Это самый быстрый фикс без переобрезки
+ *  самого файла. Если своя фотография портретная/квадратная — лучше заранее
+ *  обрезать её под широкий формат (~16:9 или шире) перед загрузкой.
  * =========================================================================
  */
 
@@ -66,16 +75,20 @@ const MAP_QUERY = encodeURIComponent('Талгар, ул. Гагарина 67');
 
 // Временные стоковые фото (см. комментарий вверху файла — заменить на свои)
 const STOCK = {
-  about: 'https://images.unsplash.com/photo-1753873555674-1d6698c7537b?q=80&w=1400&auto=format&fit=crop',
-  feature1: 'https://images.unsplash.com/photo-1744561249162-c597c1670032?q=80&w=1200&auto=format&fit=crop',
-  feature2: 'https://images.unsplash.com/photo-1770541025973-dfc3c4c23fad?q=80&w=1200&auto=format&fit=crop',
-  gallerySide: 'https://images.unsplash.com/photo-1759301495161-31027c795358?q=80&w=1200&auto=format&fit=crop',
-  menuTeaser: 'https://images.unsplash.com/photo-1743034193060-8332b1fec210?q=80&w=1200&auto=format&fit=crop',
+  about: '/images/makan-about1.jpg',
+  feature1: '/images/makan-photo4.jpg',
+  feature2: '/images/makan-photo.jpg',
+  gallerySide: '/images/makan-photo2.jpg',
+  menuTeaser: '/images/makan-photo4.jpg',
   // Временная замена для отсутствующих локальных файлов makan-interior*.jpg —
   // как появятся реальные фото зала, замените на локальные пути.
-  hero: 'https://images.unsplash.com/photo-1744561249162-c597c1670032?q=80&w=1600&auto=format&fit=crop',
-  detail: 'https://images.unsplash.com/photo-1753873555674-1d6698c7537b?q=80&w=1400&auto=format&fit=crop',
+  hero: '/images/makan-hero11.jpg',
+  detail: '/images/makan-photo3.jpg',
 };
+
+// Точка фокуса для hero-фото (object-position). Подберите под свой кадр:
+// 'center center' — центр, 'center top' — верх, 'center 30%' — ближе к верху.
+const HERO_IMAGE_FOCUS = 'center 30%';
 
 /** Волнистая линия из логотипа — единственный узнаваемый узор страницы. Используется точечно. */
 function Swash({ className = '' }: { className?: string }) {
@@ -146,8 +159,8 @@ const features = [
     alt: 'Тёплый свет, деревянные балки и латунные светильники в зале',
   },
   {
-    title: 'Кожа цвета вина',
-    text: 'Глубокий бордо и тёмная зелень диванов — оттенки, которые встречают гостя, а не просто обставляют зал.',
+    title: 'Внимание к деталям',
+    text: 'Детали интерьера не просто украшают, а создают атмосферу, в которой хочется задержаться',
     image: STOCK.feature2,
     alt: 'Диваны цвета вина и тёмно-зелёная обивка в приглушённом свете',
   },
@@ -160,8 +173,8 @@ const features = [
 ];
 
 const gallery = [
-  { src: STOCK.hero, alt: 'Общий вид зала MAKAN', caption: 'Столик у окна занимают первым' },
-  { src: STOCK.gallerySide, alt: 'Диван и тёплый свет за угловым столиком', caption: 'Здесь задерживаются дольше, чем планировали' },
+  { src: STOCK.hero, alt: 'Общий вид зала MAKAN', caption: 'Здесь задерживаются дольше, чем планировали' },
+  { src: STOCK.gallerySide, alt: 'Диван и тёплый свет за угловым столиком', caption: 'Столик у окна занимают первым' },
   { src: STOCK.detail, alt: 'Деталь интерьера: свет и текстиль', caption: 'Ковёр помнит больше разговоров, чем мы' },
   { src: STOCK.feature1, alt: 'Тёплый свет и латунные светильники в зале', caption: 'Свет здесь никогда не бывает резким' },
 ];
@@ -188,13 +201,13 @@ const navLinks = [
 // блоке `hours` выше, но по дням недели (0 = вс … 6 = сб) для расчёта в JS.
 // close: 24 значит "до полуночи".
 const WEEKLY_HOURS: Record<number, [number, number]> = {
-  0: [10, 22], // воскресенье
-  1: [9, 23],
-  2: [9, 23],
-  3: [9, 23],
-  4: [9, 23],
-  5: [9, 24],
-  6: [9, 24],
+  0: [10, 23], // воскресенье
+  1: [10, 23],
+  2: [10, 23],
+  3: [10, 23],
+  4: [10, 23],
+  5: [10, 23],
+  6: [10, 23],
 };
 
 function formatHour(h: number) {
@@ -349,13 +362,14 @@ export default function Home() {
       {/* 1. HERO — что это за место */}
       <section className="hero">
         <Image
-          src={STOCK.hero}
-          alt="Зал кафе MAKAN: кирпичные стены, кожаные диваны бордового и зелёного цвета, тёплый свет"
-          fill
-          priority
-          sizes="100vw"
-          className="hero__img"
-        />
+  src={STOCK.hero}
+  alt="Зал кафе MAKAN: кирпичные стены, кожаные диваны бордового и зелёного цвета, тёплый свет"
+  fill
+  priority
+  sizes="100vw"
+  className="hero__img"
+  style={{ objectFit: 'cover', objectPosition: HERO_IMAGE_FOCUS }}
+/>
         <div className="hero__scrim" />
         <div className="hero__content">
           {status && (
@@ -364,11 +378,11 @@ export default function Home() {
               {status.text}
             </span>
           )}
-          <p className="eyebrow">Кафе в центре Алматы</p>
+          <p className="eyebrow">Кафе в центре Талгара</p>
           <h1 className="hero__title">
             Место, где не смотрят на часы.
             <br />
-            <em>Кофе, десерты и вечера, которые не хочется торопить.</em>
+            <em>Еда, теплые разговоры и вечера, которые не хочется торопить.</em>
           </h1>
           <p className="hero__text">
             Кирпичные стены, тёплый свет и кожаные диваны — атмосфера,
@@ -389,7 +403,7 @@ export default function Home() {
         <div className="marquee__track">
           {Array.from({ length: 2 }).map((_, rep) => (
             <span className="marquee__group" key={rep}>
-              {['Кирпич', 'Латунь', 'Кожа цвета вина', 'Кофе', 'Десерты', 'MAKAN'].map((w) => (
+              {['MAKAN', 'Азербайджанский шашлык', 'Европейская и восточная кухня', 'Грузинский стиль', 'Гостеприимство'].map((w) => (
                 <span className="marquee__item" key={w}>
                   {w}
                   <Swash className="marquee__swash" />
@@ -407,30 +421,31 @@ export default function Home() {
             <p className="eyebrow">О нас</p>
             <h2 className="about__title">Место для тех, кто никуда не спешит</h2>
             <p className="about__text">
-              MAKAN — кафе в самом сердце Алматы, где интерьер и подача выросли
+              MAKAN — кафе в самом сердце Талгара, где интерьер и подача выросли
               из одной идеи: гостя встречают неторопливо и щедро, будто он уже
               свой. Кирпич, тяжёлая кожа диванов, приглушённый свет и ковры на
               стенах вместо картин — детали, которые держат атмосферу.
             </p>
             <p className="about__text">
-              Кофе, десерты и авторское меню — то, ради чего сюда возвращаются
+              Вкусная еда, атмосфера и гостеприимство — то, ради чего сюда возвращаются
               снова и снова.
             </p>
             <blockquote className="about__quote">
               <Swash className="about__quote-swash" />
-              «Хороший стол — это время, которое не хочется торопить.
-              Мы просто даём гостю на него столько, сколько нужно».
+              «Хороший стол — это время, которое не хочется торопить.»
             </blockquote>
           </Reveal>
-          <Reveal className="about__media">
-            <Image
-              src={STOCK.about}
-              alt="Кирпичная стена и тёплый свет в интерьере кафе"
-              fill
-              sizes="(max-width: 900px) 100vw, 44vw"
-              className="about__media-img"
-            />
-          </Reveal>
+          <Reveal>
+  <div className="about__media">
+    <Image
+      src={STOCK.about}
+      alt="Кирпичная стена и тёплый свет в интерьере кафе"
+      fill
+      sizes="(max-width: 900px) 100vw, 44vw"
+      className="about__media-img"
+    />
+  </div>
+</Reveal>
         </div>
       </section>
 
@@ -595,7 +610,7 @@ export default function Home() {
             <div className="footer__mark">
               MAKAN <span>кафесі</span>
             </div>
-            <p className="footer__tag">Кофе, десерты и атмосфера, в которой хочется задержаться</p>
+            <p className="footer__tag">Вкусная еда и атмосфера, в которой хочется задержаться</p>
           </div>
 
           <div className="footer__col footer__col--meta">
@@ -1068,7 +1083,7 @@ export default function Home() {
           transform: translateX(0.55rem); color: var(--gold-light);
         }
         .explore__row-text { font-size: 0.86rem; color: var(--parchment-dim); font-weight: 300; max-width: 34ch; }
-        .explore__row-thumb { display: none; }
+        .explore__row-thumb { display: none; position: relative; }
         .explore__row-arrow {
           font-size: 1.2rem; color: var(--gold-light);
           opacity: 0; transform: translateX(-10px);
