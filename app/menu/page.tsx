@@ -36,16 +36,16 @@ const body = Manrope({
   variable: '--font-body',
 });
 
-const ADDRESS = 'г. Алматы, пр. Достык, 132';
-const PHONE = '+7 (700) 123-45-67';
-const PHONE_HREF = 'tel:+77001234567';
-const INSTAGRAM = 'https://instagram.com/makan.kafesi';
-const WHATSAPP = 'https://wa.me/77001234567';
+const ADDRESS = 'г. Талгар, ул. Гагарина 67';
+const PHONE = '+7 708 605 9354';
+const PHONE_HREF = 'tel:+77086059354';
+const INSTAGRAM = 'https://www.instagram.com/makan_talgar/';
+const WHATSAPP = 'https://wa.me/77086059354';
 
 const hours = [
-  { day: 'Понедельник — четверг', time: '09:00 — 23:00' },
-  { day: 'Пятница — суббота', time: '09:00 — 00:00' },
-  { day: 'Воскресенье', time: '10:00 — 22:00' },
+  { day: 'Понедельник — четверг', time: '10:00 — 23:00' },
+  { day: 'Пятница — суббота', time: '10:00 — 23:00' },
+  { day: 'Воскресенье', time: '10:00 — 23:00' },
 ];
 
 const navLinks = [
@@ -180,7 +180,7 @@ const FOOD_CATEGORIES: MenuCategory[] = [
       ['Острые крылышки', '2499 ₸'],
       ['Креветки в чесночном соусе', '3099 ₸'],
       ['Мини чебуреки с мясом', '3 шт — 1399 ₸ · 5 шт — 2199 ₸'],
-      ['Мини чебуреки с брынзой и зеленью', '3 шт — 1999 ₸ · 5 шт — 1999 ₸'],
+      ['Мини чебуреки с брынзой и зеленью', '3 шт — 1399 ₸ · 5 шт — 1999 ₸'],
       ['Ассорти колбасок (говядина, конина, баранина, курица)', '12499 ₸ · по отдельности 3799 ₸'],
       ['Мини самса с мясом', '5 шт — 2199 ₸'],
       ['Наггетсы', '6 шт — 1399 ₸']
@@ -215,7 +215,7 @@ const FOOD_CATEGORIES: MenuCategory[] = [
   {
     title: 'Восточная кухня',
     groups: items(
-      ['Помян', '1799 ₸'],
+      ['Цомян', '1799 ₸'],
       ['Гуйру лагман', '2499 ₸'],
       ['Манты', '1999 ₸'],
       ['Куырдак', '3499 ₸'],
@@ -262,7 +262,7 @@ const FOOD_CATEGORIES: MenuCategory[] = [
       ['Традиционный бесбармак', 'на 6 перс. — 18999 ₸ · на 4 перс. — 13999 ₸'],
       ['Куырдак из баранины', 'на 6 перс. — 19499 ₸ · на 4 перс. — 13499 ₸'],
       ['Сырне', 'на 6 перс. — 19499 ₸ · на 4 перс. — 14499 ₸'],
-      ['Даланджи с рисом', 'на 6 перс. — 13999 ₸ · на 4 перс. — 10999 ₸'],
+      ['Дапанджи с рисом', 'на 6 перс. — 13999 ₸ · на 4 перс. — 10999 ₸'],
       ['Плов праздничный с говядиной', 'на 6 перс. — 16999 ₸ · на 4 перс. — 12999 ₸'],
       ['Манты', 'на 6 перс. — 10499 ₸'],
       ['Коктал', '27999 ₸']
@@ -308,7 +308,7 @@ const FOOD_CATEGORIES: MenuCategory[] = [
   {
     title: 'Стейки',
     groups: items(
-      ['Рибай с овощами гриль', '6059 ₸'],
+      ['Рибай с овощами гриль', '6099 ₸'],
       ['Тибон с овощами', '5799 ₸'],
       ['Стейк из форели', '4799 ₸'],
       ['Стейк из лосося', '4799 ₸']
@@ -369,9 +369,9 @@ const BAR_CATEGORIES: MenuCategory[] = [
       {
         subtitle: 'Виски',
         items: [
-          { name: 'Villian Lavons 3 года', price: '1050 ₸' },
+          { name: 'William Lawson', price: '1050 ₸' },
           { name: 'Jameson', price: '1450 ₸' },
-          { name: "Ballantine's Finest", price: '1000 ₸' },
+          { name: "Ballantine's", price: '1000 ₸' },
           { name: "Jack Daniel's", price: '1855 ₸' },
           { name: 'Chivas 12 летний', price: '2900 ₸' },
         ],
@@ -392,7 +392,7 @@ const BAR_CATEGORIES: MenuCategory[] = [
         items: [
           { name: 'Bacardi Carta Negra', price: '950 ₸' },
           { name: 'Bacardi Carta Blanca', price: '950 ₸' },
-          { name: 'Bacardi Oakheart', price: '950 ₸' },
+          { name: 'Oakheart', price: '950 ₸' },
         ],
       },
       {
@@ -425,39 +425,50 @@ const BAR_CATEGORIES: MenuCategory[] = [
       {
         subtitle: 'Белое сухое',
         items: [
-          { name: 'Тбилиси', price: '7050 ₸' },
+          { name: 'Долины Грузии Тбилиси', price: '7050 ₸' },
           { name: 'Carmen Insigne Sauvignon Blanc', price: '7500 ₸' },
         ],
       },
       {
         subtitle: 'Белое полусухое',
         items: [
-          { name: 'Сачино', price: '7400 ₸' },
-          { name: 'Vartely (Молдова)', price: '5900 ₸' },
+          { name: 'Долины Грузии Сачино', price: '7400 ₸' },
+          { name: 'Chateau Vartely Chardonnay', price: '5900 ₸' },
         ],
       },
       {
         subtitle: 'Белое полусладкое',
         items: [
-          { name: 'Алазанская Долина Белое (Kvareli)', price: '5300 ₸' },
-          { name: 'Teliani Valley Алазанская Долина Белое', price: '6750 ₸' },
+          { name: 'Алазанская Долина Kvareli', price: '5300 ₸' },
+          { name: 'Алазанская Долина Teliani Valley', price: '6750 ₸' },
         ],
       },
       {
         subtitle: 'Красное полусухое',
         items: [
-          { name: 'Пиросмани', price: '7200 ₸' },
-          { name: 'Vartely Cabernet Sauvignon (Молдова)', price: '5900 ₸' },
+          { name: 'Pirosmani Kvareli', price: '7200 ₸' },
+          { name: 'Chateau Vartely Cabernet Sauvignon', price: '5900 ₸' },
         ],
       },
       {
         subtitle: 'Красное полусладкое',
         items: [
-          { name: 'Алазанская Долина Красное', price: '6500 ₸' },
-          { name: 'Долина Грузии Киндзмараули', price: '12200 ₸' },
+          { name: 'Алазанская Долина Kvareli', price: '6500 ₸' },
+          { name: 'Долины Грузии Киндзмараули', price: '12200 ₸' },
         ],
       },
+      {
+        subtitle: 'Вино игристое',
+        items: [{ name: 'Martini Asti', price: '14000 ₸' }],
+      },
     ],
+  },
+  {
+    title: 'Шампанское',
+    groups: items(
+      ['Шампанское советское', '5500 ₸'],
+      ['Шампанское Diana', '5400 ₸']
+    ),
   },
   {
     title: 'Пиво',
@@ -675,7 +686,7 @@ export default function MenuPage() {
         <div className="marquee__track">
           {Array.from({ length: 2 }).map((_, rep) => (
             <span className="marquee__group" key={rep}>
-              {['Хачапури', 'Шашлык', 'Дорадо', 'Плов', 'Коктейли', 'MAKAN'].map((w) => (
+              {['MAKAN', 'Шашлык', 'Грузинские блюда', 'Бар', 'Коктейли', 'Лимонады'].map((w) => (
                 <span className="marquee__item" key={w}>
                   {w}
                   <Swash className="marquee__swash" />
@@ -747,13 +758,13 @@ export default function MenuPage() {
             <div className="footer__mark">
               MAKAN <span>кафесі</span>
             </div>
-            <p className="footer__tag">Кофе, десерты и атмосфера, в которой хочется задержаться</p>
+            <p className="footer__tag">Вкусная еда и атмосфера, в которой хочется задержаться</p>
           </div>
 
           <div className="footer__col footer__col--meta">
             <p>{ADDRESS}</p>
             <p><a href={PHONE_HREF}>{PHONE}</a></p>
-            <p>Ежедневно, 09:00 — 23:00</p>
+            <p>Ежедневно, 10:00 — 23:00</p>
           </div>
 
           <div className="footer__col footer__col--social">
@@ -916,7 +927,8 @@ export default function MenuPage() {
           font-size: clamp(2.4rem, 6vw, 3.6rem); margin: 0 0 1rem; color: var(--parchment);
         }
         .menu-hero__text { font-size: 0.95rem; line-height: 1.7; color: var(--parchment-dim); font-weight: 300; margin: 0 auto; max-width: 46ch; }
-        .menu-hero__swash { width: 90px; height: 14px; color: var(--gold); margin: 2rem auto 0; display: block; }
+        :global(.menu-hero__swash) { width: 440px; height: 84px; color: white; margin: 2rem auto 0; display: block; }
+        
         @media (max-width: 640px) {
           .menu-hero { padding: 7.5rem 1.4rem 2rem; }
         }
