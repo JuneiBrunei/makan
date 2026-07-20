@@ -59,13 +59,26 @@ const WHATSAPP = 'https://wa.me/77086059354';
 
 // Временные стоковые фото — те же источники, что и на главной странице,
 // чтобы визуально всё было в одном стиле. Замените на реальные кадры зала.
+// Временные стоковые фото — сгруппированы по категориям, чтобы сразу было
+// видно, что и куда менять. Когда появятся реальные фото зала MAKAN,
+// положите их в /public/images/gallery/ и замените пути ниже —
+// имена ключей (hall_1, details_2, table_1 и т.д.) менять не нужно,
+// просто подставьте новый путь к файлу.
 const STOCK = {
-  hero: '/images/makan-hero1.jpg',
-  about: 'https://images.unsplash.com/photo-1753873555674-1d6698c7537b?q=80&w=1400&auto=format&fit=crop',
-  feature1: 'https://images.unsplash.com/photo-1744561249162-c597c1670032?q=80&w=1200&auto=format&fit=crop',
-  feature2: 'https://images.unsplash.com/photo-1770541025973-dfc3c4c23fad?q=80&w=1200&auto=format&fit=crop',
-  gallerySide: 'https://images.unsplash.com/photo-1759301495161-31027c795358?q=80&w=1200&auto=format&fit=crop',
-  menuTeaser: 'https://images.unsplash.com/photo-1743034193060-8332b1fec210?q=80&w=1200&auto=format&fit=crop',
+  // ЗАЛ — общие планы помещения, диваны, светильники
+  hall_1: '/images/makan-hero1.jpg',
+  hall_2: '/images/makan-photo2.jpg',
+
+  // ДЕТАЛИ — крупные планы: стены, свет, текстуры, декор
+  details_1: '/images/makan-details2.jpg',
+  details_2: '/images/makan-details3.jpg',
+  details_3: '/images/makan-details4.jpg',
+  details_4: '/images/makan-details5.jpg',
+  details_5: '/images/makan-details6.jpg',
+
+  // НА СТОЛЕ — еда, напитки, сервировка
+  table_1: '/images/makan-photo1.jpg',
+  table_2: '/images/makan-photo.jpg',
 };
 
 const HERO_IMAGE_FOCUS = 'center 30%';
@@ -79,8 +92,9 @@ const categories: { key: Category | 'all'; label: string }[] = [
   { key: 'table', label: 'На столе' },
 ];
 
-// aspect — задаёт «рост» карточки в масонри-сетке, чтобы ряд не выглядел
-// типовой плиткой; чередование форматов имитирует разложенные снимки.
+// Каждая картинка используется РОВНО ОДИН РАЗ — как только появятся новые
+// реальные фото, просто добавляйте новые объекты в этот массив
+// (и, при необходимости, новые ключи в STOCK выше).
 const photos: {
   src: string;
   alt: string;
@@ -88,18 +102,20 @@ const photos: {
   category: Category;
   aspect: string;
 }[] = [
-  { src: STOCK.hero, alt: 'Общий вид зала MAKAN', caption: 'Столик у окна занимают первым', category: 'hall', aspect: '4 / 5' },
-  { src: STOCK.feature1, alt: 'Тёплый свет и латунные светильники в зале', caption: 'Свет здесь никогда не бывает резким', category: 'hall', aspect: '1 / 1' },
-  { src: STOCK.feature2, alt: 'Диваны цвета вина и тёмно-зелёная обивка', caption: 'Кожа цвета вина встречает гостя с порога', category: 'hall', aspect: '3 / 4' },
-  { src: STOCK.about, alt: 'Кирпичная стена и тёплый свет в интерьере', caption: 'Кирпич и латунь — фон, который не объясняют', category: 'details', aspect: '4 / 3' },
-  { src: STOCK.gallerySide, alt: 'Диван и тёплый свет за угловым столиком', caption: 'Здесь задерживаются дольше, чем планировали', category: 'details', aspect: '1 / 1' },
-  { src: STOCK.menuTeaser, alt: 'Кофе с латте-артом на столе', caption: 'Утро начинается с этой чашки', category: 'table', aspect: '4 / 5' },
-  { src: STOCK.feature1, alt: 'Деталь потолка и подвесной свет', caption: 'Свет расставлен так же тщательно, как стол', category: 'details', aspect: '3 / 4' },
-  { src: STOCK.about, alt: 'Ковёр на кирпичной стене', caption: 'Ковёр помнит больше разговоров, чем мы', category: 'details', aspect: '1 / 1' },
-  { src: STOCK.gallerySide, alt: 'Сервированный стол у окна', caption: 'Стол накрыт для тех, кто никуда не спешит', category: 'table', aspect: '4 / 3' },
-  { src: STOCK.feature2, alt: 'Тёмно-зелёная обивка кресла крупным планом', caption: 'Оттенки, которые не просто обставляют зал', category: 'hall', aspect: '4 / 5' },
-  { src: STOCK.menuTeaser, alt: 'Десерт и напиток на столе', caption: 'Ради этого сюда возвращаются', category: 'table', aspect: '1 / 1' },
-  { src: STOCK.hero, alt: 'Зал MAKAN вечером', caption: 'Вечер, который не хочется торопить', category: 'hall', aspect: '3 / 4' },
+  // — ЗАЛ —
+  { src: STOCK.hall_1, alt: 'Общий вид зала MAKAN', caption: 'Столик у окна занимают первым', category: 'hall', aspect: '4 / 5' },
+  { src: STOCK.hall_2, alt: 'Диваны цвета вина и тёмно-зелёная обивка', caption: 'Кожа цвета вина встречает гостя с порога', category: 'hall', aspect: '3 / 4' },
+
+  // — ДЕТАЛИ —
+  { src: STOCK.details_1, alt: 'Деталь интерьера MAKAN', caption: 'Кирпич и латунь — фон, который не объясняют', category: 'details', aspect: '4 / 3' },
+  { src: STOCK.details_2, alt: 'Деталь интерьера MAKAN', caption: 'Здесь задерживаются дольше, чем планировали', category: 'details', aspect: '1 / 1' },
+  { src: STOCK.details_3, alt: 'Деталь интерьера MAKAN', caption: 'Свет расставлен так же тщательно, как стол', category: 'details', aspect: '4 / 5' },
+  { src: STOCK.details_4, alt: 'Деталь интерьера MAKAN', caption: 'Ковёр помнит больше разговоров, чем мы', category: 'details', aspect: '3 / 4' },
+  { src: STOCK.details_5, alt: 'Деталь интерьера MAKAN', caption: 'Мелочи, которые замечают не сразу', category: 'details', aspect: '1 / 1' },
+
+  // — НА СТОЛЕ —
+  { src: STOCK.table_1, alt: 'Десерт и напиток на столе', caption: 'Ради этого сюда возвращаются', category: 'table', aspect: '4 / 5' },
+  { src: STOCK.table_2, alt: 'Кофе с латте-артом на столе', caption: 'Утро начинается с этой чашки', category: 'table', aspect: '1 / 1' },
 ];
 
 const explore = [
@@ -357,15 +373,15 @@ export default function GalleryPage() {
 
       {/* 1. HERO */}
       <section className="hero">
-        <Image
-          src={STOCK.hero}
-          alt="Зал кафе MAKAN: кирпичные стены, кожаные диваны и тёплый свет"
-          fill
-          priority
-          sizes="100vw"
-          className="hero__img"
-          style={{ objectFit: 'cover', objectPosition: HERO_IMAGE_FOCUS }}
-        />
+  <Image
+    src={STOCK.hall_1}
+    alt="Зал кафе MAKAN: кирпичные стены, кожаные диваны и тёплый свет"
+    fill
+    priority
+    sizes="100vw"
+    className="hero__img"
+    style={{ objectFit: 'cover', objectPosition: HERO_IMAGE_FOCUS }}
+  />
         <div className="hero__scrim" />
         <div className="hero__content">
           <p className="eyebrow">Галерея</p>

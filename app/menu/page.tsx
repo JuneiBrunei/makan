@@ -754,6 +754,11 @@ export default function MenuPage() {
 
       <footer className="footer">
         <div className="footer__inner">
+          <div className="footer__disclaimer">
+          Администрация не несёт ответственности за личные вещи, оставленные без присмотра,
+          а также за отключение электроэнергии по независящим от заведения причинам.
+        </div>
+
           <div className="footer__col">
             <div className="footer__mark">
               MAKAN <span>кафесі</span>
@@ -995,6 +1000,21 @@ export default function MenuPage() {
           text-decoration: none; white-space: nowrap; transition: color 0.2s ease, border-color 0.2s ease;
         }
         .menu-toc__chip:hover, .menu-toc__chip:focus-visible { color: var(--gold-light); border-color: var(--gold); }
+        
+        .footer__disclaimer {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding-top: 1.8rem;
+          border-top: 1px solid var(--hairline);
+          font-size: 0.72rem;
+          line-height: 1.6;
+          color: var(--parchment-dim);
+          text-align: center;
+          opacity: 0.75;
+        }
+        @media (max-width: 480px) {
+          .footer__disclaimer { font-size: 0.68rem; padding: 0 0.4rem; padding-top: 1.5rem; }
+        }
 
         /* КАТЕГОРИИ МЕНЮ — CSS columns вместо grid: контейнер сам считает
            высоту по контенту, поэтому ничего не может "разъехаться" или
@@ -1069,7 +1089,7 @@ export default function MenuPage() {
         .footer__col--social a { color: var(--parchment-dim); text-decoration: none; font-size: 0.85rem; letter-spacing: 0.05em; }
         .footer__col--social a:hover, .footer__col--social a:focus-visible { color: var(--gold-light); }
         .footer__bottom {
-          max-width: 1200px; margin: 0 auto; padding-top: 1.8rem; border-top: 1px solid var(--hairline);
+          max-width: 1200px; margin: 0 auto; padding-top: 1.2rem;
           display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
           font-size: 0.75rem; color: var(--parchment-dim); letter-spacing: 0.05em;
         }

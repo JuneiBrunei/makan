@@ -525,7 +525,7 @@ export default function HistoryPage() {
             <div className="footer__mark">
               MAKAN <span>кафесі</span>
             </div>
-            <p className="footer__tag">Дух гор Кавказа, кофе и десерты — в атмосфере, в которой хочется задержаться</p>
+            <p className="footer__tag">Вкусная еда и атмосфера, в которой хочется задержаться</p>
           </div>
 
           <div className="footer__col footer__col--meta">
@@ -886,12 +886,13 @@ export default function HistoryPage() {
 
         /* ДАЛЬШЕ ПО САЙТУ */
         .explore { padding: var(--space-section-sm) 3vw var(--space-section); background: var(--ink); text-align: center; }
-        .explore__list { max-width: none; width: 100%; margin: 3rem 0 0; text-align: left; }
+        .explore__list { max-width: 1400px; width: 100%; margin: 3rem auto 0; text-align: center; }
         .explore__row {
           position: relative; display: grid;
           grid-template-columns: 2.8rem 1fr auto; align-items: center; gap: 1.4rem;
           padding: 1.9rem 0; text-decoration: none;
           border-top: 1px solid var(--hairline);
+          justify-items: center
         }
         .explore__list .explore__row:last-child { border-bottom: 1px solid var(--hairline); }
         .explore__row::after {
@@ -906,7 +907,7 @@ export default function HistoryPage() {
           transition: opacity 0.3s ease, color 0.3s ease;
         }
         .explore__row:hover .explore__row-index { opacity: 1; color: var(--gold-light); }
-        .explore__row-content { display: flex; flex-direction: column; gap: 0.45rem; min-width: 0; }
+        .explore__row-content { display: flex; flex-direction: column; gap: 0.45rem; min-width: 0; align-items: center }
         .explore__row-title {
           font-family: var(--font-display), serif; font-weight: 600;
           font-size: clamp(1.6rem, 3.2vw, 2.3rem); color: var(--parchment);
