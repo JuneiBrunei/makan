@@ -927,7 +927,15 @@ export default function MenuPage() {
           font-size: clamp(2.4rem, 6vw, 3.6rem); margin: 0 0 1rem; color: var(--parchment);
         }
         .menu-hero__text { font-size: 0.95rem; line-height: 1.7; color: var(--parchment-dim); font-weight: 300; margin: 0 auto; max-width: 46ch; }
-        :global(.menu-hero__swash) { width: 440px; height: 84px; color: white; margin: 2rem auto 0; display: block; }
+        :global(.menu-hero__swash) {
+          width: 100%;
+          max-width: 440px;
+          aspect-ratio: 440 / 84;
+          height: auto;
+          color: white;
+          margin: 2rem auto 0;
+          display: block;
+        }
         
         @media (max-width: 640px) {
           .menu-hero { padding: 7.5rem 1.4rem 2rem; }
