@@ -826,7 +826,7 @@ export default function Home() {
         .hero__img { object-fit: cover; filter: saturate(0.85) brightness(0.62); }
         .hero__scrim {
           position: absolute; inset: 0;
-          background: linear-gradient(180deg, rgba(14,11,9,0.6) 0%, rgba(14,11,9,0.4) 38%, rgba(12,9,7,0.95) 100%);
+          background: linear-gradient(180deg, rgba(14,11,9,0.65) 0%, rgba(12,9,7,0.72) 45%, rgba(12,9,7,0.97) 100%);
         }
         .hero__content { position: relative; z-index: 2; max-width: 800px; padding: 0 2rem 7rem; margin: 0 auto; width: 100%; }
         .hero__status {
@@ -839,11 +839,13 @@ export default function Home() {
           font-family: var(--font-display), serif; font-weight: 600;
           font-size: clamp(2.3rem, 5.6vw, 4.2rem); line-height: 1.14;
           margin: 0 0 1.4rem; color: var(--parchment);
+          text-shadow: 0 2px 24px rgba(0,0,0,0.55), 0 1px 4px rgba(0,0,0,0.85);
         }
         .hero__title em { font-style: italic; font-weight: 600; color: var(--parchment); }
         .hero__text {
           font-size: 1.02rem; line-height: 1.7; color: var(--parchment-dim);
           max-width: 48ch; margin: 0 0 2.3rem; font-weight: 300;
+          text-shadow: 0 1px 12px rgba(0,0,0,0.5);
         }
         .hero__actions { display: flex; gap: 1.1rem; flex-wrap: wrap; }
         .hero__actions :global(a) { will-change: transform; }
