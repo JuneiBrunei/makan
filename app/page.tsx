@@ -443,6 +443,7 @@ export default function Home() {
       fill
       sizes="(max-width: 900px) 100vw, 44vw"
       className="about__media-img"
+      style={{ objectFit: 'cover', objectPosition: 'center' }}
     />
   </div>
 </Reveal>
@@ -1100,11 +1101,9 @@ export default function Home() {
         @media (max-width: 900px) {
           .explore__inner { grid-template-columns: 1fr; gap: 0; }
           .explore__panel { display: none; }
-          .explore__row { grid-template-columns: 2.2rem 1fr auto auto; gap: 1rem; padding: 1.3rem 0; }
-          .explore__row-thumb { display: block; position: relative; width: 52px; height: 52px; flex-shrink: 0; overflow: hidden; }
-          .explore__row-thumb :global(img) { object-fit: cover; filter: saturate(0.85) brightness(0.8); }
+          .explore__row { grid-template-columns: 2.2rem 1fr auto; gap: 1rem; padding: 1.5rem 0; }
           .explore__row-title { font-size: 1.2rem; }
-          .explore__row-text { display: none; }
+          .explore__row-text { display: block; font-size: 0.82rem; }
           .explore__row-arrow { opacity: 1; transform: none; }
         }
 
