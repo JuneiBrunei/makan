@@ -70,8 +70,8 @@ const WHATSAPP = 'https://wa.me/77086059354';
 // Временные стоковые фото — те же источники, что и на остальных страницах.
 const STOCK = {
   hero: '/images/makan-hero1.jpg',
-  before: 'https://images.unsplash.com/photo-1770541025973-dfc3c4c23fad?q=80&w=1400&auto=format&fit=crop',
-  after: 'https://images.unsplash.com/photo-1753873555674-1d6698c7537b?q=80&w=1400&auto=format&fit=crop',
+  before: '/images/photo_posle.jpg',
+  after: '/images/photo-do.jpg',
 };
 
 const HERO_IMAGE_FOCUS = 'center 30%';
@@ -86,7 +86,7 @@ const milestones = [
   {
     year: 'Июль 2026',
     title: 'Открытие',
-    text: 'Двери MAKAN открылись для первых гостей — с интерьером в духе горного дома и меню, где грузинские традиции встретились с шашлыком, десертами и авторским кофе.',
+    text: 'Двери MAKAN открылись для первых гостей — с интерьером в духе горного дома и меню, где грузинские традиции встретились с шашлыком, десертами и гостеприимством.',
   },
   {
     year: 'Сегодня',
@@ -404,7 +404,7 @@ export default function HistoryPage() {
               Так родилась идея: собрать в одном пространстве дух грузинских
               гор — камень, дерево, огонь — и подать его через кухню, где
               кавказские традиции встречаются с шашлыком, десертами и
-              авторским кофе.
+              гостеприимством.
             </p>
             <p className="letter__sign">— команда MAKAN</p>
           </div>
