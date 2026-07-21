@@ -438,67 +438,7 @@ export default function HistoryPage() {
         </div>
       </section>
 
-      {/* 4. ДО / ПОСЛЕ */}
-      <section className="compare-section">
-        <Reveal>
-          <p className="eyebrow eyebrow--center">Ремонт</p>
-          <h2 className="section-title">Перетащите, чтобы увидеть разницу</h2>
-        </Reveal>
-
-        <Reveal>
-          <div className="compare">
-            <div
-              className="compare__frame"
-              ref={compareFrameRef}
-              onPointerDown={handleComparePointerDown}
-              onPointerMove={handleComparePointerMove}
-              onPointerUp={handleComparePointerEnd}
-              onPointerCancel={handleComparePointerEnd}
-              onPointerLeave={(e) => {
-                if (compareDragging) handleComparePointerEnd(e);
-              }}
-            >
-              <Image
-                src={STOCK.before}
-                alt="Помещение до ремонта: голые стены и пустое пространство"
-                fill
-                sizes="(max-width: 900px) 92vw, 800px"
-                className="compare__img"
-                draggable={false}
-              />
-              <div className="compare__after" style={{ clipPath: `inset(0 0 0 ${reveal}%)` }}>
-                <Image
-                  src={STOCK.after}
-                  alt="Тот же зал после ремонта: кирпич, латунь и тёплый свет"
-                  fill
-                  sizes="(max-width: 900px) 92vw, 800px"
-                  className="compare__img"
-                  draggable={false}
-                />
-              </div>
-
-              <span className="compare__label compare__label--before">До</span>
-              <span className="compare__label compare__label--after">После</span>
-
-              <span className="compare__handle" style={{ left: `${reveal}%` }} aria-hidden="true">
-                <span className="compare__handle-grip">↔</span>
-              </span>
-
-              <input
-                type="range"
-                min={0}
-                max={100}
-                value={reveal}
-                onChange={(e) => setReveal(Number(e.target.value))}
-                className="compare__slider"
-                aria-label="Ползунок сравнения до и после ремонта"
-              />
-            </div>
-          </div>
-        </Reveal>
-      </section>
-
-      {/* 5. ДАЛЬШЕ ПО САЙТУ */}
+      {/* 4. ДАЛЬШЕ ПО САЙТУ */}
       <section className="explore">
         <Reveal>
           <p className="eyebrow eyebrow--center">Дальше по сайту</p>
@@ -842,91 +782,55 @@ export default function HistoryPage() {
           .timeline__dot { left: 0.35rem; top: 0.5rem; }
           .timeline__card { width: 100%; }
         }
-
-        /* ДО / ПОСЛЕ */
-        .compare-section { padding: var(--space-section-sm) 2rem var(--space-section); background: var(--ink-soft); border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
-        .compare { display: flex; justify-content: center; }
-        .compare__frame {
-          position: relative; width: min(100%, 800px); aspect-ratio: 16 / 10;
-          overflow: hidden; border: 1px solid var(--hairline); cursor: ew-resize;
-          touch-action: none; user-select: none;
-        }
-        .compare__img { object-fit: cover; filter: saturate(0.88) brightness(0.85); }
-        .compare__after { position: absolute; inset: 0; }
-        .compare__label {
-          position: absolute; top: 1rem; z-index: 2;
-          font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase;
-          color: var(--parchment); background: rgba(10, 8, 6, 0.55);
-          padding: 0.35rem 0.7rem; pointer-events: none;
-        }
-        .compare__label--before { left: 1rem; }
-        .compare__label--after { right: 1rem; }
-        .compare__handle {
-          position: absolute; top: 0; bottom: 0; z-index: 3;
-          width: 2px; background: var(--gold-light); transform: translateX(-50%);
-          display: flex; align-items: center; justify-content: center; pointer-events: none;
-        }
-        .compare__handle-grip {
-          width: 2.6rem; height: 2.6rem; border-radius: 50%;
-          background: var(--gold-light); color: var(--ink);
-          display: flex; align-items: center; justify-content: center;
-          font-size: 1rem; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
-        }
-        .compare__slider {
-          position: absolute; inset: 0; width: 100%; height: 100%; z-index: 4;
-          margin: 0; opacity: 0; cursor: ew-resize;
-          -webkit-appearance: none; appearance: none;
-          pointer-events: none;
-        }
-        .compare__slider::-webkit-slider-thumb { -webkit-appearance: none; width: 100%; height: 100%; }
-        .compare__slider::-moz-range-thumb { width: 100%; height: 100%; border: 0; background: transparent; }
-        @media (max-width: 640px) {
-          .compare__frame { aspect-ratio: 4 / 5; }
-        }
-
+          
         /* ДАЛЬШЕ ПО САЙТУ */
-        .explore { padding: var(--space-section-sm) 3vw var(--space-section); background: var(--ink); text-align: center; }
-        .explore__list { max-width: 1400px; width: 100%; margin: 3rem auto 0; text-align: center; }
-        .explore__row {
-          position: relative; display: grid;
-          grid-template-columns: 2.8rem 1fr auto; align-items: center; gap: 1.4rem;
-          padding: 1.9rem 0; text-decoration: none;
-          border-top: 1px solid var(--hairline);
-          justify-items: center
-        }
-        .explore__list .explore__row:last-child { border-bottom: 1px solid var(--hairline); }
-        .explore__row::after {
-          content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px;
-          background: var(--gold-light); transform: scaleX(0); transform-origin: left;
-          transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .explore__row:hover::after, .explore__row:focus-visible::after { transform: scaleX(1); }
-        .explore__row-index {
-          font-family: var(--font-display), serif; font-style: italic; font-weight: 500;
-          font-size: 0.95rem; color: var(--gold); opacity: 0.55;
-          transition: opacity 0.3s ease, color 0.3s ease;
-        }
-        .explore__row:hover .explore__row-index { opacity: 1; color: var(--gold-light); }
-        .explore__row-content { display: flex; flex-direction: column; gap: 0.45rem; min-width: 0; align-items: center }
-        .explore__row-title {
-          font-family: var(--font-display), serif; font-weight: 600;
-          font-size: clamp(1.6rem, 3.2vw, 2.3rem); color: var(--parchment);
-          transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), color 0.3s ease;
-        }
-        .explore__row:hover .explore__row-title { transform: translateX(0.55rem); color: var(--gold-light); }
-        .explore__row-text { font-size: 0.86rem; color: var(--parchment-dim); font-weight: 300; max-width: 34ch; }
-        .explore__row-arrow {
-          font-size: 1.2rem; color: var(--gold-light);
-          opacity: 0; transform: translateX(-10px);
-          transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .explore__row:hover .explore__row-arrow, .explore__row:focus-visible .explore__row-arrow { opacity: 1; transform: translateX(0); }
-        @media (max-width: 640px) {
-          .explore__row { grid-template-columns: 2.2rem 1fr auto; gap: 1rem; padding: 1.3rem 0; }
-          .explore__row-title { font-size: 1.2rem; }
-          .explore__row-text { display: none; }
-          .explore__row-arrow { opacity: 1; transform: none; }
-        }
+.explore { padding: var(--space-section-sm) 3vw var(--space-section); background: var(--ink); text-align: center; }
+.explore__list { max-width: 720px; width: 100%; margin: 3rem auto 0; text-align: center; }
+.explore__row {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 2.1rem 0;
+  text-decoration: none;
+  border-top: 1px solid var(--hairline);
+}
+.explore__list .explore__row:last-child { border-bottom: 1px solid var(--hairline); }
+.explore__row::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px;
+  background: var(--gold-light); transform: scaleX(0); transform-origin: center;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.explore__row:hover::after, .explore__row:focus-visible::after { transform: scaleX(1); }
+.explore__row-index {
+  font-family: var(--font-display), serif; font-style: italic; font-weight: 500;
+  font-size: 0.95rem; color: var(--gold); opacity: 0.55;
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+.explore__row:hover .explore__row-index { opacity: 1; color: var(--gold-light); }
+.explore__row-content { display: flex; flex-direction: column; align-items: center; gap: 0.45rem; }
+.explore__row-title {
+  font-family: var(--font-display), serif; font-weight: 600;
+  font-size: clamp(1.6rem, 3.2vw, 2.3rem); color: var(--parchment);
+  transition: color 0.3s ease;
+}
+.explore__row:hover .explore__row-title { color: var(--gold-light); }
+.explore__row-text { font-size: 0.86rem; color: var(--parchment-dim); font-weight: 300; max-width: 34ch; text-align: center; }
+.explore__row-arrow {
+  font-size: 1.2rem; color: var(--gold-light);
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.3s ease;
+}
+.explore__row:hover .explore__row-arrow, .explore__row:focus-visible .explore__row-arrow {
+  opacity: 1; transform: translateY(4px);
+}
+@media (max-width: 640px) {
+  .explore__row { padding: 1.6rem 0; gap: 0.5rem; }
+  .explore__row-title { font-size: 1.3rem; }
+  .explore__row-text { display: none; }
+  .explore__row-arrow { opacity: 1; }
+}
 
         /* FOOTER */
         .footer { position: relative; padding: 4.5rem 2rem 2.5rem; background: var(--ink-soft); border-top: 1px solid var(--hairline); }

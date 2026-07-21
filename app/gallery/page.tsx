@@ -68,17 +68,21 @@ const STOCK = {
   // ЗАЛ — общие планы помещения, диваны, светильники
   hall_1: '/images/makan-hero1.jpg',
   hall_2: '/images/makan-photo2.jpg',
+  hall_3: '/images/makan-hall2.jpg',
+  hall_4: '/images/makan-hall5.jpg',
+  hall_5: '/images/makan-hall4.jpg',
 
   // ДЕТАЛИ — крупные планы: стены, свет, текстуры, декор
   details_1: '/images/makan-details2.jpg',
-  details_2: '/images/makan-details3.jpg',
-  details_3: '/images/makan-details4.jpg',
+  details_2: '/images/makan-details4.jpg',
+  details_3: '/images/makan-details3.jpg',
   details_4: '/images/makan-details5.jpg',
   details_5: '/images/makan-details6.jpg',
+  details_6: '/images/makan-photo.jpg',
 
   // НА СТОЛЕ — еда, напитки, сервировка
-  table_1: '/images/makan-photo1.jpg',
-  table_2: '/images/makan-photo.jpg',
+  table_1: '/images/skoro.jpg',
+  table_2: '/images/zhuirda.jpg',
 };
 
 const HERO_IMAGE_FOCUS = 'center 30%';
@@ -105,17 +109,21 @@ const photos: {
   // — ЗАЛ —
   { src: STOCK.hall_1, alt: 'Общий вид зала MAKAN', caption: 'Столик у окна занимают первым', category: 'hall', aspect: '4 / 5' },
   { src: STOCK.hall_2, alt: 'Диваны цвета вина и тёмно-зелёная обивка', caption: 'Кожа цвета вина встречает гостя с порога', category: 'hall', aspect: '3 / 4' },
+  { src: STOCK.hall_3, alt: 'Зал MAKAN', caption: 'Свет здесь никогда не бывает резким', category: 'hall', aspect: '3 / 4' },
+  { src: STOCK.hall_4, alt: 'Зал MAKAN', caption: 'Место, где хочется задержаться подольше', category: 'hall', aspect: '1 / 1' },
+  { src: STOCK.hall_5, alt: 'Зал MAKAN вечером', caption: 'Вечер, который не хочется торопить', category: 'hall', aspect: '3 / 4' },
 
   // — ДЕТАЛИ —
-  { src: STOCK.details_1, alt: 'Деталь интерьера MAKAN', caption: 'Кирпич и латунь — фон, который не объясняют', category: 'details', aspect: '4 / 3' },
-  { src: STOCK.details_2, alt: 'Деталь интерьера MAKAN', caption: 'Здесь задерживаются дольше, чем планировали', category: 'details', aspect: '1 / 1' },
+  { src: STOCK.details_1, alt: 'Деталь интерьера MAKAN', caption: 'Кирпич и латунь — фон, который не объясняют', category: 'details', aspect: '1 / 1' },
+  { src: STOCK.details_2, alt: 'Деталь интерьера MAKAN', caption: 'Здесь задерживаются дольше, чем планировали', category: 'details', aspect: '4 / 5' },
   { src: STOCK.details_3, alt: 'Деталь интерьера MAKAN', caption: 'Свет расставлен так же тщательно, как стол', category: 'details', aspect: '4 / 5' },
   { src: STOCK.details_4, alt: 'Деталь интерьера MAKAN', caption: 'Ковёр помнит больше разговоров, чем мы', category: 'details', aspect: '3 / 4' },
   { src: STOCK.details_5, alt: 'Деталь интерьера MAKAN', caption: 'Мелочи, которые замечают не сразу', category: 'details', aspect: '1 / 1' },
-
+  { src: STOCK.details_6, alt: 'Деталь интерьера MAKAN', caption: 'Ковёр помнит больше разговоров, чем мы', category: 'details', aspect: '3 / 4' },
+  
   // — НА СТОЛЕ —
-  { src: STOCK.table_1, alt: 'Десерт и напиток на столе', caption: 'Ради этого сюда возвращаются', category: 'table', aspect: '4 / 5' },
-  { src: STOCK.table_2, alt: 'Кофе с латте-артом на столе', caption: 'Утро начинается с этой чашки', category: 'table', aspect: '1 / 1' },
+  { src: STOCK.table_1, alt: 'Десерт и напиток на столе', caption: 'Ради этого сюда возвращаются', category: 'table', aspect: '4 / 3' },
+  { src: STOCK.table_2, alt: 'Кофе с латте-артом на столе', caption: 'Утро начинается с этой чашки', category: 'table', aspect: '4 / 3' },
 ];
 
 const explore = [
@@ -526,17 +534,17 @@ export default function GalleryPage() {
         </Reveal>
 
         <div className="explore__list">
-          {explore.map((e, i) => (
-            <Link href={e.href} className="explore__row" key={e.label}>
-              <span className="explore__row-index">{String(i + 1).padStart(2, '0')}</span>
-              <span className="explore__row-content">
-                <span className="explore__row-title">{e.label}</span>
-                <span className="explore__row-text">{e.text}</span>
-              </span>
-              <span className="explore__row-arrow" aria-hidden="true">→</span>
-            </Link>
-          ))}
-        </div>
+  {explore.map((e, i) => (
+    <Link href={e.href} className="explore__row" key={e.label}>
+      <span className="explore__row-index">{String(i + 1).padStart(2, '0')}</span>
+      <span className="explore__row-content">
+        <span className="explore__row-title">{e.label}</span>
+        <span className="explore__row-text">{e.text}</span>
+      </span>
+      <span className="explore__row-arrow" aria-hidden="true">→</span>
+    </Link>
+  ))}
+</div>
       </section>
 
       <footer className="footer">
@@ -891,46 +899,52 @@ export default function GalleryPage() {
 
         /* ДАЛЬШЕ ПО САЙТУ */
         .explore { padding: var(--space-section-sm) 2rem var(--space-section); background: var(--ink); text-align: center; }
-        .explore__list { max-width: 900px; margin: 3rem auto 0; text-align: left; }
-        .explore__row {
-          position: relative; display: grid;
-          grid-template-columns: 2.8rem 1fr auto; align-items: center; gap: 1.4rem;
-          padding: 1.9rem 0; text-decoration: none;
-          border-top: 1px solid var(--hairline);
-        }
-        .explore__list .explore__row:last-child { border-bottom: 1px solid var(--hairline); }
-        .explore__row::after {
-          content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px;
-          background: var(--gold-light); transform: scaleX(0); transform-origin: left;
-          transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .explore__row:hover::after, .explore__row:focus-visible::after { transform: scaleX(1); }
-        .explore__row-index {
-          font-family: var(--font-display), serif; font-style: italic; font-weight: 500;
-          font-size: 0.95rem; color: var(--gold); opacity: 0.55;
-          transition: opacity 0.3s ease, color 0.3s ease;
-        }
-        .explore__row:hover .explore__row-index { opacity: 1; color: var(--gold-light); }
-        .explore__row-content { display: flex; flex-direction: column; gap: 0.45rem; min-width: 0; }
-        .explore__row-title {
-          font-family: var(--font-display), serif; font-weight: 600;
-          font-size: clamp(1.6rem, 3.2vw, 2.3rem); color: var(--parchment);
-          transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), color 0.3s ease;
-        }
-        .explore__row:hover .explore__row-title { transform: translateX(0.55rem); color: var(--gold-light); }
-        .explore__row-text { font-size: 0.86rem; color: var(--parchment-dim); font-weight: 300; max-width: 34ch; }
-        .explore__row-arrow {
-          font-size: 1.2rem; color: var(--gold-light);
-          opacity: 0; transform: translateX(-10px);
-          transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .explore__row:hover .explore__row-arrow, .explore__row:focus-visible .explore__row-arrow { opacity: 1; transform: translateX(0); }
-        @media (max-width: 640px) {
-          .explore__row { grid-template-columns: 2.2rem 1fr auto; gap: 1rem; padding: 1.3rem 0; }
-          .explore__row-title { font-size: 1.2rem; }
-          .explore__row-text { display: none; }
-          .explore__row-arrow { opacity: 1; transform: none; }
-        }
+.explore__list { max-width: 720px; margin: 3rem auto 0; text-align: center; }
+.explore__row {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 2.1rem 0;
+  text-decoration: none;
+  border-top: 1px solid var(--hairline);
+}
+.explore__list .explore__row:last-child { border-bottom: 1px solid var(--hairline); }
+.explore__row::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px;
+  background: var(--gold-light); transform: scaleX(0); transform-origin: center;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.explore__row:hover::after, .explore__row:focus-visible::after { transform: scaleX(1); }
+.explore__row-index {
+  font-family: var(--font-display), serif; font-style: italic; font-weight: 500;
+  font-size: 0.95rem; color: var(--gold); opacity: 0.55;
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+.explore__row:hover .explore__row-index { opacity: 1; color: var(--gold-light); }
+.explore__row-content { display: flex; flex-direction: column; align-items: center; gap: 0.45rem; }
+.explore__row-title {
+  font-family: var(--font-display), serif; font-weight: 600;
+  font-size: clamp(1.6rem, 3.2vw, 2.3rem); color: var(--parchment);
+  transition: color 0.3s ease;
+}
+.explore__row:hover .explore__row-title { color: var(--gold-light); }
+.explore__row-text { font-size: 0.86rem; color: var(--parchment-dim); font-weight: 300; max-width: 34ch; text-align: center; }
+.explore__row-arrow {
+  font-size: 1.2rem; color: var(--gold-light);
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.3s ease;
+}
+.explore__row:hover .explore__row-arrow, .explore__row:focus-visible .explore__row-arrow {
+  opacity: 1; transform: translateY(4px);
+}
+@media (max-width: 640px) {
+  .explore__row { padding: 1.6rem 0; gap: 0.5rem; }
+  .explore__row-title { font-size: 1.3rem; }
+  .explore__row-text { display: none; }
+  .explore__row-arrow { opacity: 1; }
+}
 
         /* FOOTER — идентичен главной странице */
         .footer { position: relative; padding: 4.5rem 2rem 2.5rem; background: var(--ink-soft); border-top: 1px solid var(--hairline); }

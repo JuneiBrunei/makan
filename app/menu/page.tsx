@@ -751,6 +751,14 @@ export default function MenuPage() {
           ))}
         </div>
       </section>
+      
+      {/* ДИСКЛЕЙМЕР */}
+<section className="disclaimer">
+  <p className="disclaimer__text">
+    Администрация кафе не несёт ответственности за сохранность личных вещей гостей,
+    а также за перебои электроснабжения, произошедшие по причинам, не зависящим от администрации.
+  </p>
+</section>
 
       <footer className="footer">
         <div className="footer__inner">
@@ -1056,6 +1064,27 @@ export default function MenuPage() {
           .menu-item__price { white-space: normal; }
         }
 
+          /* ДИСКЛЕЙМЕР — служебный текст перед подвалом, намеренно приглушённый */
+.disclaimer {
+  padding: 2rem 2rem 2.5rem;
+  background: var(--ink);
+  border-top: 1px solid var(--hairline);
+}
+.disclaimer__text {
+  max-width: 820px;
+  margin: 0 auto;
+  padding-top: 2rem;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--parchment-dim);
+  opacity: 0.75;
+  text-align: center;
+  font-weight: 300;
+}
+@media (max-width: 640px) {
+  .disclaimer { padding: 1.5rem 1.25rem 2rem; }
+  .disclaimer__text { padding-top: 1.5rem; font-size: 0.8rem; }
+}
         /* FOOTER — идентично главной странице */
         .footer { position: relative; padding: 4.5rem 2rem 2.5rem; background: var(--ink-soft); border-top: 1px solid var(--hairline); }
         .footer__inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.3fr 1fr 0.7fr; gap: 2rem; padding-bottom: 2.5rem; }
