@@ -194,11 +194,11 @@ const hours = [
 ];
 
 const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/menu', label: 'Menu' },
-  { href: '/gallery', label: 'Gallery' },
-  { href: '/history', label: 'History' },
-  { href: '#contacts', label: 'Contacts' },
+  { href: '/en_main', label: 'Home' },
+  { href: '/en_menu', label: 'Menu' },
+  { href: '/en_gallery', label: 'Gallery' },
+  { href: '/en_history', label: 'History' },
+  { href: '/en_main#contacts', label: 'Contacts' },
 ];
 
 // Opening hours for the live "open/closed" status — the same data as in the

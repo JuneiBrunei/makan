@@ -48,11 +48,11 @@ const hours = [
 ];
 
 const navLinks = [
-  { href: '/', label: 'Басты бет' },
-  { href: '/menu', label: 'Мәзір' },
-  { href: '/gallery', label: 'Галерея' },
-  { href: '/history', label: 'Тарихы' },
-  { href: '#contacts', label: 'Байланыс' },
+  { href: '/kz_main', label: 'Басты бет' },
+  { href: '/kz_menu', label: 'Мәзір' },
+  { href: '/kz_gallery', label: 'Галерея' },
+  { href: '/kz_history', label: 'Тарихы' },
+  { href: '/kz_main#contacts', label: 'Байланыс' },
 ];
 
 const WEEKLY_HOURS: Record<number, [number, number]> = {

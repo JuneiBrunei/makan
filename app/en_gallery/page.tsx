@@ -100,11 +100,11 @@ const explore = [
 ];
 
 const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/menu', label: 'Menu' },
-  { href: '/gallery', label: 'Gallery' },
-  { href: '/history', label: 'Our Story' },
-  { href: '/#contacts', label: 'Contacts' },
+  { href: '/en_main', label: 'Home' },
+  { href: '/en_menu', label: 'Menu' },
+  { href: '/en_gallery', label: 'Gallery' },
+  { href: '/en_history', label: 'History' },
+  { href: '/en_main#contacts', label: 'Contacts' },
 ];
 
 const WEEKLY_HOURS: Record<number, [number, number]> = {
