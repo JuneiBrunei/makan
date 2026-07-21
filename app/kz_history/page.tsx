@@ -13,38 +13,16 @@ import Link from 'next/link';
 import { Cormorant_Garamond, Manrope } from 'next/font/google';
 
 /**
- * MAKAN — страница «История»
+ * MAKAN — «Тарихы» беті
  * =========================================================================
- * Та же визуальная система, что на главной и в галерее: тёмный фон,
- * золото/бордо, Cormorant Garamond + Manrope, Reveal / Swash, живой
- * статус «открыто/закрыто», одинаковые nav и footer.
+ * Басты бет пен галереядағыдай визуалды жүйе: күңгірт фон,
+ * алтын/шарап түсі, Cormorant Garamond + Manrope, Reveal / Swash,
+ * «ашық/жабық» нақты уақыттағы мәртебесі, бірыңғай nav және footer.
  *
- * ДВЕ УНИКАЛЬНЫЕ ФИЧИ ЭТОЙ СТРАНИЦЫ (их нет ни на главной, ни в галерее):
- *  1. «Письмо» — светлая карточка цвета пергамента на тёмном фоне,
- *     стилизованная под рукописную записку. Единственное на весь сайт
- *     светлое пятно — работает как акцент, а не украшение.
- *  2. Вертикальная хронология (timeline) с чередованием карточек
- *     слева/справа и годами-метками. Нумерация/даты здесь оправданы —
- *     в отличие от остальных секций сайта, история действительно
- *     линейна и хронологична.
- *  3. Слайдер «До / После» — фото до и после ремонта, которое гость
- *     раскрывает перетаскиванием ползунка.
- *
- * СОДЕРЖАНИЕ:
- *  Годы и факты — по-прежнему условная канва («идея → помещение →
- *  ремонт → открытие»), но текст теперь раскрывает главную идею MAKAN:
- *  воссоздать атмосферу грузинских гор в небольшом городе. При наличии
- *  реальных дат/деталей — подставьте свои. Фото «до» и «после» — временные
- *  стоковые (см. STOCK ниже), при наличии реальных архивных снимков
- *  ремонта — замените на них.
- *
- * ВАЖНО про next/image + fill (тот же принцип, что и в gallery/page.tsx):
- *  Каждый контейнер с fill-картинкой — обычный <div>, написанный прямо
- *  в этом файле. Ему НИКОГДА не передаётся критичный для позиционирования
- *  класс через `<Reveal className="...">` — иначе scoped-стили styled-jsx
- *  не применятся (Reveal рендерит свой div в другом компоненте), и фото
- *  схлопнется в высоту 0. Reveal здесь всегда оборачивает уже готовый,
- *  самостоятельно стилизованный блок, а не наоборот.
+ * БҰЛ БЕТТІҢ ЕКІ БӨЛЕК ЕРЕКШЕЛІГІ (басты бетте де, галереяда да жоқ):
+ *  1. «Хат» — күңгірт фондағы қолмен жазылған жазба стиліндегі ашық пергамент түсті карточка. Бүкіл сайттағы жалғыз ашық түсті екпін.
+ *  2. Вертикаль хронология (timeline) — сол/оң жақтағы карточкалар және жылдар-белгілермен.
+ *  3. «Дейін / Кейін» слайдері — сырғытпаны жылжыту арқылы ашылатын жөндеуге дейінгі және кейінгі фото.
  * =========================================================================
  */
 
@@ -61,13 +39,13 @@ const body = Manrope({
   variable: '--font-body',
 });
 
-const ADDRESS = 'г. Талгар, ул. Гагарина 67';
+const ADDRESS = 'Талғар қ., Гагарин көш., 67';
 const PHONE = '+7 708 605 9354';
 const PHONE_HREF = 'tel:+77086059354';
 const INSTAGRAM = 'https://www.instagram.com/makan_talgar/';
 const WHATSAPP = 'https://wa.me/77086059354';
 
-// Временные стоковые фото — те же источники, что и на остальных страницах.
+// Уақытша сток фотолар
 const STOCK = {
   hero: '/images/makan-hero1.jpg',
   before: '/images/photo_posle.jpg',
@@ -76,37 +54,37 @@ const STOCK = {
 
 const HERO_IMAGE_FOCUS = 'center 30%';
 
-// Хронология MAKAN — идея, стоящая за каждым этапом, всегда одна: горы Кавказа в Талгаре.
+// MAKAN хронологиясы — Кавказ тауларының атмосферасын Талғарда жаңғырту.
 const milestones = [
   {
     year: '',
     title: 'Идея',
-    text: 'Пришла идея воссоздать атмосферу грузинских гор — тепло очага, щедрость стола и гостеприимство Кавказа — в небольшом городе, где такого ещё не было.',
+    text: 'Шағын қалада бұрын болмаған грузин тауларының атмосферасын — ошақ жылуын, дастарқан молшылығын және Кавказ қонақжайлылығын жаңғырту идеясы пайда болды.',
   },
   {
-    year: 'Июль 2026',
-    title: 'Открытие',
-    text: 'Двери MAKAN открылись для первых гостей — с интерьером в духе горного дома и меню, где грузинские традиции встретились с шашлыком, десертами и гостеприимством.',
+    year: 'Шілде 2026',
+    title: 'Ашылуы',
+    text: 'MAKAN есігі алғашқы қонақтар үшін ашылды — тау үйінің рухындағы интерьермен және грузин дәстүрлері шашлықпен, десерттермен әрі қонақжайлылықпен тоғысқан мәзір ұсынылды.',
   },
   {
-    year: 'Сегодня',
-    title: 'Продолжение',
-    text: 'Место, где каждый гость на минуту оказывается в горах Кавказа — и куда возвращаются не за скоростью, а за этим чувством.',
+    year: 'Бүгін',
+    title: 'Жалғасы',
+    text: 'Әрбір қонақ бір сәтке Кавказ тауларында жүргендей сезінетін, асығыстық үшін емес, осы бір ерекше сезім үшін қайта оралатын мекен.',
   },
 ];
 
 const explore = [
-  { label: 'Меню', href: '/menu', text: 'Грузинские блюда, шашлык и десерты, которые мы подаём каждый день.' },
-  { label: 'Галерея', href: '/gallery', text: 'Зал, детали интерьера и атмосфера гор Кавказа.' },
-  { label: 'Контакты', href: '/#contacts', text: 'Адрес, часы работы и как до нас добраться.' },
+  { label: 'Мәзір', href: '/menu', text: 'Күн сайын ұсынатын грузин тағамдары, шашлық және десерттер.' },
+  { label: 'Галерея', href: '/gallery', text: 'Зал, интерьер бөлшектері және Кавказ тауларының атмосферасы.' },
+  { label: 'Байланыстар', href: '/#contacts', text: 'Мекенжай, жұмыс уақыты және бізге қалай жетуге болады.' },
 ];
 
 const navLinks = [
-  { href: '/', label: 'Главная' },
-  { href: '/menu', label: 'Меню' },
+  { href: '/', label: 'Басты бет' },
+  { href: '/menu', label: 'Мәзір' },
   { href: '/gallery', label: 'Галерея' },
-  { href: '/history', label: 'История' },
-  { href: '/#contacts', label: 'Контакты' },
+  { href: '/history', label: 'Тарихы' },
+  { href: '/#contacts', label: 'Байланыстар' },
 ];
 
 const WEEKLY_HOURS: Record<number, [number, number]> = {
@@ -133,10 +111,10 @@ function useOpenStatus() {
       const t = now.getHours() + now.getMinutes() / 60;
       const [open, close] = WEEKLY_HOURS[day];
       if (t >= open && t < close) {
-        setStatus({ open: true, text: `Открыто · до ${formatHour(close)}` });
+        setStatus({ open: true, text: `Ашық · ${formatHour(close)}-ге дейін` });
       } else {
         const nextOpen = t < open ? open : WEEKLY_HOURS[(day + 1) % 7][0];
-        setStatus({ open: false, text: `Закрыто · с ${formatHour(nextOpen)}` });
+        setStatus({ open: false, text: `Жабық · ${formatHour(nextOpen)}-ден бастап` });
       }
     };
     compute();
@@ -294,14 +272,14 @@ export default function HistoryPage() {
           <Link href="/" className="nav__mark">
             MAKAN <span>кафесі</span>
           </Link>
-          <nav className="nav__links" aria-label="Основная навигация">
-            <Link href="/" className="nav__link">Главная</Link>
-            <Link href="/menu" className="nav__link">Меню</Link>
-            <Link href="/gallery" className="nav__link">Галерея</Link>
-            <Link href="/history" className="nav__link nav__link--active">История</Link>
-            <a href="/#contacts" className="nav__link nav__link--cta">Контакты</a>
-            <div className="nav__lang" aria-label="Выбор языка">
-              <Link href="/kz_history" className="nav__lang-btn">ҚАЗ</Link>
+          <nav className="nav__links" aria-label="Негізгі навигация">
+            <Link href="/kz_main" className="nav__link">Басты бет</Link>
+            <Link href="/kz_menu" className="nav__link">Мәзір</Link>
+            <Link href="/kz_gallery" className="nav__link">Галерея</Link>
+            <Link href="/kz_history" className="nav__link nav__link--active">Тарихы</Link>
+            <a href="/kz_main#contacts" className="nav__link nav__link--cta">Байланыс</a>
+            <div className="nav__lang" aria-label="Тіл таңдау">
+              <Link href="/history" className="nav__lang-btn">РУС</Link>
               <span className="nav__lang-dot" aria-hidden="true">·</span>
               <Link href="/en_history" className="nav__lang-btn">ENG</Link>
             </div>
@@ -315,7 +293,7 @@ export default function HistoryPage() {
           <button
             type="button"
             className={`nav__toggle ${menuOpen ? 'nav__toggle--open' : ''}`}
-            aria-label={menuOpen ? 'Закрыть меню' : 'Открыть меню'}
+            aria-label={menuOpen ? 'Мәзірді жабу' : 'Мәзірді ашу'}
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen((v) => !v)}
           >
@@ -327,7 +305,7 @@ export default function HistoryPage() {
       </header>
 
       <div className={`mobile-menu ${menuOpen ? 'mobile-menu--open' : ''}`}>
-        <nav className="mobile-menu__links" aria-label="Мобильная навигация">
+        <nav className="mobile-menu__links" aria-label="Мобильді навигация">
           {navLinks.map((l, i) => (
             <Link
               key={l.href}
@@ -343,7 +321,7 @@ export default function HistoryPage() {
         </nav>
         <div className="mobile-menu__footer" style={{ transitionDelay: menuOpen ? `${navLinks.length * 60 + 180}ms` : '0ms' }}>
           <div className="mobile-menu__lang">
-            <Link href="/kz_history" className="mobile-menu__lang-btn" onClick={() => setMenuOpen(false)}>ҚАЗ</Link>
+            <Link href="/history" className="mobile-menu__lang-btn" onClick={() => setMenuOpen(false)}>РУС</Link>
             <span className="mobile-menu__lang-dot" aria-hidden="true">·</span>
             <Link href="/en_history" className="mobile-menu__lang-btn" onClick={() => setMenuOpen(false)}>ENG</Link>
           </div>
@@ -364,7 +342,7 @@ export default function HistoryPage() {
       <section className="hero">
         <Image
           src={STOCK.hero}
-          alt="Зал кафе MAKAN сегодня: кирпичные стены, кожаные диваны и тёплый свет"
+          alt="MAKAN кафесінің бүгінгі залы: кірпіш қабырғалар, былғары дивандар және жылы жарық"
           fill
           priority
           sizes="100vw"
@@ -373,12 +351,12 @@ export default function HistoryPage() {
         />
         <div className="hero__scrim" />
         <div className="hero__content">
-          <p className="eyebrow">История</p>
+          <p className="eyebrow">Тарихы</p>
           <h1 className="hero__title">
-            Мы принесли <em>дух грузинских гор</em> в Талгар
+            Біз Талғарға <em>грузин тауларының рухын</em> әкелдік
           </h1>
           <p className="hero__text">
-            Как желание воссоздать атмосферу Кавказа превратилось в кафе, где горное гостеприимство встречает гостя с первого шага.
+            Кавказ атмосферасын қайта жаңғырту тиесі алғашқы қадамнан бастап қонақжайлылықпен қарсы алатын кафеге қалай айналғаны жайлы.
           </p>
         </div>
       </section>
@@ -387,7 +365,7 @@ export default function HistoryPage() {
         <div className="marquee__track">
           {Array.from({ length: 2 }).map((_, rep) => (
             <span className="marquee__group" key={rep}>
-              {['MAKAN', 'Дух Кавказа', 'История создания', 'Талгар', 'Горное гостеприимство'].map((w) => (
+              {['MAKAN', 'Кавказ рухы', 'Құрылу тарихы', 'Талғар', 'Тау қонақжайлылығы'].map((w) => (
                 <span className="marquee__item" key={w}>
                   {w}
                   <Swash className="marquee__swash" />
@@ -398,25 +376,24 @@ export default function HistoryPage() {
         </div>
       </div>
 
-      {/* 2. ПИСЬМО — единственное светлое пятно на весь сайт */}
+      {/* 2. ХАТ — сайттағы жалғыз ашық түсті элемент */}
       <section className="letter-section">
         <Reveal>
           <div className="letter">
             <span className="letter__seal" aria-hidden="true">M</span>
             <Swash className="letter__swash" />
-            <p className="letter__eyebrow">Несколько слов от нас</p>
+            <p className="letter__eyebrow">Біздің атымыздан бірнеше сөз</p>
             <p className="letter__text">
-              Мы хотели, чтобы гость, переступив порог, оказался не в обычном
-              кафе, а будто в горном доме где-то в Сванетии или Кахетии — там,
-              где тепло очага и щедрость стола не показные, а настоящие.
+              Біз қонақтардың табалдырықтан аттаған сәтте әдеттегі кафеде емес,
+              Сванетия немесе Кахетияның таулы үйінде жүргендей сезінуін қаладық —
+              онда ошақ жылуы мен дастарқан молшылығы жасанды емес, шынайы.
             </p>
             <p className="letter__text">
-              Так родилась идея: собрать в одном пространстве дух грузинских
-              гор — камень, дерево, огонь — и подать его через кухню, где
-              кавказские традиции встречаются с шашлыком, десертами и
-              гостеприимством.
+              Идея осылай туды: бір кеңістікте грузин тауларының рухын — тас,
+              ағаш, от — жинап, оны кавказ дәстүрлері шашлықпен, десерттермен
+              және қонақжайлылықпен тоғысқан асүй арқылы ұсыну.
             </p>
-            <p className="letter__sign">— команда MAKAN</p>
+            <p className="letter__sign">— MAKAN ұжымы</p>
           </div>
         </Reveal>
       </section>
@@ -425,7 +402,7 @@ export default function HistoryPage() {
       <section className="timeline">
         <Reveal>
           <p className="eyebrow eyebrow--center">Хроника</p>
-          <h2 className="section-title">Как всё начиналось</h2>
+          <h2 className="section-title">Бәрі қалай басталды</h2>
         </Reveal>
 
         <div className="timeline__list">
@@ -433,7 +410,7 @@ export default function HistoryPage() {
           {milestones.map((m, i) => (
             <div
               className={`timeline__item ${i % 2 === 0 ? 'timeline__item--left' : 'timeline__item--right'}`}
-              key={m.year}
+              key={m.year || i}
             >
               <span className="timeline__dot" aria-hidden="true" />
               <Reveal>
@@ -448,11 +425,11 @@ export default function HistoryPage() {
         </div>
       </section>
 
-      {/* 4. ДАЛЬШЕ ПО САЙТУ */}
+      {/* 4. САЙТ БОЙЫНША АРЫ ҚАРАЙ */}
       <section className="explore">
         <Reveal>
-          <p className="eyebrow eyebrow--center">Дальше по сайту</p>
-          <h2 className="section-title">Погрузитесь глубже</h2>
+          <p className="eyebrow eyebrow--center">Сайт бойынша ары қарай</p>
+          <h2 className="section-title">Тереңірек танысыңыз</h2>
         </Reveal>
 
         <div className="explore__list">
@@ -475,13 +452,13 @@ export default function HistoryPage() {
             <div className="footer__mark">
               MAKAN <span>кафесі</span>
             </div>
-            <p className="footer__tag">Вкусная еда и атмосфера, в которой хочется задержаться</p>
+            <p className="footer__tag">Дәмді тағам және асықпай аялдағың келетін атмосфера</p>
           </div>
 
           <div className="footer__col footer__col--meta">
             <p>{ADDRESS}</p>
             <p><a href={PHONE_HREF}>{PHONE}</a></p>
-            <p>Ежедневно, 10:00 — 23:00</p>
+            <p>Күн сайын, 10:00 — 23:00</p>
           </div>
 
           <div className="footer__col footer__col--social">
@@ -519,6 +496,23 @@ export default function HistoryPage() {
         }
       `}</style>
 
+      <style jsx>{`
+        .grain {
+          position: fixed; inset: 0; z-index: 90; pointer-events: none;
+          opacity: 0.05; mix-blend-mode: overlay;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+        .spotlight {
+          position: fixed; inset: 0; z-index: 5; pointer-events: none;
+          background: radial-gradient(480px circle at var(--x, 50%) var(--y, 40%), rgba(217, 184, 120, 0.10), transparent 70%);
+        }
+        @media (hover: none), (pointer: coarse) { .spotlight { display: none; } }
+        .progress {
+          position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 55;
+          background: var(--gold-light); transform-origin: left;
+          transform: scaleX(0); transition: transform 0.1s linear;
+        }
+      `}</style>
       <style jsx>{`
         .grain {
           position: fixed; inset: 0; z-index: 90; pointer-events: none;

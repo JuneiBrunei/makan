@@ -1,50 +1,17 @@
 'use client';
 
-import {
-  useEffect,
-  useRef,
-  useState,
-  type MouseEvent as ReactMouseEvent,
-  type PointerEvent as ReactPointerEvent,
-  type ReactNode,
-} from 'react';
+import { useEffect, useRef, useState, type MouseEvent as ReactMouseEvent, type ReactNode } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Cormorant_Garamond, Manrope } from 'next/font/google';
 
 /**
- * MAKAN — страница «История»
+ * MAKAN — "Gallery" Page
  * =========================================================================
- * Та же визуальная система, что на главной и в галерее: тёмный фон,
- * золото/бордо, Cormorant Garamond + Manrope, Reveal / Swash, живой
- * статус «открыто/закрыто», одинаковые nav и footer.
- *
- * ДВЕ УНИКАЛЬНЫЕ ФИЧИ ЭТОЙ СТРАНИЦЫ (их нет ни на главной, ни в галерее):
- *  1. «Письмо» — светлая карточка цвета пергамента на тёмном фоне,
- *     стилизованная под рукописную записку. Единственное на весь сайт
- *     светлое пятно — работает как акцент, а не украшение.
- *  2. Вертикальная хронология (timeline) с чередованием карточек
- *     слева/справа и годами-метками. Нумерация/даты здесь оправданы —
- *     в отличие от остальных секций сайта, история действительно
- *     линейна и хронологична.
- *  3. Слайдер «До / После» — фото до и после ремонта, которое гость
- *     раскрывает перетаскиванием ползунка.
- *
- * СОДЕРЖАНИЕ:
- *  Годы и факты — по-прежнему условная канва («идея → помещение →
- *  ремонт → открытие»), но текст теперь раскрывает главную идею MAKAN:
- *  воссоздать атмосферу грузинских гор в небольшом городе. При наличии
- *  реальных дат/деталей — подставьте свои. Фото «до» и «после» — временные
- *  стоковые (см. STOCK ниже), при наличии реальных архивных снимков
- *  ремонта — замените на них.
- *
- * ВАЖНО про next/image + fill (тот же принцип, что и в gallery/page.tsx):
- *  Каждый контейнер с fill-картинкой — обычный <div>, написанный прямо
- *  в этом файле. Ему НИКОГДА не передаётся критичный для позиционирования
- *  класс через `<Reveal className="...">` — иначе scoped-стили styled-jsx
- *  не применятся (Reveal рендерит свой div в другом компоненте), и фото
- *  схлопнется в высоту 0. Reveal здесь всегда оборачивает уже готовый,
- *  самостоятельно стилизованный блок, а не наоборот.
+ * Crafted in the same visual system as the main page:
+ * the same dark background, gold/burgundy tones, warm lighting, Cormorant Garamond
+ * + Manrope fonts, Reveal / Swash components, live open/closed status,
+ * identical navigation and footer.
  * =========================================================================
  */
 
@@ -61,52 +28,83 @@ const body = Manrope({
   variable: '--font-body',
 });
 
-const ADDRESS = 'г. Талгар, ул. Гагарина 67';
+const ADDRESS = '67 Gagarina St, Talgar';
 const PHONE = '+7 708 605 9354';
 const PHONE_HREF = 'tel:+77086059354';
 const INSTAGRAM = 'https://www.instagram.com/makan_talgar/';
 const WHATSAPP = 'https://wa.me/77086059354';
 
-// Временные стоковые фото — те же источники, что и на остальных страницах.
 const STOCK = {
-  hero: '/images/makan-hero1.jpg',
-  before: '/images/photo_posle.jpg',
-  after: '/images/photo-do.jpg',
+  // HALL — general room views, sofas, light fixtures
+  hall_1: '/images/makan-hero1.jpg',
+  hall_2: '/images/makan-photo2.jpg',
+  hall_3: '/images/makan-hall2.jpg',
+  hall_4: '/images/makan-hall5.jpg',
+  hall_5: '/images/makan-hall4.jpg',
+
+  // DETAILS — close-ups: walls, light, textures, decor
+  details_1: '/images/makan-details2.jpg',
+  details_2: '/images/makan-details4.jpg',
+  details_3: '/images/makan-details3.jpg',
+  details_4: '/images/makan-details5.jpg',
+  details_5: '/images/makan-details6.jpg',
+  details_6: '/images/makan-photo.jpg',
+
+  // TABLE — food, drinks, table setting
+  table_1: '/images/skoro.jpg',
+  table_2: '/images/zhuirda.jpg',
 };
 
 const HERO_IMAGE_FOCUS = 'center 30%';
 
-// Хронология MAKAN — идея, стоящая за каждым этапом, всегда одна: горы Кавказа в Талгаре.
-const milestones = [
-  {
-    year: '',
-    title: 'Идея',
-    text: 'Пришла идея воссоздать атмосферу грузинских гор — тепло очага, щедрость стола и гостеприимство Кавказа — в небольшом городе, где такого ещё не было.',
-  },
-  {
-    year: 'Июль 2026',
-    title: 'Открытие',
-    text: 'Двери MAKAN открылись для первых гостей — с интерьером в духе горного дома и меню, где грузинские традиции встретились с шашлыком, десертами и гостеприимством.',
-  },
-  {
-    year: 'Сегодня',
-    title: 'Продолжение',
-    text: 'Место, где каждый гость на минуту оказывается в горах Кавказа — и куда возвращаются не за скоростью, а за этим чувством.',
-  },
+type Category = 'hall' | 'details' | 'table';
+
+const categories: { key: Category | 'all'; label: string }[] = [
+  { key: 'all', label: 'All' },
+  { key: 'hall', label: 'Hall' },
+  { key: 'details', label: 'Details' },
+  { key: 'table', label: 'On the Table' },
+];
+
+const photos: {
+  src: string;
+  alt: string;
+  caption: string;
+  category: Category;
+  aspect: string;
+}[] = [
+  // — HALL —
+  { src: STOCK.hall_1, alt: 'Overview of the MAKAN hall', caption: 'The light here is never harsh', category: 'hall', aspect: '4 / 5' },
+  { src: STOCK.hall_2, alt: 'Wine-colored sofas and dark green upholstery', caption: 'The window table is always taken first', category: 'hall', aspect: '3 / 4' },
+  { src: STOCK.hall_3, alt: 'MAKAN hall', caption: 'An evening you do not want to rush', category: 'hall', aspect: '3 / 4' },
+  { src: STOCK.hall_4, alt: 'MAKAN hall', caption: 'A place where you want to linger longer', category: 'hall', aspect: '1 / 1' },
+  { src: STOCK.hall_5, alt: 'MAKAN hall in the evening', caption: 'Wine and emerald leather welcome guests right from the doorstep', category: 'hall', aspect: '3 / 4' },
+
+  // — DETAILS —
+  { src: STOCK.details_1, alt: 'MAKAN interior detail', caption: 'We create comfort for guests in every corner', category: 'details', aspect: '1 / 1' },
+  { src: STOCK.details_2, alt: 'MAKAN interior detail', caption: 'Guests stay here longer than planned', category: 'details', aspect: '4 / 5' },
+  { src: STOCK.details_3, alt: 'MAKAN interior detail', caption: 'We pay attention to every detail', category: 'details', aspect: '4 / 5' },
+  { src: STOCK.details_4, alt: 'MAKAN interior detail', caption: 'The rug remembers more conversations than we do', category: 'details', aspect: '3 / 4' },
+  { src: STOCK.details_5, alt: 'MAKAN interior detail', caption: 'Brick and brass — a backdrop that needs no explanation', category: 'details', aspect: '1 / 1' },
+  { src: STOCK.details_6, alt: 'MAKAN interior detail', caption: 'Little things you notice only after a while', category: 'details', aspect: '3 / 4' },
+  
+  // — ON THE TABLE —
+  { src: STOCK.table_1, alt: 'Dessert and drink on the table', caption: 'This is why people keep coming back', category: 'table', aspect: '4 / 3' },
+  { src: STOCK.table_2, alt: 'Coffee with latte art on the table', caption: 'The morning starts with this cup', category: 'table', aspect: '4 / 3' },
 ];
 
 const explore = [
-  { label: 'Меню', href: '/menu', text: 'Грузинские блюда, шашлык и десерты, которые мы подаём каждый день.' },
-  { label: 'Галерея', href: '/gallery', text: 'Зал, детали интерьера и атмосфера гор Кавказа.' },
-  { label: 'Контакты', href: '/#contacts', text: 'Адрес, часы работы и как до нас добраться.' },
+  { label: 'Menu', href: '/menu', text: 'Dishes and drinks we serve every day.' },
+  { label: 'Story', href: '/history', text: 'How the café came to be and why it looks this way.' },
+  { label: 'Contacts', href: '/#contacts', text: 'Address, opening hours, and how to reach us.' },
 ];
 
 const navLinks = [
-  { href: '/', label: 'Главная' },
-  { href: '/menu', label: 'Меню' },
-  { href: '/gallery', label: 'Галерея' },
-  { href: '/history', label: 'История' },
-  { href: '/#contacts', label: 'Контакты' },
+  { href: '/', label: 'Home' },
+  { href: '/menu', label: 'Menu' },
+  { href: '/gallery', label: 'Gallery' },
+  { href: '/history', label: 'Our Story' },
+  { href: '/#contacts', label: 'Contacts' },
 ];
 
 const WEEKLY_HOURS: Record<number, [number, number]> = {
@@ -133,10 +131,10 @@ function useOpenStatus() {
       const t = now.getHours() + now.getMinutes() / 60;
       const [open, close] = WEEKLY_HOURS[day];
       if (t >= open && t < close) {
-        setStatus({ open: true, text: `Открыто · до ${formatHour(close)}` });
+        setStatus({ open: true, text: `Open · until ${formatHour(close)}` });
       } else {
         const nextOpen = t < open ? open : WEEKLY_HOURS[(day + 1) % 7][0];
-        setStatus({ open: false, text: `Закрыто · с ${formatHour(nextOpen)}` });
+        setStatus({ open: false, text: `Closed · opens at ${formatHour(nextOpen)}` });
       }
     };
     compute();
@@ -206,15 +204,16 @@ function Reveal({ children, className = '' }: { children: ReactNode; className?:
   );
 }
 
-export default function HistoryPage() {
+export default function GalleryPage() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [reveal, setReveal] = useState(50);
-  const [compareDragging, setCompareDragging] = useState(false);
-  const compareFrameRef = useRef<HTMLDivElement>(null);
+  const [activeCategory, setActiveCategory] = useState<Category | 'all'>('all');
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const spotlightRef = useRef<HTMLDivElement>(null);
   const status = useOpenStatus();
+
+  const filtered = activeCategory === 'all' ? photos : photos.filter((p) => p.category === activeCategory);
 
   useEffect(() => {
     const onScroll = () => {
@@ -237,51 +236,28 @@ export default function HistoryPage() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    document.body.style.overflow = menuOpen || lightboxIndex !== null ? 'hidden' : '';
     return () => {
       document.body.style.overflow = '';
     };
-  }, [menuOpen]);
+  }, [menuOpen, lightboxIndex]);
 
-  const updateRevealFromClientX = (clientX: number) => {
-    const el = compareFrameRef.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    if (rect.width === 0) return;
-    const pct = ((clientX - rect.left) / rect.width) * 100;
-    setReveal(Math.min(100, Math.max(0, pct)));
-  };
+  useEffect(() => {
+    if (lightboxIndex === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setLightboxIndex(null);
+      if (e.key === 'ArrowRight') setLightboxIndex((i) => (i === null ? null : (i + 1) % filtered.length));
+      if (e.key === 'ArrowLeft') setLightboxIndex((i) => (i === null ? null : (i - 1 + filtered.length) % filtered.length));
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [lightboxIndex, filtered.length]);
 
-  const handleComparePointerDown = (e: ReactPointerEvent<HTMLDivElement>) => {
-    setCompareDragging(true);
-    e.currentTarget.setPointerCapture?.(e.pointerId);
-    updateRevealFromClientX(e.clientX);
-  };
-  const handleComparePointerMove = (e: ReactPointerEvent<HTMLDivElement>) => {
-    if (!compareDragging) return;
-    updateRevealFromClientX(e.clientX);
-  };
-  const handleComparePointerEnd = (e: ReactPointerEvent<HTMLDivElement>) => {
-    setCompareDragging(false);
-    try {
-      e.currentTarget.releasePointerCapture?.(e.pointerId);
-    } catch {
-      // pointer already released
-    }
-  };
+  useEffect(() => {
+    setLightboxIndex(null);
+  }, [activeCategory]);
 
-  const magnetProps = {
-    onMouseMove: (e: ReactMouseEvent<HTMLElement>) => {
-      const el = e.currentTarget;
-      const rect = el.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-      el.style.transform = `translate(${x * 0.25}px, ${y * 0.35}px)`;
-    },
-    onMouseLeave: (e: ReactMouseEvent<HTMLElement>) => {
-      e.currentTarget.style.transform = 'translate(0, 0)';
-    },
-  };
+  const activePhoto = lightboxIndex !== null ? filtered[lightboxIndex] : null;
 
   return (
     <main className={`${display.variable} ${body.variable} page`}>
@@ -292,18 +268,18 @@ export default function HistoryPage() {
       <header className={`nav ${scrolled ? 'nav--solid' : ''}`}>
         <div className="nav__inner">
           <Link href="/" className="nav__mark">
-            MAKAN <span>кафесі</span>
+            MAKAN <span>café</span>
           </Link>
-          <nav className="nav__links" aria-label="Основная навигация">
-            <Link href="/" className="nav__link">Главная</Link>
-            <Link href="/menu" className="nav__link">Меню</Link>
-            <Link href="/gallery" className="nav__link">Галерея</Link>
-            <Link href="/history" className="nav__link nav__link--active">История</Link>
-            <a href="/#contacts" className="nav__link nav__link--cta">Контакты</a>
-            <div className="nav__lang" aria-label="Выбор языка">
-              <Link href="/kz_history" className="nav__lang-btn">ҚАЗ</Link>
+          <nav className="nav__links" aria-label="Main Navigation">
+            <Link href="/en_main" className="nav__link">Home</Link>
+            <Link href="/en_menu" className="nav__link">Menu</Link>
+            <Link href="/en_gallery" className="nav__link nav__link--active">Gallery</Link>
+            <Link href="/en_history" className="nav__link">Our Story</Link>
+             <a href="/en_main#contacts" className="nav__link nav__link--cta">Contacts</a>
+            <div className="nav__lang" aria-label="Select language">
+              <Link href="/kz_gallery" className="nav__lang-btn">ҚАЗ</Link>
               <span className="nav__lang-dot" aria-hidden="true">·</span>
-              <Link href="/en_history" className="nav__lang-btn">ENG</Link>
+              <Link href="/gallery" className="nav__lang-btn">РУС</Link>
             </div>
             {status && (
               <span className={`nav__status ${status.open ? 'nav__status--open' : ''}`}>
@@ -315,7 +291,7 @@ export default function HistoryPage() {
           <button
             type="button"
             className={`nav__toggle ${menuOpen ? 'nav__toggle--open' : ''}`}
-            aria-label={menuOpen ? 'Закрыть меню' : 'Открыть меню'}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen((v) => !v)}
           >
@@ -327,7 +303,7 @@ export default function HistoryPage() {
       </header>
 
       <div className={`mobile-menu ${menuOpen ? 'mobile-menu--open' : ''}`}>
-        <nav className="mobile-menu__links" aria-label="Мобильная навигация">
+        <nav className="mobile-menu__links" aria-label="Mobile Navigation">
           {navLinks.map((l, i) => (
             <Link
               key={l.href}
@@ -343,9 +319,9 @@ export default function HistoryPage() {
         </nav>
         <div className="mobile-menu__footer" style={{ transitionDelay: menuOpen ? `${navLinks.length * 60 + 180}ms` : '0ms' }}>
           <div className="mobile-menu__lang">
-            <Link href="/kz_history" className="mobile-menu__lang-btn" onClick={() => setMenuOpen(false)}>ҚАЗ</Link>
+            <Link href="/kz_gallery" className="mobile-menu__lang-btn" onClick={() => setMenuOpen(false)}>ҚАЗ</Link>
             <span className="mobile-menu__lang-dot" aria-hidden="true">·</span>
-            <Link href="/en_history" className="mobile-menu__lang-btn" onClick={() => setMenuOpen(false)}>ENG</Link>
+            <Link href="/gallery" className="mobile-menu__lang-btn" onClick={() => setMenuOpen(false)}>РУС</Link>
           </div>
           {status && (
             <span className={`mobile-menu__status ${status.open ? 'mobile-menu__status--open' : ''}`}>
@@ -363,8 +339,8 @@ export default function HistoryPage() {
       {/* 1. HERO */}
       <section className="hero">
         <Image
-          src={STOCK.hero}
-          alt="Зал кафе MAKAN сегодня: кирпичные стены, кожаные диваны и тёплый свет"
+          src={STOCK.hall_1}
+          alt="MAKAN café hall: brick walls, leather sofas, and warm lighting"
           fill
           priority
           sizes="100vw"
@@ -373,12 +349,12 @@ export default function HistoryPage() {
         />
         <div className="hero__scrim" />
         <div className="hero__content">
-          <p className="eyebrow">История</p>
+          <p className="eyebrow">Gallery</p>
           <h1 className="hero__title">
-            Мы принесли <em>дух грузинских гор</em> в Талгар
+            How it <em>really</em> feels
           </h1>
           <p className="hero__text">
-            Как желание воссоздать атмосферу Кавказа превратилось в кафе, где горное гостеприимство встречает гостя с первого шага.
+            No staging — just the hall, the details, and the tables exactly as our guests see them every day.
           </p>
         </div>
       </section>
@@ -387,7 +363,7 @@ export default function HistoryPage() {
         <div className="marquee__track">
           {Array.from({ length: 2 }).map((_, rep) => (
             <span className="marquee__group" key={rep}>
-              {['MAKAN', 'Дух Кавказа', 'История создания', 'Талгар', 'Горное гостеприимство'].map((w) => (
+              {['MAKAN', 'Main Hall', 'Interior Details', 'Warm Light', 'Atmosphere'].map((w) => (
                 <span className="marquee__item" key={w}>
                   {w}
                   <Swash className="marquee__swash" />
@@ -398,61 +374,120 @@ export default function HistoryPage() {
         </div>
       </div>
 
-      {/* 2. ПИСЬМО — единственное светлое пятно на весь сайт */}
-      <section className="letter-section">
+      {/* 2. FILTERS + GRID */}
+      <section className="gallery">
         <Reveal>
-          <div className="letter">
-            <span className="letter__seal" aria-hidden="true">M</span>
-            <Swash className="letter__swash" />
-            <p className="letter__eyebrow">Несколько слов от нас</p>
-            <p className="letter__text">
-              Мы хотели, чтобы гость, переступив порог, оказался не в обычном
-              кафе, а будто в горном доме где-то в Сванетии или Кахетии — там,
-              где тепло очага и щедрость стола не показные, а настоящие.
-            </p>
-            <p className="letter__text">
-              Так родилась идея: собрать в одном пространстве дух грузинских
-              гор — камень, дерево, огонь — и подать его через кухню, где
-              кавказские традиции встречаются с шашлыком, десертами и
-              гостеприимством.
-            </p>
-            <p className="letter__sign">— команда MAKAN</p>
+          <p className="eyebrow eyebrow--center">Photographs</p>
+          <h2 className="gallery__title">Choose a view to look closer</h2>
+        </Reveal>
+
+        <Reveal className="gallery__filters-wrap">
+          <div className="gallery__filters" role="tablist" aria-label="Photo categories">
+            {categories.map((c) => (
+              <button
+                key={c.key}
+                type="button"
+                role="tab"
+                aria-selected={activeCategory === c.key}
+                className={`gallery__filter ${activeCategory === c.key ? 'gallery__filter--active' : ''}`}
+                onClick={() => setActiveCategory(c.key)}
+              >
+                {c.label}
+              </button>
+            ))}
           </div>
         </Reveal>
-      </section>
 
-      {/* 3. ХРОНОЛОГИЯ */}
-      <section className="timeline">
-        <Reveal>
-          <p className="eyebrow eyebrow--center">Хроника</p>
-          <h2 className="section-title">Как всё начиналось</h2>
-        </Reveal>
-
-        <div className="timeline__list">
-          <span className="timeline__line" aria-hidden="true" />
-          {milestones.map((m, i) => (
-            <div
-              className={`timeline__item ${i % 2 === 0 ? 'timeline__item--left' : 'timeline__item--right'}`}
-              key={m.year}
+        <div className="masonry">
+          {filtered.map((photo, i) => (
+            <button
+              type="button"
+              key={`${photo.src}-${photo.caption}`}
+              className="masonry__item"
+              style={{ aspectRatio: photo.aspect }}
+              onClick={() => setLightboxIndex(i)}
+              aria-label={`Open photo: ${photo.caption}`}
             >
-              <span className="timeline__dot" aria-hidden="true" />
-              <Reveal>
-                <div className="timeline__card">
-                  {m.year && <span className="timeline__year">{m.year}</span>}
-                  <h3 className="timeline__title">{m.title}</h3>
-                  <p className="timeline__text">{m.text}</p>
-                </div>
-              </Reveal>
-            </div>
+              <Image
+                src={photo.src}
+                alt={photo.alt}
+                fill
+                sizes="(max-width: 700px) 90vw, (max-width: 1100px) 45vw, 30vw"
+                className="masonry__img"
+              />
+              <span className="masonry__scrim" aria-hidden="true" />
+              <span className="masonry__caption">{photo.caption}</span>
+            </button>
           ))}
         </div>
+
+        {filtered.length === 0 && (
+          <p className="gallery__empty">There are no photos in this category yet.</p>
+        )}
       </section>
 
-      {/* 4. ДАЛЬШЕ ПО САЙТУ */}
+      {/* 3. LIGHTBOX */}
+      {activePhoto && (
+        <div
+          className="lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label={activePhoto.caption}
+          onClick={() => setLightboxIndex(null)}
+        >
+          <button
+            type="button"
+            className="lightbox__close"
+            aria-label="Close"
+            onClick={() => setLightboxIndex(null)}
+          >
+            ✕
+          </button>
+
+          <button
+            type="button"
+            className="lightbox__nav lightbox__nav--prev"
+            aria-label="Previous photo"
+            onClick={(e) => {
+              e.stopPropagation();
+              setLightboxIndex((i) => (i === null ? null : (i - 1 + filtered.length) % filtered.length));
+            }}
+          >
+            ←
+          </button>
+
+          <div className="lightbox__frame" onClick={(e) => e.stopPropagation()}>
+            <Image
+              src={activePhoto.src}
+              alt={activePhoto.alt}
+              fill
+              sizes="90vw"
+              className="lightbox__img"
+              style={{ objectFit: 'contain' }}
+            />
+          </div>
+
+          <button
+            type="button"
+            className="lightbox__nav lightbox__nav--next"
+            aria-label="Next photo"
+            onClick={(e) => {
+              e.stopPropagation();
+              setLightboxIndex((i) => (i === null ? null : (i + 1) % filtered.length));
+            }}
+          >
+            →
+          </button>
+
+          <p className="lightbox__caption">{activePhoto.caption}</p>
+        </div>
+      )}
+
+      {/* 4. EXPLORE MORE */}
       <section className="explore">
         <Reveal>
-          <p className="eyebrow eyebrow--center">Дальше по сайту</p>
-          <h2 className="section-title">Погрузитесь глубже</h2>
+          <p className="eyebrow eyebrow--center">Explore More</p>
+          <h2 className="gallery__title">Immerse Yourself Deeper</h2>
         </Reveal>
 
         <div className="explore__list">
@@ -473,15 +508,15 @@ export default function HistoryPage() {
         <div className="footer__inner">
           <div className="footer__col">
             <div className="footer__mark">
-              MAKAN <span>кафесі</span>
+              MAKAN <span>café</span>
             </div>
-            <p className="footer__tag">Вкусная еда и атмосфера, в которой хочется задержаться</p>
+            <p className="footer__tag">Delicious food and an atmosphere where you want to linger</p>
           </div>
 
           <div className="footer__col footer__col--meta">
             <p>{ADDRESS}</p>
             <p><a href={PHONE_HREF}>{PHONE}</a></p>
-            <p>Ежедневно, 10:00 — 23:00</p>
+            <p>Daily, 10:00 AM — 11:00 PM</p>
           </div>
 
           <div className="footer__col footer__col--social">
@@ -557,13 +592,7 @@ export default function HistoryPage() {
         }
         .eyebrow--center { text-align: center; }
 
-        .section-title {
-          font-family: var(--font-display), serif; font-weight: 600;
-          font-size: clamp(1.6rem, 3vw, 2.1rem); margin: 0 0 3rem; color: var(--parchment);
-          text-align: center;
-        }
-
-        /* NAV */
+        /* NAV — идентична главной странице */
         .nav {
           position: fixed; top: 0; left: 0; right: 0; z-index: 50;
           background: transparent;
@@ -632,11 +661,6 @@ export default function HistoryPage() {
         .nav__toggle--open span:nth-child(2) { opacity: 0; }
         .nav__toggle--open span:nth-child(3) { top: 8px; transform: rotate(-45deg); }
 
-        @media (max-width: 780px) {
-          .nav__links { display: none; }
-          .nav__toggle { display: block; }
-        }
-
         .nav__lang {
   display: flex; align-items: center; gap: 0.55rem;
   margin-left: 0.6rem; padding: 0.4rem 1rem;
@@ -651,6 +675,11 @@ export default function HistoryPage() {
 }
 .nav__lang-btn:hover, .nav__lang-btn:focus-visible { color: var(--gold-light); }
 .nav__lang-dot { color: var(--gold); opacity: 0.55; font-size: 0.65rem; }
+
+        @media (max-width: 780px) {
+          .nav__links { display: none; }
+          .nav__toggle { display: block; }
+        }
 
         .mobile-menu {
           position: fixed; inset: 0; z-index: 60;
@@ -695,6 +724,7 @@ export default function HistoryPage() {
         .mobile-menu__social { display: flex; gap: 1.6rem; }
         .mobile-menu__social a { color: var(--parchment-dim); text-decoration: none; font-size: 0.85rem; letter-spacing: 0.04em; }
         .mobile-menu__social a:hover { color: var(--gold-light); }
+
         .mobile-menu__lang {
   display: flex; align-items: center; gap: 0.85rem; margin-bottom: 0.6rem;
 }
@@ -710,7 +740,7 @@ export default function HistoryPage() {
 }
 .mobile-menu__lang-dot { color: var(--gold); opacity: 0.55; font-size: 0.85rem; }
 
-        /* HERO */
+        /* HERO — короче, чем на главной: страница сразу переходит к делу */
         .hero { position: relative; height: 62vh; min-height: 420px; display: flex; align-items: flex-end; overflow: hidden; }
         .hero__img { object-fit: cover; filter: saturate(0.85) brightness(0.55); }
         .hero__scrim {
@@ -722,10 +752,9 @@ export default function HistoryPage() {
           font-family: var(--font-display), serif; font-weight: 600;
           font-size: clamp(2.1rem, 5.2vw, 3.6rem); line-height: 1.14;
           margin: 0 0 1rem; color: var(--parchment);
-          text-shadow: 0 2px 24px rgba(0,0,0,0.55), 0 1px 4px rgba(0,0,0,0.85);
         }
         .hero__title em { font-style: italic; font-weight: 600; color: var(--gold-light); }
-        .hero__text { font-size: 1rem; line-height: 1.7; color: var(--parchment-dim); max-width: 46ch; margin: 0; font-weight: 300; text-shadow: 0 1px 12px rgba(0,0,0,0.5); }
+        .hero__text { font-size: 1rem; line-height: 1.7; color: var(--parchment-dim); max-width: 46ch; margin: 0; font-weight: 300; }
         @media (max-width: 640px) {
           .hero { height: 52vh; }
           .hero__content { padding: 0 1.4rem 3rem; }
@@ -752,79 +781,112 @@ export default function HistoryPage() {
           .marquee__track { animation: none; }
         }
 
-        /* ПИСЬМО — единственная светлая поверхность на сайте */
-        .letter-section { padding: var(--space-section) 2rem; background: var(--ink); display: flex; justify-content: center; }
-        .letter {
-          position: relative; max-width: 620px; width: 100%;
-          background: var(--parchment); color: var(--ink-soft);
-          padding: 3.4rem 3rem 3rem; box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
+        /* ГАЛЕРЕЯ */
+        .gallery { padding: var(--space-section) 2rem; background: var(--ink); text-align: center; }
+        .gallery__title {
+          font-family: var(--font-display), serif; font-weight: 600;
+          font-size: clamp(1.6rem, 3vw, 2.1rem); margin: 0 0 2.4rem; color: var(--parchment);
         }
-        .letter__seal {
-          position: absolute; top: -1.3rem; left: 50%; transform: translateX(-50%);
-          width: 2.8rem; height: 2.8rem; border-radius: 50%;
-          background: var(--wine); color: var(--parchment);
-          display: flex; align-items: center; justify-content: center;
-          font-family: var(--font-display), serif; font-style: italic; font-weight: 700; font-size: 1.2rem;
-          box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
+
+        .gallery__filters-wrap { display: flex; justify-content: center; margin-bottom: 3rem; }
+        .gallery__filters {
+          display: inline-flex; gap: 0.6rem; padding: 0.35rem;
+          border: 1px solid var(--hairline); flex-wrap: wrap; justify-content: center;
         }
-        .letter__swash { width: 90px; height: 14px; color: var(--gold); display: block; margin: 0.6rem auto 1.6rem; }
-        .letter__eyebrow {
-          text-align: center; font-size: 0.7rem; letter-spacing: 0.26em; text-transform: uppercase;
-          color: var(--wine); font-weight: 700; margin: 0 0 1.6rem;
+        .gallery__filter {
+          background: none; border: 0; cursor: pointer;
+          padding: 0.55rem 1.2rem; font-family: var(--font-body), sans-serif;
+          font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase;
+          color: var(--parchment-dim); transition: color 0.2s ease, background 0.2s ease;
         }
-        .letter__text {
-          font-family: var(--font-display), serif; font-style: italic; font-weight: 500;
-          font-size: 1.15rem; line-height: 1.75; margin: 0 0 1.2rem; color: var(--ink-soft);
-          text-align: center;
+        .gallery__filter:hover, .gallery__filter:focus-visible { color: var(--parchment); }
+        .gallery__filter--active { color: var(--ink); background: var(--gold-light); }
+
+        /* Масонри-сетка через CSS columns — три колонки на десктопе,
+           карточки разной высоты (photo.aspect) создают неровный, живой ряд. */
+        .masonry {
+          column-count: 3; column-gap: 1.2rem;
+          max-width: 1180px; margin: 0 auto; text-align: left;
         }
-        .letter__sign {
-          text-align: center; margin: 1.6rem 0 0; font-size: 0.8rem;
-          letter-spacing: 0.1em; text-transform: uppercase; color: var(--wine); font-weight: 700;
+        .masonry__item {
+          position: relative; display: block; width: 100%;
+          break-inside: avoid; margin-bottom: 1.2rem;
+          border: 0; padding: 0; cursor: zoom-in; background: var(--ink-soft);
+          overflow: hidden;
         }
+        .masonry__img { object-fit: cover; filter: saturate(0.88) brightness(0.9); transition: transform 0.6s ease, filter 0.4s ease; }
+        .masonry__item:hover .masonry__img, .masonry__item:focus-visible .masonry__img {
+          transform: scale(1.06); filter: saturate(0.95) brightness(0.75);
+        }
+        .masonry__scrim {
+          position: absolute; inset: 0;
+          background: linear-gradient(180deg, transparent 55%, rgba(10,8,6,0.85) 100%);
+          opacity: 0; transition: opacity 0.35s ease;
+        }
+        .masonry__item:hover .masonry__scrim, .masonry__item:focus-visible .masonry__scrim { opacity: 1; }
+        .masonry__caption {
+          position: absolute; left: 1rem; right: 1rem; bottom: 0.9rem;
+          font-family: var(--font-display), serif; font-style: italic; font-weight: 600;
+          font-size: 0.92rem; color: var(--parchment);
+          opacity: 0; transform: translateY(8px);
+          transition: opacity 0.35s ease, transform 0.35s ease;
+        }
+        .masonry__item:hover .masonry__caption, .masonry__item:focus-visible .masonry__caption {
+          opacity: 1; transform: translateY(0);
+        }
+        .masonry__item:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 2px; }
+
+        .gallery__empty { color: var(--parchment-dim); font-size: 0.95rem; margin-top: 2rem; }
+
+        @media (max-width: 900px) {
+          .masonry { column-count: 2; }
+        }
+        @media (max-width: 560px) {
+          .masonry { column-count: 1; }
+          .masonry__caption { opacity: 1; transform: none; }
+          .masonry__scrim { opacity: 1; }
+        }
+
+        /* ЛАЙТБОКС */
+        .lightbox {
+          position: fixed; inset: 0; z-index: 80;
+          background: rgba(8, 6, 5, 0.94);
+          display: flex; flex-direction: column; align-items: center; justify-content: center;
+          padding: 2.5rem 1.2rem;
+          animation: lightboxIn 0.25s ease;
+        }
+        @keyframes lightboxIn {
+          from { opacity: 0; } to { opacity: 1; }
+        }
+        .lightbox__frame { position: relative; width: min(90vw, 1100px); height: min(75vh, 780px); }
+        .lightbox__caption {
+          margin: 1.4rem 0 0; font-family: var(--font-display), serif; font-style: italic;
+          font-weight: 600; font-size: 1rem; color: var(--gold-light); text-align: center;
+        }
+        .lightbox__close {
+          position: absolute; top: 1.4rem; right: 1.6rem; z-index: 2;
+          background: none; border: 1px solid var(--hairline); color: var(--parchment);
+          width: 2.6rem; height: 2.6rem; font-size: 1rem; cursor: pointer;
+          transition: border-color 0.2s ease, color 0.2s ease;
+        }
+        .lightbox__close:hover, .lightbox__close:focus-visible { border-color: var(--gold-light); color: var(--gold-light); }
+        .lightbox__nav {
+          background: none; border: 1px solid var(--hairline); color: var(--parchment);
+          width: 3rem; height: 3rem; font-size: 1.1rem; cursor: pointer; flex-shrink: 0;
+          transition: border-color 0.2s ease, color 0.2s ease;
+          margin: 0 1.2rem;
+        }
+        .lightbox__nav:hover, .lightbox__nav:focus-visible { border-color: var(--gold-light); color: var(--gold-light); }
         @media (max-width: 640px) {
-          .letter { padding: 3rem 1.6rem 2.2rem; }
+          .lightbox { padding: 1.5rem 0.6rem; }
+          .lightbox__frame { width: 100%; height: 58vh; }
+          .lightbox__nav { width: 2.4rem; height: 2.4rem; margin: 0 0.5rem; }
+          .lightbox__close { top: 0.8rem; right: 0.8rem; width: 2.3rem; height: 2.3rem; }
         }
 
-        /* ХРОНОЛОГИЯ */
-        .timeline { padding: var(--space-section) 2rem; background: var(--ink); }
-        .timeline__list { position: relative; max-width: 900px; margin: 0 auto; }
-        .timeline__line {
-          position: absolute; top: 0; bottom: 0; left: 50%; width: 1px;
-          background: var(--hairline); transform: translateX(-50%);
-        }
-        .timeline__item {
-          position: relative; display: flex; margin-bottom: 3.2rem;
-        }
-        .timeline__item:last-child { margin-bottom: 0; }
-        .timeline__item--left { justify-content: flex-start; }
-        .timeline__item--right { justify-content: flex-end; }
-        .timeline__dot {
-          position: absolute; top: 0.5rem; left: 50%; transform: translateX(-50%);
-          width: 0.7rem; height: 0.7rem; border-radius: 50%;
-          background: var(--gold-light); box-shadow: 0 0 0 4px var(--ink), 0 0 0 5px var(--hairline);
-          z-index: 2;
-        }
-        .timeline__card {
-          width: calc(50% - 3rem); background: var(--ink-soft);
-          border: 1px solid var(--hairline); padding: 1.7rem 1.9rem;
-        }
-        .timeline__year {
-          font-family: var(--font-display), serif; font-style: italic; font-weight: 700;
-          font-size: 1.6rem; color: var(--gold-light); display: block; margin-bottom: 0.4rem;
-        }
-        .timeline__title { font-family: var(--font-display), serif; font-weight: 600; font-size: 1.15rem; margin: 0 0 0.6rem; color: var(--parchment); }
-        .timeline__text { font-size: 0.88rem; line-height: 1.7; color: var(--parchment-dim); margin: 0; font-weight: 300; }
-
-        @media (max-width: 760px) {
-          .timeline__line { left: 0.35rem; }
-          .timeline__item, .timeline__item--left, .timeline__item--right { justify-content: flex-start; padding-left: 2rem; }
-          .timeline__dot { left: 0.35rem; top: 0.5rem; }
-          .timeline__card { width: 100%; }
-        }
-          
         /* ДАЛЬШЕ ПО САЙТУ */
-.explore { padding: var(--space-section-sm) 3vw var(--space-section); background: var(--ink); text-align: center; }
-.explore__list { max-width: 720px; width: 100%; margin: 3rem auto 0; text-align: center; }
+        .explore { padding: var(--space-section-sm) 2rem var(--space-section); background: var(--ink); text-align: center; }
+.explore__list { max-width: 720px; margin: 3rem auto 0; text-align: center; }
 .explore__row {
   position: relative;
   display: flex;
@@ -871,7 +933,7 @@ export default function HistoryPage() {
   .explore__row-arrow { opacity: 1; }
 }
 
-        /* FOOTER */
+        /* FOOTER — идентичен главной странице */
         .footer { position: relative; padding: 4.5rem 2rem 2.5rem; background: var(--ink-soft); border-top: 1px solid var(--hairline); }
         .footer__inner {
           max-width: 1200px; margin: 0 auto; display: grid;
@@ -903,7 +965,7 @@ export default function HistoryPage() {
         }
 
         @media (max-width: 480px) {
-          .letter-section, .timeline, .compare-section, .explore {
+          .gallery, .explore {
             padding-left: 1.25rem; padding-right: 1.25rem;
           }
         }

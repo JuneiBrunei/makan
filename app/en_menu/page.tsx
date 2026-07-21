@@ -5,21 +5,13 @@ import Link from 'next/link';
 import { Cormorant_Garamond, Manrope } from 'next/font/google';
 
 /**
- * MAKAN — страница «Меню»
+ * MAKAN — "Menu" page
  * =========================================================================
- * Переиспользует ту же шапку/подвал/дизайн-систему, что и главная страница
- * (см. page.tsx): тёмный фон, золото, Cormorant Garamond + Manrope.
+ * Reuses the same header/footer/design system as the main page (page.tsx):
+ * dark background, gold accents, Cormorant Garamond + Manrope fonts.
  *
- * Данные — из двух загруженных PDF (кухня + бар), перенесены как есть, без
- * выдумывания новых позиций. Валюта указана как ₸ (тенге) вместо "т" из PDF.
- *
- * СТРУКТУРА:
- *  1. Шапка + мобильное меню (как на главной)
- *  2. Заголовок страницы
- *  3. Переключатель "Кухня / Бар" + быстрые ссылки на категории
- *  4. Категории меню — плиткой в несколько колонок (CSS columns),
- *     внутри — точечные лидеры "название .... цена", как в самом PDF
- *  5. Footer
+ * Data from PDF menus (kitchen + bar) translated into English.
+ * Currency is displayed in ₸ (tenge).
  * =========================================================================
  */
 
@@ -36,24 +28,24 @@ const body = Manrope({
   variable: '--font-body',
 });
 
-const ADDRESS = 'г. Талгар, ул. Гагарина 67';
+const ADDRESS = '67 Gagarina St, Talgar';
 const PHONE = '+7 708 605 9354';
 const PHONE_HREF = 'tel:+77086059354';
 const INSTAGRAM = 'https://www.instagram.com/makan_talgar/';
 const WHATSAPP = 'https://wa.me/77086059354';
 
 const hours = [
-  { day: 'Понедельник — четверг', time: '10:00 — 23:00' },
-  { day: 'Пятница — суббота', time: '10:00 — 23:00' },
-  { day: 'Воскресенье', time: '10:00 — 23:00' },
+  { day: 'Monday — Thursday', time: '10:00 — 23:00' },
+  { day: 'Friday — Saturday', time: '10:00 — 23:00' },
+  { day: 'Sunday', time: '10:00 — 23:00' },
 ];
 
 const navLinks = [
-  { href: '/', label: 'Главная' },
-  { href: '/menu', label: 'Меню' },
-  { href: '/gallery', label: 'Галерея' },
-  { href: '/history', label: 'История' },
-  { href: '#contacts', label: 'Контакты' },
+  { href: '/', label: 'Home' },
+  { href: '/menu', label: 'Menu' },
+  { href: '/gallery', label: 'Gallery' },
+  { href: '/history', label: 'History' },
+  { href: '#contacts', label: 'Contacts' },
 ];
 
 const WEEKLY_HOURS: Record<number, [number, number]> = {
@@ -80,10 +72,10 @@ function useOpenStatus() {
       const t = now.getHours() + now.getMinutes() / 60;
       const [open, close] = WEEKLY_HOURS[day];
       if (t >= open && t < close) {
-        setStatus({ open: true, text: `Открыто · до ${formatHour(close)}` });
+        setStatus({ open: true, text: `Open · until ${formatHour(close)}` });
       } else {
         const nextOpen = t < open ? open : WEEKLY_HOURS[(day + 1) % 7][0];
-        setStatus({ open: false, text: `Закрыто · с ${formatHour(nextOpen)}` });
+        setStatus({ open: false, text: `Closed · opens at ${formatHour(nextOpen)}` });
       }
     };
     compute();
@@ -94,7 +86,7 @@ function useOpenStatus() {
   return status;
 }
 
-/** Волнистая линия из логотипа — единственный узнаваемый узор страницы. */
+/** Swash line SVG flourish */
 function Swash({ className = '' }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true">
@@ -110,7 +102,7 @@ function Swash({ className = '' }: { className?: string }) {
 }
 
 /* =========================================================================
-   ДАННЫЕ МЕНЮ — перенесены из загруженных PDF (кухня + бар)
+   MENU DATA — Translated into English
    ========================================================================= */
 
 type MenuItem = { name: string; price: string };
@@ -123,272 +115,272 @@ function items(...pairs: [string, string][]): MenuGroup[] {
 
 const FOOD_CATEGORIES: MenuCategory[] = [
   {
-    title: 'Завтраки',
+    title: 'Breakfast',
     groups: items(
-      ['Грузинский завтрак (колбаски, яйца-глазунья, омлет с овощами, зелень, фасоль)', '2599 ₸'],
-      ['Сырники (варенье, мёд, сметана по желанию)', '2299 ₸'],
-      ['Овсянка с фруктами (фрукты по сезону)', '1199 ₸'],
-      ['Шакшука (яйцо, помидоры, перец, лук, специи)', '2299 ₸'],
-      ['Блинчики с творогом', '1599 ₸'],
-      ['Блинчики с мясом', '1799 ₸'],
-      ['Турецкий завтрак (брынза, оливки, яйца варёные, черри, огурцы, зелень)', '1599 ₸']
+      ['Georgian Breakfast (sausages, fried eggs, vegetable omelet, greens, beans)', '2599 ₸'],
+      ['Syrniki / Cottage Cheese Pancakes (jam, honey, sour cream on request)', '2299 ₸'],
+      ['Oatmeal with Seasonal Fruit', '1199 ₸'],
+      ['Shakshuka (eggs, tomatoes, bell peppers, onions, spices)', '2299 ₸'],
+      ['Crepes with Cottage Cheese', '1599 ₸'],
+      ['Crepes with Minced Meat', '1799 ₸'],
+      ['Turkish Breakfast (feta cheese, olives, boiled eggs, cherry tomatoes, cucumbers, greens)', '1599 ₸']
     ),
   },
   {
-    title: 'Закуски',
+    title: 'Appetizers',
     groups: items(
-      ['Кавказская закуска (помидоры, огурцы, брынза, маслины, зелёный лук, укроп, кинза, лимоны, перец болгарский)', '3499 ₸'],
-      ['Ассорти солений (огурцы солёные, помидоры солёные, квашеная капуста, перец острый)', '3299 ₸'],
-      ['Конская ассорти (жая, казы, язык)', '6599 ₸'],
-      ['Рыбная ассорти', '5499 ₸'],
-      ['Рулетики из баклажанов с орехами', '2799 ₸'],
-      ['Русская закуска (сельдь, картофель, огурцы солёные, лук, лимон, квашеная капуста)', '3399 ₸']
+      ['Caucasian Platter (tomatoes, cucumbers, feta cheese, black olives, green onions, dill, cilantro, lemon, bell peppers)', '3499 ₸'],
+      ['Assorted Pickles (pickled cucumbers, tomatoes, sauerkraut, spicy peppers)', '3299 ₸'],
+      ['Horse Meat Platter (zhaya, kazy, horse tongue)', '6599 ₸'],
+      ['Fish Platter', '5499 ₸'],
+      ['Eggplant Rolls with Walnut Filling', '2799 ₸'],
+      ['Russian Appetizer (herring, potatoes, pickled cucumbers, onions, lemon, sauerkraut)', '3399 ₸']
     ),
   },
   {
-    title: 'Первые блюда',
+    title: 'Soups',
     groups: items(
-      ['Харчо (говядина, рис, грузинские специи, грецкие орехи)', '1550 ₸'],
-      ['Чечевичный суп', '1350 ₸'],
-      ['Лапша по-домашнему (курица, лапша, специи)', '1299 ₸'],
-      ['Шорпа (баранина, картофель, перец болгарский, лук, помидоры, специи)', '2099 ₸'],
-      ['Домашние пельмени (фарш говядины, лук, тесто, сметана, специи)', '1699 ₸'],
-      ['Мясо по-казахски (мясо, казы, тесто, бульон, лук)', '1899 ₸'],
-      ['Хаш — традиционный кавказский суп (говяжьи ножки, чеснок, зелень, бульон, лаваш)', '2499 ₸'],
-      ['Том-ям (креветки, шампиньоны, черри, лук, кокосовое молоко, паста том-ям, лайм, кинза, чили по вкусу)', '3499 ₸']
+      ['Kharcho (beef, rice, Georgian spices, walnuts)', '1550 ₸'],
+      ['Lentil Soup', '1350 ₸'],
+      ['Homemade Chicken Noodle Soup', '1299 ₸'],
+      ['Shorpa (lamb, potatoes, bell peppers, onions, tomatoes, spices)', '2099 ₸'],
+      ['Homemade Pelmeni (beef dumplings, onions, dough, sour cream, spices)', '1699 ₸'],
+      ['Beshbarmak / Kazakh Meat (beef/horsemeat, kazy, pasta sheets, broth, onion sauce)', '1899 ₸'],
+      ['Khash — Traditional Caucasian Soup (beef feet, garlic, herbs, broth, lavash)', '2499 ₸'],
+      ['Tom Yum (shrimp, mushrooms, cherry tomatoes, onions, coconut milk, tom yum paste, lime, cilantro, chili optional)', '3499 ₸']
     ),
   },
   {
-    title: 'Салаты',
+    title: 'Salads',
     groups: items(
-      ['Фирменный салат «Макан» (хрустящие баклажаны в кисло-сладком соусе, микс салат, говядина, черри, специи)', '2799 ₸'],
-      ['Цезарь с сёмгой (айсберг, сёмга, черри, пармезан, сухарики, яйцо, соус «цезарь»)', '2899 ₸'],
-      ['Цезарь с курицей (айсберг, куриное филе в кляре, черри, пармезан, сухарики, соус «цезарь», яйцо)', '2299 ₸'],
-      ['Греческий салат (помидоры, огурцы, перец, оливки, лимон, лист салата, красный лук, масло, брынза)', '1999 ₸'],
-      ['Острый салат «Арзу» (огурцы, сладкий перец, красный лук, чеснок, говядина, острый перец, соевый соус, масло)', '2199 ₸'],
-      ['Грузинский салат «Цицибели» (шампиньоны, куриное филе, огурцы, картофель пай, соус)', '2699 ₸'],
-      ['Салат от шефа (жареная брынза, черри, шампиньоны, чеснок, масло)', '2499 ₸'],
-      ['Салат с куркумой (цветная капуста, брокколи, перец, черри, куриное филе, соус с куркумой)', '2199 ₸'],
-      ['Салат «Тбилиси» (говядина, красная фасоль, болгарский перец, кинза, грецкий орех, лимонный сок, масло)', '2799 ₸'],
-      ['Кавказский салат (помидоры, огурцы, красный лук, кинза, базилик, масло)', '2199 ₸'],
-      ['Свежий салат (помидоры, огурцы, лук)', '1199 ₸']
+      ['Signature "Makan" Salad (crispy eggplant in sweet and sour sauce, salad mix, beef, cherry tomatoes, spices)', '2799 ₸'],
+      ['Salmon Caesar (iceberg lettuce, salmon, cherry tomatoes, parmesan, croutons, egg, Caesar dressing)', '2899 ₸'],
+      ['Chicken Caesar (iceberg lettuce, crispy chicken fillet, cherry tomatoes, parmesan, croutons, Caesar dressing, egg)', '2299 ₸'],
+      ['Greek Salad (tomatoes, cucumbers, bell peppers, olives, lemon, salad leaves, red onion, olive oil, feta)', '1999 ₸'],
+      ['Spicy "Arzu" Salad (cucumbers, sweet peppers, red onion, garlic, beef, hot pepper, soy sauce, oil)', '2199 ₸'],
+      ['Georgian "Tsitsibeli" Salad (mushrooms, chicken fillet, cucumbers, shoe-string potatoes, sauce)', '2699 ₸'],
+      ['Chef\'s Special Salad (seared feta, cherry tomatoes, mushrooms, garlic, oil)', '2499 ₸'],
+      ['Turmeric Salad (cauliflower, broccoli, bell peppers, cherry tomatoes, chicken fillet, turmeric dressing)', '2199 ₸'],
+      ['"Tbilisi" Salad (beef, red kidney beans, bell pepper, cilantro, walnuts, lemon juice, oil)', '2799 ₸'],
+      ['Caucasian Salad (tomatoes, cucumbers, red onion, cilantro, basil, oil)', '2199 ₸'],
+      ['Fresh Garden Salad (tomatoes, cucumbers, onions)', '1199 ₸']
     ),
   },
   {
-    title: 'Горячие закуски',
+    title: 'Hot Appetizers',
     groups: items(
-      ['Острые крылышки', '2499 ₸'],
-      ['Креветки в чесночном соусе', '3099 ₸'],
-      ['Мини чебуреки с мясом', '3 шт — 1399 ₸ · 5 шт — 2199 ₸'],
-      ['Мини чебуреки с брынзой и зеленью', '3 шт — 1399 ₸ · 5 шт — 1999 ₸'],
-      ['Ассорти колбасок (говядина, конина, баранина, курица)', '12499 ₸ · по отдельности 3799 ₸'],
-      ['Мини самса с мясом', '5 шт — 2199 ₸'],
-      ['Наггетсы', '6 шт — 1399 ₸']
+      ['Spicy Chicken Wings', '2499 ₸'],
+      ['Garlic Butter Shrimp', '3099 ₸'],
+      ['Mini Meat Chebureks', '3 pcs — 1399 ₸ · 5 pcs — 2199 ₸'],
+      ['Mini Cheese & Herb Chebureks', '3 pcs — 1399 ₸ · 5 pcs — 1999 ₸'],
+      ['Sausage Platter (beef, horsemeat, lamb, chicken)', '12499 ₸ · single portion 3799 ₸'],
+      ['Mini Meat Samsa', '5 pcs — 2199 ₸'],
+      ['Chicken Nuggets', '6 pcs — 1399 ₸']
     ),
   },
   {
-    title: 'Горячая выпечка',
+    title: 'Fresh Bakery',
     groups: items(
-      ['Хачапури по-мегрельски', '3099 ₸'],
-      ['Хачапури по-имеретински', '2799 ₸'],
-      ['Хычины (с мясом)', '1899 ₸'],
-      ['Хачапури по-аджарски', '2999 ₸'],
-      ['Хычины с сыром, картофелем', '1599 ₸']
+      ['Megrelian Khachapuri', '3099 ₸'],
+      ['Imeretian Khachapuri', '2799 ₸'],
+      ['Meat Khychins', '1899 ₸'],
+      ['Adjaruli Khachapuri', '2999 ₸'],
+      ['Cheese & Potato Khychins', '1599 ₸']
     ),
   },
   {
-    title: 'Вторые блюда',
+    title: 'Main Courses',
     groups: items(
-      ['Жаровня из говядины', '2599 ₸'],
-      ['Мясо по-тайски на жаровне (говядина, перец болгарский, лук, чеснок, чили по желанию, соевый соус)', '2399 ₸'],
-      ['Хинкали с мясом', '2599 ₸'],
-      ['Баранина по-грузински (баранина, болгарский перец, томатная паста, грузинские специи, лук)', '2499 ₸'],
-      ['Бефстроганов (говядина, лук, сливки; гарнир отдельно)', '2199 ₸'],
-      ['Чахохбили (курица, перец болгарский, грузинские специи, лук)', '2599 ₸'],
-      ['Жаровня из курицы (куриное филе, болгарский перец, зелень, специи)', '2599 ₸'],
-      ['Оджахури (филе, лук, картофель, помидоры, зелень, специи)', '2599 ₸'],
-      ['Куриная грудка с грибами в сливочном соусе', '2899 ₸'],
-      ['Котлеты по-домашнему, 2 шт (гарнир отдельно)', '1599 ₸'],
-      ['Долма', '2399 ₸']
+      ['Sizzling Beef Skillet', '2599 ₸'],
+      ['Thai-Style Sizzling Beef (beef, bell peppers, onions, garlic, chili on request, soy sauce)', '2399 ₸'],
+      ['Meat Khinkali (Georgian Dumplings)', '2599 ₸'],
+      ['Georgian-Style Lamb (lamb, bell peppers, tomato paste, Georgian spices, onions)', '2499 ₸'],
+      ['Beef Stroganoff (beef, onions, cream; side dish separate)', '2199 ₸'],
+      ['Chakhokhbili (stewed chicken, bell peppers, Georgian spices, onions)', '2599 ₸'],
+      ['Sizzling Chicken Skillet (chicken fillet, bell peppers, herbs, spices)', '2599 ₸'],
+      ['Ojdakhuri (meat, onions, potatoes, tomatoes, herbs, spices)', '2599 ₸'],
+      ['Creamy Mushroom Chicken Breast', '2899 ₸'],
+      ['Homemade Meat Patties, 2 pcs (side dish separate)', '1599 ₸'],
+      ['Dolma (stuffed grape leaves)', '2399 ₸']
     ),
   },
   {
-    title: 'Восточная кухня',
+    title: 'Oriental Cuisine',
     groups: items(
-      ['Цомян', '1799 ₸'],
-      ['Гуйру лагман', '2499 ₸'],
-      ['Манты', '1999 ₸'],
-      ['Куырдак', '3499 ₸'],
-      ['Сырне', '3499 ₸']
+      ['Tsomian (Pan-fried Lagman noodles)', '1799 ₸'],
+      ['Guyru Lagman', '2499 ₸'],
+      ['Steamed Manti Dumplings', '1999 ₸'],
+      ['Kuyrdak (roasted organ meats and meat with potatoes)', '3499 ₸'],
+      ['Syrne (slow-cooked tender lamb)', '3499 ₸']
     ),
   },
   {
-    title: 'Пицца',
+    title: 'Pizza',
     groups: items(
-      ['Пицца пепперони', '2599 ₸'],
-      ['Пицца маргарита', '2399 ₸'],
-      ['Пицца из курицы', '3299 ₸'],
-      ['Пицца «4 сезона»', '2799 ₸'],
-      ['Пицца «Цезарь»', '3399 ₸']
+      ['Pepperoni Pizza', '2599 ₸'],
+      ['Margherita Pizza', '2399 ₸'],
+      ['Chicken Pizza', '3299 ₸'],
+      ['Four Seasons Pizza', '2799 ₸'],
+      ['Caesar Pizza', '3399 ₸']
     ),
   },
   {
-    title: 'Хлеб',
+    title: 'Bread Basket',
     groups: items(
-      ['Баурсаки', '999 ₸'],
-      ['Хлебная корзина', '1499 ₸'],
-      ['Лаваш', '299 ₸'],
-      ['Лепёшки', '299 ₸']
+      ['Baursaks (fried dough puffs)', '999 ₸'],
+      ['Bread Basket', '1499 ₸'],
+      ['Lavash Flatbread', '299 ₸'],
+      ['Traditional Tandoor Bread', '299 ₸']
     ),
   },
   {
-    title: 'Шашлыки',
+    title: 'Shashlik / Kebabs',
     groups: items(
-      ['Баранина', '1499 ₸'],
-      ['Антрекот из баранины', '2499 ₸'],
-      ['Люля из баранины', '1499 ₸'],
-      ['Кавказский', '2399 ₸'],
-      ['Окорочка', '1199 ₸'],
-      ['Крылышки', '1299 ₸'],
-      ['Шашлык из утки', '1299 ₸'],
-      ['Печень в оболочке', '1399 ₸'],
-      ['Грибы', '1599 ₸'],
-      ['Овощи', '1199 ₸']
+      ['Lamb Kebab', '1499 ₸'],
+      ['Lamb Rib Kebab / Chops', '2499 ₸'],
+      ['Minced Lamb Lyulya Kebab', '1499 ₸'],
+      ['Caucasian Pork/Beef Kebab', '2399 ₸'],
+      ['Chicken Thigh Kebab', '1199 ₸'],
+      ['Chicken Wing Kebab', '1299 ₸'],
+      ['Duck Kebab', '1299 ₸'],
+      ['Wrapped Beef Liver Kebab', '1399 ₸'],
+      ['Grilled Mushrooms', '1599 ₸'],
+      ['Grilled Vegetables', '1199 ₸']
     ),
   },
   {
-    title: 'Блюда на компанию',
+    title: 'Sharing Platters (Group Meals)',
     groups: items(
-      ['Традиционный бесбармак', 'на 6 перс. — 18999 ₸ · на 4 перс. — 13999 ₸'],
-      ['Куырдак из баранины', 'на 6 перс. — 19499 ₸ · на 4 перс. — 13499 ₸'],
-      ['Сырне', 'на 6 перс. — 19499 ₸ · на 4 перс. — 14499 ₸'],
-      ['Дапанджи с рисом', 'на 6 перс. — 13999 ₸ · на 4 перс. — 10999 ₸'],
-      ['Плов праздничный с говядиной', 'на 6 перс. — 16999 ₸ · на 4 перс. — 12999 ₸'],
-      ['Манты', 'на 6 перс. — 10499 ₸'],
-      ['Коктал', '27999 ₸']
+      ['Traditional Beshbarmak', 'for 6 pers. — 18999 ₸ · for 4 pers. — 13999 ₸'],
+      ['Lamb Kuyrdak', 'for 6 pers. — 19499 ₸ · for 4 pers. — 13499 ₸'],
+      ['Syrne (Slow-cooked Lamb)', 'for 6 pers. — 19499 ₸ · for 4 pers. — 14499 ₸'],
+      ['Dapanji with Rice (spicy chicken stew)', 'for 6 pers. — 13999 ₸ · for 4 pers. — 10999 ₸'],
+      ['Festive Beef Plov (Pilaf)', 'for 6 pers. — 16999 ₸ · for 4 pers. — 12999 ₸'],
+      ['Steamed Manti Dumplings', 'for 6 pers. — 10499 ₸'],
+      ['Koktal (Smoked Whole Fish)', '27999 ₸']
     ),
   },
   {
-    title: 'Соусы',
+    title: 'Sauces',
     groups: items(
-      ['Аджика домашняя', '499 ₸'],
-      ['Чесночный соус', '399 ₸'],
-      ['Белый соус с зеленью', '399 ₸'],
-      ['Красный соус с зеленью', '399 ₸'],
-      ['Сырный соус', '399 ₸'],
-      ['Кетчуп', '299 ₸'],
-      ['Майонез', '299 ₸'],
-      ['Соевый соус', '350 ₸']
+      ['Homemade Adjika', '499 ₸'],
+      ['Garlic Sauce', '399 ₸'],
+      ['White Herb Sauce', '399 ₸'],
+      ['Red Herb Sauce', '399 ₸'],
+      ['Cheese Sauce', '399 ₸'],
+      ['Ketchup', '299 ₸'],
+      ['Mayonnaise', '299 ₸'],
+      ['Soy Sauce', '350 ₸']
     ),
   },
   {
-    title: 'Блюда из рыбы',
+    title: 'Fish Dishes',
     groups: items(
-      ['Форель со сливочным соусом', '3599 ₸'],
-      ['Жареный судак (на подушке с пюре)', '3599 ₸'],
-      ['Дорадо с кисло-сладким соусом', '4599 ₸']
+      ['Trout in Cream Sauce', '3599 ₸'],
+      ['Pan-seared Pike-perch (served over mashed potatoes)', '3599 ₸'],
+      ['Dorado in Sweet and Sour Sauce', '4599 ₸']
     ),
   },
   {
-    title: 'Сеты на 8 персон',
+    title: 'Sets for 8 Persons',
     groups: items(
-      ['Мясной сет (бараньи рёбра, антрекоты, говяжьи медальоны, куриные ножки, колбаски на гриле из конины, долма, овощи на гриле, запечённый картофель, соусы)', '27999 ₸'],
-      ['Рыбное плато (форель, лосось, филе судака, лимоны, овощи гриль, рис)', '33999 ₸'],
-      ['Сет из птицы (куриные ножки, крылья, филе, утка, зелень, картофель фри)', '22999 ₸']
+      ['Meat Set (lamb ribs, chops, beef medallions, chicken thighs, grilled horsemeat sausages, dolma, grilled vegetables, baked potatoes, sauces)', '27999 ₸'],
+      ['Seafood Platter (trout, salmon, pike-perch fillet, lemons, grilled vegetables, rice)', '33999 ₸'],
+      ['Poultry Set (chicken thighs, wings, fillet, duck, greens, french fries)', '22999 ₸']
     ),
   },
   {
-    title: 'Десерты',
+    title: 'Desserts',
     groups: items(
-      ['Медовик', '1599 ₸'],
-      ['Наполеон', '1599 ₸'],
-      ['Пахлава', '1899 ₸']
+      ['Honey Cake (Medovik)', '1599 ₸'],
+      ['Napoleon Cake', '1599 ₸'],
+      ['Baklava', '1899 ₸']
     ),
   },
   {
-    title: 'Стейки',
+    title: 'Steaks',
     groups: items(
-      ['Рибай с овощами гриль', '6099 ₸'],
-      ['Тибон с овощами', '5799 ₸'],
-      ['Стейк из форели', '4799 ₸'],
-      ['Стейк из лосося', '4799 ₸']
+      ['Ribeye Steak with Grilled Vegetables', '6099 ₸'],
+      ['T-Bone Steak with Vegetables', '5799 ₸'],
+      ['Trout Steak', '4799 ₸'],
+      ['Salmon Steak', '4799 ₸']
     ),
   },
   {
-    title: 'Паста',
+    title: 'Pasta',
     groups: items(
-      ['Феттучини альфредо с сёмгой', '3599 ₸'],
-      ['Феттучини альфредо с курицей', '2199 ₸'],
-      ['Феттучини альфредо с креветками', '3099 ₸'],
-      ['Болоньезе', '2199 ₸']
+      ['Fettuccine Alfredo with Salmon', '3599 ₸'],
+      ['Fettuccine Alfredo with Chicken', '2199 ₸'],
+      ['Fettuccine Alfredo with Shrimp', '3099 ₸'],
+      ['Spaghetti Bolognese', '2199 ₸']
     ),
   },
   {
-    title: 'Гарниры',
+    title: 'Side Dishes',
     groups: items(
-      ['Фри', '799 ₸'],
-      ['Рис', '599 ₸'],
-      ['Овощи гриль', '899 ₸'],
-      ['Картофель по-деревенски', '799 ₸'],
-      ['Пюре', '599 ₸'],
-      ['Сложный гарнир', '799 ₸']
+      ['French Fries', '799 ₸'],
+      ['Steamed Rice', '599 ₸'],
+      ['Grilled Vegetables', '899 ₸'],
+      ['Potato Wedges', '799 ₸'],
+      ['Mashed Potatoes', '599 ₸'],
+      ['Combo Side Dish', '799 ₸']
     ),
   },
   {
-    title: 'Бой посуды',
-    note: 'на всякий случай',
+    title: 'Tableware Damage Fees',
+    note: 'just in case',
     groups: items(
-      ['Рюмка, стакан, чайная чашка, блюдце', '999 ₸'],
-      ['Тарелки средние, пивная кружка, сахарница, фужеры, миски, кремянка', '1999 ₸'],
-      ['Большие тарелки, чайник, кувшин, графин, фруктовница, керамическая посуда', '3999 ₸'],
-      ['Чистка имущества', '4999 ₸'],
-      ['Порча имущества', 'по стоимости имущества']
+      ['Shot glass, drinking glass, teacup, saucer', '999 ₸'],
+      ['Medium plates, beer mug, sugar bowl, wine glasses, bowls, ice cream bowl', '1999 ₸'],
+      ['Large plates, teapot, pitcher, carafe, fruit bowl, ceramic dishware', '3999 ₸'],
+      ['Property cleaning fee', '4999 ₸'],
+      ['Property damage', 'at full market value']
     ),
   },
 ];
 
 const BAR_CATEGORIES: MenuCategory[] = [
   {
-    title: 'Коктейли',
-    note: '250 мл',
+    title: 'Cocktails',
+    note: '250 ml',
     groups: items(
-      ['Текила Санрайз', '2100 ₸'],
-      ['Секс на пляже', '2000 ₸'],
-      ['Лонг-Айленд', '2500 ₸'],
-      ['Апероль Шприц', '2500 ₸'],
-      ['Мохито', '2400 ₸'],
-      ['Голубая лагуна', '2500 ₸'],
-      ['Джин Тоник', '2300 ₸'],
-      ['Пина Колада', '2300 ₸']
+      ['Tequila Sunrise', '2100 ₸'],
+      ['Sex on the Beach', '2000 ₸'],
+      ['Long Island Iced Tea', '2500 ₸'],
+      ['Aperol Spritz', '2500 ₸'],
+      ['Mojito', '2400 ₸'],
+      ['Blue Lagoon', '2500 ₸'],
+      ['Gin & Tonic', '2300 ₸'],
+      ['Pina Colada', '2300 ₸']
     ),
   },
   {
-    title: 'Крепкий алкоголь',
-    note: '50 мл',
+    title: 'Spirits',
+    note: '50 ml',
     groups: [
       {
-        subtitle: 'Виски',
+        subtitle: 'Whiskey',
         items: [
-          { name: 'William Lawson', price: '1050 ₸' },
+          { name: 'William Lawson\'s', price: '1050 ₸' },
           { name: 'Jameson', price: '1450 ₸' },
           { name: "Ballantine's", price: '1000 ₸' },
           { name: "Jack Daniel's", price: '1855 ₸' },
-          { name: 'Chivas 12 летний', price: '2900 ₸' },
+          { name: 'Chivas Regal 12 YO', price: '2900 ₸' },
         ],
       },
       {
-        subtitle: 'Текила',
+        subtitle: 'Tequila',
         items: [
           { name: 'Olmeca Silver', price: '1100 ₸' },
           { name: 'Olmeca Gold', price: '1300 ₸' },
         ],
       },
       {
-        subtitle: 'Джин',
+        subtitle: 'Gin',
         items: [{ name: 'Beefeater', price: '1050 ₸' }],
       },
       {
-        subtitle: 'Ром',
+        subtitle: 'Rum',
         items: [
           { name: 'Bacardi Carta Negra', price: '950 ₸' },
           { name: 'Bacardi Carta Blanca', price: '950 ₸' },
@@ -396,151 +388,151 @@ const BAR_CATEGORIES: MenuCategory[] = [
         ],
       },
       {
-        subtitle: 'Коньяк',
+        subtitle: 'Cognac & Brandy',
         items: [
-          { name: 'Аскенели 3 года', price: '850 ₸' },
-          { name: 'Казахстан 3*', price: '700 ₸' },
-          { name: 'Казахстан 5*', price: '1050 ₸' },
-          { name: 'Арарат 5*', price: '1300 ₸' },
+          { name: 'Askaneli 3 Stars', price: '850 ₸' },
+          { name: 'Kazakhstan 3*', price: '700 ₸' },
+          { name: 'Kazakhstan 5*', price: '1050 ₸' },
+          { name: 'Ararat 5*', price: '1300 ₸' },
         ],
       },
       {
-        subtitle: 'Водка',
+        subtitle: 'Vodka',
         items: [
-          { name: 'Столичная Excellent', price: '650 ₸' },
-          { name: 'Царская особая', price: '1000 ₸' },
-          { name: 'Царская золотая', price: '1200 ₸' },
-          { name: 'Бульбашъ особая', price: '500 ₸' },
+          { name: 'Stolichnaya Excellent', price: '650 ₸' },
+          { name: 'Tsarskaya Special', price: '1000 ₸' },
+          { name: 'Tsarskaya Gold', price: '1200 ₸' },
+          { name: 'Bulbash Special', price: '500 ₸' },
           { name: 'Finlandia', price: '1100 ₸' },
-          { name: 'Кызылжар', price: '600 ₸' },
+          { name: 'Kyzylzhar', price: '600 ₸' },
           { name: 'Grey Goose', price: '1900 ₸' },
         ],
       },
     ],
   },
   {
-    title: 'Вино',
-    note: 'бутылка 0.75 л',
+    title: 'Wine',
+    note: '0.75 L bottle',
     groups: [
       {
-        subtitle: 'Белое сухое',
+        subtitle: 'White Dry',
         items: [
-          { name: 'Долины Грузии Тбилиси', price: '7050 ₸' },
+          { name: 'Valleys of Georgia Tbilisi', price: '7050 ₸' },
           { name: 'Carmen Insigne Sauvignon Blanc', price: '7500 ₸' },
         ],
       },
       {
-        subtitle: 'Белое полусухое',
+        subtitle: 'White Semi-Dry',
         items: [
-          { name: 'Долины Грузии Сачино', price: '7400 ₸' },
+          { name: 'Valleys of Georgia Sachino', price: '7400 ₸' },
           { name: 'Chateau Vartely Chardonnay', price: '5900 ₸' },
         ],
       },
       {
-        subtitle: 'Белое полусладкое',
+        subtitle: 'White Semi-Sweet',
         items: [
-          { name: 'Алазанская Долина Kvareli', price: '5300 ₸' },
-          { name: 'Алазанская Долина Teliani Valley', price: '6750 ₸' },
+          { name: 'Alazani Valley Kvareli', price: '5300 ₸' },
+          { name: 'Alazani Valley Teliani Valley', price: '6750 ₸' },
         ],
       },
       {
-        subtitle: 'Красное полусухое',
+        subtitle: 'Red Semi-Dry',
         items: [
           { name: 'Pirosmani Kvareli', price: '7200 ₸' },
           { name: 'Chateau Vartely Cabernet Sauvignon', price: '5900 ₸' },
         ],
       },
       {
-        subtitle: 'Красное полусладкое',
+        subtitle: 'Red Semi-Sweet',
         items: [
-          { name: 'Алазанская Долина Kvareli', price: '6500 ₸' },
-          { name: 'Долины Грузии Киндзмараули', price: '12200 ₸' },
+          { name: 'Alazani Valley Kvareli', price: '6500 ₸' },
+          { name: 'Valleys of Georgia Kindzmarauli', price: '12200 ₸' },
         ],
       },
       {
-        subtitle: 'Вино игристое',
+        subtitle: 'Sparkling Wine',
         items: [{ name: 'Martini Asti', price: '14000 ₸' }],
       },
     ],
   },
   {
-    title: 'Шампанское',
+    title: 'Champagne',
     groups: items(
-      ['Шампанское советское', '5500 ₸'],
-      ['Шампанское Diana', '5400 ₸']
+      ['Soviet Champagne', '5500 ₸'],
+      ['Diana Champagne', '5400 ₸']
     ),
   },
   {
-    title: 'Пиво',
+    title: 'Beer',
     groups: items(
-      ['Bud 5% (0.44 л)', '1700 ₸'],
-      ['Heineken сидр 4.7% (0.5 л)', '1100 ₸'],
-      ['Безалкогольное пиво', '1100 ₸'],
-      ['Прага (разливное)', '1100 ₸']
+      ['Bud 5% (0.44 L)', '1700 ₸'],
+      ['Heineken Cider 4.7% (0.5 L)', '1100 ₸'],
+      ['Non-Alcoholic Beer', '1100 ₸'],
+      ['Praga (Draft)', '1100 ₸']
     ),
   },
   {
-    title: 'Лимонады',
-    note: 'графин / стакан',
+    title: 'Limonades',
+    note: 'pitcher / glass',
     groups: items(
-      ['Ягодный микс', '1790 ₸ / 500 ₸'],
-      ['Манго-Маракуйя', '1790 ₸ / 500 ₸'],
-      ['Маракуйя-Апельсин', '1790 ₸ / 500 ₸'],
-      ['Киви-Яблоко', '1790 ₸ / 500 ₸'],
-      ['Киви-Тархун', '1790 ₸ / 500 ₸'],
-      ['Тархун', '1790 ₸ / 500 ₸'],
-      ['Клубника-Маракуйя', '1790 ₸ / 500 ₸'],
-      ['Классический мохито', '1990 ₸ / 600 ₸'],
-      ['Гранатовый мохито', '1990 ₸ / 600 ₸'],
+      ['Berry Mix', '1790 ₸ / 500 ₸'],
+      ['Mango-Passion Fruit', '1790 ₸ / 500 ₸'],
+      ['Passion Fruit-Orange', '1790 ₸ / 500 ₸'],
+      ['Kiwi-Apple', '1790 ₸ / 500 ₸'],
+      ['Kiwi-Tarragon', '1790 ₸ / 500 ₸'],
+      ['Tarragon', '1790 ₸ / 500 ₸'],
+      ['Strawberry-Passion Fruit', '1790 ₸ / 500 ₸'],
+      ['Classic Mojito', '1990 ₸ / 600 ₸'],
+      ['Pomegranate Mojito', '1990 ₸ / 600 ₸'],
       ['Ice Tea', '1790 ₸ / 500 ₸']
     ),
   },
   {
-    title: 'Напитки',
+    title: 'Soft Drinks',
     groups: items(
-      ['Вода с/без газа', '600 ₸'],
-      ['Coca-Cola / Zero (1 л)', '1200 ₸'],
-      ['Coca-Cola (0.25 л)', '800 ₸'],
-      ['Red Bull (0.25 л)', '1100 ₸'],
-      ['Schweppes (0.33 л)', '1300 ₸'],
-      ['Боржоми (0.25 л)', '1100 ₸'],
-      ['Натуральный сок (1 л)', '1300 ₸']
+      ['Still / Sparkling Water', '600 ₸'],
+      ['Coca-Cola / Zero (1 L)', '1200 ₸'],
+      ['Coca-Cola (0.25 L)', '800 ₸'],
+      ['Red Bull (0.25 L)', '1100 ₸'],
+      ['Schweppes (0.33 L)', '1300 ₸'],
+      ['Borjomi Mineral Water (0.25 L)', '1100 ₸'],
+      ['Natural Juice (1 L)', '1300 ₸']
     ),
   },
   {
-    title: 'Аперитив',
-    note: '100 мл',
+    title: 'Aperitifs',
+    note: '100 ml',
     groups: items(['Aperol', '1500 ₸'], ['Martini Bianco', '1500 ₸']),
   },
   {
-    title: 'Чай / Кофе',
+    title: 'Tea & Coffee',
     groups: items(
-      ['Чёрный чай', '300 ₸ / 950 ₸'],
-      ['Зелёный чай', '300 ₸ / 900 ₸'],
-      ['Чай с молоком', '400 ₸ / 1100 ₸'],
-      ['Ташкентский чай', '1700 ₸'],
-      ['Марокканский чай', '1990 ₸'],
-      ['Кофе 3в1', 'уточнить цену']
+      ['Black Tea', '300 ₸ / 950 ₸'],
+      ['Green Tea', '300 ₸ / 900 ₸'],
+      ['Milk Tea', '400 ₸ / 1100 ₸'],
+      ['Tashkent Tea (Citrus & Mint)', '1700 ₸'],
+      ['Moroccan Mint Tea', '1990 ₸'],
+      ['Instant Coffee 3-in-1', 'ask for price']
     ),
   },
   {
-    title: 'К чаю',
+    title: 'Tea Additions',
     groups: items(
-      ['Мёд', '500 ₸'],
-      ['Лимон', '500 ₸'],
-      ['Молоко', '300 ₸'],
-      ['Казахстанский шоколад', '1500 ₸'],
-      ['Alpen Gold', '1500 ₸']
+      ['Honey', '500 ₸'],
+      ['Lemon', '500 ₸'],
+      ['Milk', '300 ₸'],
+      ['Kazakhstan Chocolate Bar', '1500 ₸'],
+      ['Alpen Gold Chocolate', '1500 ₸']
     ),
   },
   {
-    title: 'К пиву',
+    title: 'Beer Snacks',
     groups: items(
-      ['Арахис', '1100 ₸'],
-      ['Гренки', '900 ₸'],
-      ['Фисташки', '1390 ₸'],
-      ['Чечил', '950 ₸'],
-      ['Lays', '1100 ₸']
+      ['Peanuts', '1100 ₸'],
+      ['Garlic Croutons', '900 ₸'],
+      ['Pistachios', '1390 ₸'],
+      ['Chechil Smoked Cheese', '950 ₸'],
+      ['Lay\'s Potato Chips', '1100 ₸']
     ),
   },
 ];
@@ -611,18 +603,18 @@ export default function MenuPage() {
       <header className={`nav ${scrolled ? 'nav--solid' : ''}`}>
         <div className="nav__inner">
           <Link href="/" className="nav__mark">
-            MAKAN <span>кафесі</span>
+            MAKAN <span>cafe</span>
           </Link>
-          <nav className="nav__links" aria-label="Основная навигация">
-            <Link href="/" className="nav__link">Главная</Link>
-            <Link href="/menu" className="nav__link nav__link--active">Меню</Link>
-            <Link href="/gallery" className="nav__link">Галерея</Link>
-            <Link href="/history" className="nav__link">История</Link>
-            <a href="/#contacts" className="nav__link nav__link--cta">Контакты</a>
-            <div className="nav__lang" aria-label="Выбор языка">
+          <nav className="nav__links" aria-label="Main navigation">
+            <Link href="/en_main" className="nav__link">Home</Link>
+            <Link href="/en_menu" className="nav__link nav__link--active">Menu</Link>
+            <Link href="/en_gallery" className="nav__link">Gallery</Link>
+            <Link href="/en_history" className="nav__link">History</Link>
+            <a href="/en_main#contacts" className="nav__link nav__link--cta">Contacts</a>
+            <div className="nav__lang" aria-label="Select language">
               <Link href="/kz_menu" className="nav__lang-btn">ҚАЗ</Link>
               <span className="nav__lang-dot" aria-hidden="true">·</span>
-              <Link href="/en_menu" className="nav__lang-btn">ENG</Link>
+              <Link href="/menu" className="nav__lang-btn">РУС</Link>
             </div>
             {status && (
               <span className={`nav__status ${status.open ? 'nav__status--open' : ''}`}>
@@ -634,7 +626,7 @@ export default function MenuPage() {
           <button
             type="button"
             className={`nav__toggle ${menuOpen ? 'nav__toggle--open' : ''}`}
-            aria-label={menuOpen ? 'Закрыть меню' : 'Открыть меню'}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen((v) => !v)}
           >
@@ -646,7 +638,7 @@ export default function MenuPage() {
       </header>
 
       <div className={`mobile-menu ${menuOpen ? 'mobile-menu--open' : ''}`}>
-        <nav className="mobile-menu__links" aria-label="Мобильная навигация">
+        <nav className="mobile-menu__links" aria-label="Mobile navigation">
           {navLinks.map((l, i) => (
             <Link
               key={l.href}
@@ -664,7 +656,7 @@ export default function MenuPage() {
           <div className="mobile-menu__lang">
             <Link href="/kz_menu" className="mobile-menu__lang-btn" onClick={() => setMenuOpen(false)}>ҚАЗ</Link>
             <span className="mobile-menu__lang-dot" aria-hidden="true">·</span>
-            <Link href="/en_menu" className="mobile-menu__lang-btn" onClick={() => setMenuOpen(false)}>ENG</Link>
+            <Link href="/menu" className="mobile-menu__lang-btn" onClick={() => setMenuOpen(false)}>РУС</Link>
           </div>
           {status && (
             <span className={`mobile-menu__status ${status.open ? 'mobile-menu__status--open' : ''}`}>
@@ -679,24 +671,24 @@ export default function MenuPage() {
         </div>
       </div>
 
-      {/* ЗАГОЛОВОК СТРАНИЦЫ */}
+      {/* PAGE HEADER */}
       <section className="menu-hero">
         <div className="menu-hero__inner">
           <p className="eyebrow eyebrow--center">MAKAN</p>
-          <h1 className="menu-hero__title">Меню</h1>
+          <h1 className="menu-hero__title">Menu</h1>
           <p className="menu-hero__text">
-            Кухня, бар и всё, что подаётся в зале. Цены — в тенге, обслуживание 10% не включено.
+            Kitchen, bar, and everything served in our main hall. Prices are in KZT, 10% service charge is excluded.
           </p>
           <Swash className="menu-hero__swash" />
         </div>
       </section>
 
-      {/* Бегущая строка — тот же приём, что и на главной: короткая пауза для глаза */}
+      {/* Marquee */}
       <div className="marquee" aria-hidden="true">
         <div className="marquee__track">
           {Array.from({ length: 2 }).map((_, rep) => (
             <span className="marquee__group" key={rep}>
-              {['MAKAN', 'Шашлык', 'Грузинские блюда', 'Бар', 'Коктейли', 'Лимонады'].map((w) => (
+              {['MAKAN', 'Shashlik', 'Georgian Cuisine', 'Bar', 'Cocktails', 'Lemonades'].map((w) => (
                 <span className="marquee__item" key={w}>
                   {w}
                   <Swash className="marquee__swash" />
@@ -707,26 +699,26 @@ export default function MenuPage() {
         </div>
       </div>
 
-      {/* ПЕРЕКЛЮЧАТЕЛЬ КУХНЯ / БАР */}
+      {/* FOOD / BAR SWITCHER */}
       <div className="menu-tabs">
         <button
           type="button"
           className={`menu-tab ${tab === 'food' ? 'menu-tab--active' : ''}`}
           onClick={() => setTab('food')}
         >
-          Кухня
+          Kitchen
         </button>
         <button
           type="button"
           className={`menu-tab ${tab === 'bar' ? 'menu-tab--active' : ''}`}
           onClick={() => setTab('bar')}
         >
-          Бар
+          Bar
         </button>
       </div>
 
-      {/* БЫСТРЫЕ ССЫЛКИ НА КАТЕГОРИИ */}
-      <nav className="menu-toc" aria-label="Категории меню" key={tab}>
+      {/* QUICK CATEGORY LINKS */}
+      <nav className="menu-toc" aria-label="Menu categories" key={tab}>
         {categories.map((c) => (
           <a key={c.title} href={`#${slugify(c.title)}`} className="menu-toc__chip">
             {c.title}
@@ -734,7 +726,7 @@ export default function MenuPage() {
         ))}
       </nav>
 
-      {/* КАТЕГОРИИ МЕНЮ */}
+      {/* MENU CATEGORIES */}
       <section className="menu-content" key={`content-${tab}`}>
         <div className="menu-columns">
           {categories.map((c, i) => (
@@ -762,27 +754,27 @@ export default function MenuPage() {
         </div>
       </section>
       
-      {/* ДИСКЛЕЙМЕР */}
-<section className="disclaimer">
-  <p className="disclaimer__text">
-    Администрация кафе не несёт ответственности за сохранность личных вещей гостей,
-    а также за перебои электроснабжения, произошедшие по причинам, не зависящим от администрации.
-  </p>
-</section>
+      {/* DISCLAIMER */}
+      <section className="disclaimer">
+        <p className="disclaimer__text">
+          The cafe administration is not responsible for guests' personal belongings,
+          nor for power outages occurring due to circumstances beyond the administration's control.
+        </p>
+      </section>
 
       <footer className="footer">
         <div className="footer__inner">
           <div className="footer__col">
             <div className="footer__mark">
-              MAKAN <span>кафесі</span>
+              MAKAN <span>cafe</span>
             </div>
-            <p className="footer__tag">Вкусная еда и атмосфера, в которой хочется задержаться</p>
+            <p className="footer__tag">Delicious food and an atmosphere that makes you want to stay</p>
           </div>
 
           <div className="footer__col footer__col--meta">
             <p>{ADDRESS}</p>
             <p><a href={PHONE_HREF}>{PHONE}</a></p>
-            <p>Ежедневно, 10:00 — 23:00</p>
+            <p>Daily, 10:00 — 23:00</p>
           </div>
 
           <div className="footer__col footer__col--social">
@@ -795,7 +787,6 @@ export default function MenuPage() {
           <Swash className="footer__swash" />
         </div>
       </footer>
-
       <style jsx global>{`
         :root {
           --ink: #120e0b;

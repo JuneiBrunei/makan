@@ -328,7 +328,12 @@ export default function GalleryPage() {
             <Link href="/menu" className="nav__link">Меню</Link>
             <Link href="/gallery" className="nav__link nav__link--active">Галерея</Link>
             <Link href="/history" className="nav__link">История</Link>
-            <Link href="/#contacts" className="nav__link nav__link--cta">Контакты</Link>
+            <a href="/#contacts" className="nav__link nav__link--cta">Контакты</a>
+            <div className="nav__lang" aria-label="Выбор языка">
+              <Link href="/kz_gallery" className="nav__lang-btn">ҚАЗ</Link>
+              <span className="nav__lang-dot" aria-hidden="true">·</span>
+              <Link href="/en_gallery" className="nav__lang-btn">ENG</Link>
+            </div>
             {status && (
               <span className={`nav__status ${status.open ? 'nav__status--open' : ''}`}>
                 <span className="nav__status-dot" />
@@ -366,6 +371,11 @@ export default function GalleryPage() {
           ))}
         </nav>
         <div className="mobile-menu__footer" style={{ transitionDelay: menuOpen ? `${navLinks.length * 60 + 180}ms` : '0ms' }}>
+          <div className="mobile-menu__lang">
+            <Link href="/kz_gallery" className="mobile-menu__lang-btn" onClick={() => setMenuOpen(false)}>ҚАЗ</Link>
+            <span className="mobile-menu__lang-dot" aria-hidden="true">·</span>
+            <Link href="/en_gallery" className="mobile-menu__lang-btn" onClick={() => setMenuOpen(false)}>ENG</Link>
+          </div>
           {status && (
             <span className={`mobile-menu__status ${status.open ? 'mobile-menu__status--open' : ''}`}>
               <span className="nav__status-dot" />
@@ -704,6 +714,21 @@ export default function GalleryPage() {
         .nav__toggle--open span:nth-child(2) { opacity: 0; }
         .nav__toggle--open span:nth-child(3) { top: 8px; transform: rotate(-45deg); }
 
+        .nav__lang {
+  display: flex; align-items: center; gap: 0.55rem;
+  margin-left: 0.6rem; padding: 0.4rem 1rem;
+  border: 1px solid var(--hairline); border-radius: 999px;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+.nav__lang:hover { border-color: var(--gold); background: rgba(185, 148, 86, 0.06); }
+.nav__lang-btn {
+  font-family: var(--font-display), serif; font-style: italic; font-weight: 600;
+  font-size: 0.85rem; letter-spacing: 0.03em; color: var(--parchment-dim);
+  text-decoration: none; transition: color 0.2s ease;
+}
+.nav__lang-btn:hover, .nav__lang-btn:focus-visible { color: var(--gold-light); }
+.nav__lang-dot { color: var(--gold); opacity: 0.55; font-size: 0.65rem; }
+
         @media (max-width: 780px) {
           .nav__links { display: none; }
           .nav__toggle { display: block; }
@@ -752,6 +777,21 @@ export default function GalleryPage() {
         .mobile-menu__social { display: flex; gap: 1.6rem; }
         .mobile-menu__social a { color: var(--parchment-dim); text-decoration: none; font-size: 0.85rem; letter-spacing: 0.04em; }
         .mobile-menu__social a:hover { color: var(--gold-light); }
+
+        .mobile-menu__lang {
+  display: flex; align-items: center; gap: 0.85rem; margin-bottom: 0.6rem;
+}
+.mobile-menu__lang-btn {
+  color: var(--parchment); text-decoration: none;
+  font-family: var(--font-display), serif; font-style: italic; font-weight: 600;
+  font-size: 1rem; letter-spacing: 0.03em;
+  padding-bottom: 0.2rem; border-bottom: 1px solid transparent;
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+.mobile-menu__lang-btn:hover, .mobile-menu__lang-btn:focus-visible {
+  color: var(--gold-light); border-color: var(--gold);
+}
+.mobile-menu__lang-dot { color: var(--gold); opacity: 0.55; font-size: 0.85rem; }
 
         /* HERO — короче, чем на главной: страница сразу переходит к делу */
         .hero { position: relative; height: 62vh; min-height: 420px; display: flex; align-items: flex-end; overflow: hidden; }

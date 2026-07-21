@@ -50,6 +50,9 @@ import { Cormorant_Garamond, Manrope } from 'next/font/google';
  *  попадёт нужная часть интерьера. Это самый быстрый фикс без переобрезки
  *  самого файла. Если своя фотография портретная/квадратная — лучше заранее
  *  обрезать её под широкий формат (~16:9 или шире) перед загрузкой.
+ *
+ * ЯЗЫК (2026-07-21): весь пользовательский текст в этом файле переведён
+ * на казахский язык. Технические комментарии оставлены на русском.
  * =========================================================================
  */
 
@@ -66,12 +69,12 @@ const body = Manrope({
   variable: '--font-body',
 });
 
-const ADDRESS = 'г. Талгар, ул. Гагарина 67';
+const ADDRESS = 'Талғар қ., Гагарин көш., 67';
 const PHONE = '+7 708 605 9354';
 const PHONE_HREF = 'tel:+77086059354';
 const INSTAGRAM = 'https://www.instagram.com/makan_talgar/';
 const WHATSAPP = 'https://wa.me/77086059354';
-const MAP_QUERY = encodeURIComponent('Талгар, ул. Гагарина 67');
+const MAP_QUERY = encodeURIComponent('Талғар, Гагарин көшесі 67');
 
 // Временные стоковые фото (см. комментарий вверху файла — заменить на свои)
 const STOCK = {
@@ -153,48 +156,48 @@ function Reveal({ children, className = '' }: { children: ReactNode; className?:
 
 const features = [
   {
-    title: 'Кирпич и латунь',
-    text: 'Тёплая кладка, тёмный потолок и матовая латунь — фон, который не нуждается в объяснениях.',
+    title: 'Кірпіш пен жез',
+    text: 'Жылы қалау, күңгірт төбе және түксіз жез — түсіндіруді қажет етпейтін фон.',
     image: STOCK.feature1,
-    alt: 'Тёплый свет, деревянные балки и латунные светильники в зале',
+    alt: 'Залдағы жылы жарық, ағаш арқалықтар және жез шамдар',
   },
   {
-    title: 'Внимание к деталям',
-    text: 'Детали интерьера не просто украшают, а создают атмосферу, в которой хочется задержаться',
+    title: 'Детальдарға назар',
+    text: 'Интерьер детальдары тек әсемдеп қана қоймай, отырғың келетін атмосфера жасайды',
     image: STOCK.feature2,
-    alt: 'Диваны цвета вина и тёмно-зелёная обивка в приглушённом свете',
+    alt: 'Күңгірт жарықтағы шарап түсті диван мен күңгірт жасыл жапсырма',
   },
   {
-    title: 'Ковры на стенах',
-    text: 'Тканые узоры и подвесной свет вместо картин — деталь, которая держит атмосферу, а не украшает её.',
+    title: 'Қабырғадағы кілемдер',
+    text: 'Суреттердің орнына тоқыма өрнектер мен ілінген жарық — атмосфераны әсемдеп қана қоймай, ұстап тұратын деталь.',
     image: STOCK.detail,
-    alt: 'Тканый ковёр на кирпичной стене и подвесной светильник',
+    alt: 'Кірпіш қабырғадағы тоқыма кілем және ілінген шам',
   },
 ];
 
 const gallery = [
-  { src: STOCK.hero, alt: 'Общий вид зала MAKAN', caption: 'Здесь задерживаются дольше, чем планировали' },
-  { src: STOCK.gallerySide, alt: 'Диван и тёплый свет за угловым столиком', caption: 'Столик у окна занимают первым' },
-  { src: STOCK.detail, alt: 'Деталь интерьера: свет и текстиль', caption: 'Ковёр помнит больше разговоров, чем мы' },
-  { src: STOCK.feature1, alt: 'Тёплый свет и латунные светильники в зале', caption: 'Свет здесь никогда не бывает резким' },
+  { src: STOCK.hero, alt: 'MAKAN залының жалпы көрінісі', caption: 'Мұнда жоспарлағаннан да ұзақ отырып қалады' },
+  { src: STOCK.gallerySide, alt: 'Бұрыштағы үстел жанындағы диван мен жылы жарық', caption: 'Терезе жанындағы үстелді бірінші болып алады' },
+  { src: STOCK.detail, alt: 'Интерьер детальі: жарық пен тоқыма', caption: 'Кілем бізден де көп әңгімені есінде сақтайды' },
+  { src: STOCK.feature1, alt: 'Залдағы жылы жарық пен жез шамдар', caption: 'Мұндағы жарық ешқашан өткір болмайды' },
 ];
 
 const explore = [
-  { label: 'Меню', href: '/menu', text: 'Блюда и напитки, которые мы подаём каждый день.', thumb: STOCK.menuTeaser },
-  { label: 'Галерея', href: '/gallery', text: 'Зал, детали интерьера и атмосфера MAKAN.', thumb: STOCK.gallerySide },
-  { label: 'История', href: '/history', text: 'Как появилось кафе и почему оно выглядит именно так.', thumb: STOCK.about },
+  { label: 'Мәзір', href: '/menu', text: 'Біз күн сайын ұсынатын тағамдар мен сусындар.', thumb: STOCK.menuTeaser },
+  { label: 'Галерея', href: '/gallery', text: 'MAKAN залы, интерьер детальдары және атмосферасы.', thumb: STOCK.gallerySide },
+  { label: 'Тарих', href: '/history', text: 'Кафе қалай пайда болды және неге дәл осылай көрінеді.', thumb: STOCK.about },
 ];
 
 const hours = [
-  { day: 'Понедельник — Воскресенье', time: '10:00 — 23:00' },
+  { day: 'Дүйсенбі — Жексенбі', time: '10:00 — 23:00' },
 ];
 
 const navLinks = [
-  { href: '/', label: 'Главная' },
-  { href: '/menu', label: 'Меню' },
+  { href: '/', label: 'Басты бет' },
+  { href: '/menu', label: 'Мәзір' },
   { href: '/gallery', label: 'Галерея' },
-  { href: '/history', label: 'История' },
-  { href: '#contacts', label: 'Контакты' },
+  { href: '/history', label: 'Тарих' },
+  { href: '#contacts', label: 'Байланыс' },
 ];
 
 // Часы работы для живого статуса "открыто/закрыто" — те же данные, что в
@@ -225,10 +228,10 @@ function useOpenStatus() {
       const t = now.getHours() + now.getMinutes() / 60;
       const [open, close] = WEEKLY_HOURS[day];
       if (t >= open && t < close) {
-        setStatus({ open: true, text: `Открыто · до ${formatHour(close)}` });
+        setStatus({ open: true, text: `Ашық · ${formatHour(close)} дейін` });
       } else {
         const nextOpen = t < open ? open : WEEKLY_HOURS[(day + 1) % 7][0];
-        setStatus({ open: false, text: `Закрыто · с ${formatHour(nextOpen)}` });
+        setStatus({ open: false, text: `Жабық · ${formatHour(nextOpen)} бастап` });
       }
     };
     compute();
@@ -302,14 +305,14 @@ export default function Home() {
           <Link href="/" className="nav__mark">
             MAKAN <span>кафесі</span>
           </Link>
-          <nav className="nav__links" aria-label="Основная навигация">
-            <Link href="/" className="nav__link nav__link--active">Главная</Link>
-            <Link href="/menu" className="nav__link">Меню</Link>
-            <Link href="/gallery" className="nav__link">Галерея</Link>
-            <Link href="/history" className="nav__link">История</Link>
-            <a href="#contacts" className="nav__link nav__link--cta">Контакты</a>
-            <div className="nav__lang" aria-label="Выбор языка">
-              <Link href="/kz_main" className="nav__lang-btn">ҚАЗ</Link>
+          <nav className="nav__links" aria-label="Негізгі навигация">
+            <Link href="/kz_main" className="nav__link nav__link--active">Басты бет</Link>
+            <Link href="/kz_menu" className="nav__link">Мәзір</Link>
+            <Link href="/kz_gallery" className="nav__link">Галерея</Link>
+            <Link href="/kz_history" className="nav__link">Тарих</Link>
+            <a href="/kz_main#contacts" className="nav__link nav__link--cta">Байланыс</a>
+            <div className="nav__lang" aria-label="Тіл таңдау">
+              <Link href="/" className="nav__lang-btn">РУС</Link>
               <span className="nav__lang-dot" aria-hidden="true">·</span>
               <Link href="/en_main" className="nav__lang-btn">ENG</Link>
             </div>
@@ -323,7 +326,7 @@ export default function Home() {
           <button
             type="button"
             className={`nav__toggle ${menuOpen ? 'nav__toggle--open' : ''}`}
-            aria-label={menuOpen ? 'Закрыть меню' : 'Открыть меню'}
+            aria-label={menuOpen ? 'Мәзірді жабу' : 'Мәзірді ашу'}
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen((v) => !v)}
           >
@@ -336,7 +339,7 @@ export default function Home() {
 
       {/* Полноэкранное мобильное меню */}
       <div className={`mobile-menu ${menuOpen ? 'mobile-menu--open' : ''}`}>
-        <nav className="mobile-menu__links" aria-label="Мобильная навигация">
+        <nav className="mobile-menu__links" aria-label="Мобильді навигация">
           {navLinks.map((l, i) => (
             <Link
               key={l.href}
@@ -352,7 +355,7 @@ export default function Home() {
         </nav>
         <div className="mobile-menu__footer" style={{ transitionDelay: menuOpen ? `${navLinks.length * 60 + 180}ms` : '0ms' }}>
           <div className="mobile-menu__lang">
-            <Link href="/kz_main" className="mobile-menu__lang-btn" onClick={() => setMenuOpen(false)}>ҚАЗ</Link>
+            <Link href="/" className="mobile-menu__lang-btn" onClick={() => setMenuOpen(false)}>РУС</Link>
             <span className="mobile-menu__lang-dot" aria-hidden="true">·</span>
             <Link href="/en_main" className="mobile-menu__lang-btn" onClick={() => setMenuOpen(false)}>ENG</Link>
           </div>
@@ -373,7 +376,7 @@ export default function Home() {
       <section className="hero">
         <Image
           src={STOCK.hero}
-          alt="Зал кафе MAKAN: кирпичные стены, кожаные диваны бордового и зелёного цвета, тёплый свет"
+          alt="MAKAN кафесінің залы: кірпіш қабырғалар, қызыл және жасыл түсті былғары диван­дар, жылы жарық"
           fill
           priority
           sizes="100vw"
@@ -388,19 +391,19 @@ export default function Home() {
               {status.text}
             </span>
           )}
-          <p className="eyebrow">Кафе в центре Талгара</p>
+          <p className="eyebrow">Талғардың орталығындағы кафе</p>
           <h1 className="hero__title">
-            Место, где не смотрят на часы.
+            Сағатқа қарамайтын орын.
             <br />
-            <em>Еда, теплые разговоры и вечера, которые не хочется торопить.</em>
+            <em>Тағам, жылы әңгімелер және асықпағың келмейтін кештер.</em>
           </h1>
           <p className="hero__text">
-            Кирпичные стены, тёплый свет и кожаные диваны — атмосфера,
-            в которой хочется задержаться подольше.
+            Кірпіш қабырғалар, жылы жарық және былғары диван­дар — ұзағырақ
+            отырғың келетін атмосфера.
           </p>
           <div className="hero__actions">
-            <Link href="/menu" className="btn btn--solid" {...magnetProps}>Смотреть меню</Link>
-            <a href="#contacts" className="btn btn--ghost" {...magnetProps}>Как нас найти</a>
+            <Link href="/menu" className="btn btn--solid" {...magnetProps}>Мәзірді көру</Link>
+            <a href="#contacts" className="btn btn--ghost" {...magnetProps}>Бізді қалай табуға болады</a>
           </div>
         </div>
         <div className="hero__scroll" aria-hidden="true">
@@ -413,7 +416,7 @@ export default function Home() {
         <div className="marquee__track">
           {Array.from({ length: 2 }).map((_, rep) => (
             <span className="marquee__group" key={rep}>
-              {['MAKAN', 'Азербайджанский шашлык', 'Европейская и восточная кухня', 'Грузинский стиль', 'Гостеприимство'].map((w) => (
+              {['MAKAN', 'Әзірбайжан шашлығы', 'Еуропалық және шығыс асханасы', 'Грузин стилі', 'Қонақжайлылық'].map((w) => (
                 <span className="marquee__item" key={w}>
                   {w}
                   <Swash className="marquee__swash" />
@@ -428,28 +431,29 @@ export default function Home() {
       <section id="about" className="about">
         <div className="about__grid">
           <Reveal className="about__text-col">
-            <p className="eyebrow">О нас</p>
-            <h2 className="about__title">Место для тех, кто никуда не спешит</h2>
+            <p className="eyebrow">Біз туралы</p>
+            <h2 className="about__title">Асықпайтындарға арналған орын</h2>
             <p className="about__text">
-              MAKAN — кафе в самом сердце Талгара, где интерьер и подача выросли
-              из одной идеи: гостя встречают неторопливо и щедро, будто он уже
-              свой. Кирпич, тяжёлая кожа диванов, приглушённый свет и ковры на
-              стенах вместо картин — детали, которые держат атмосферу.
+              MAKAN — Талғардың дәл жүрегінде орналасқан кафе, мұнда интерьер
+              мен қызмет көрсету бір идеядан туындаған: қонақты асықпай әрі
+              жомарттықпен, өз адамындай қарсы алады. Кірпіш, диван­дардың
+              ауыр былғарысы, күңгірт жарық және суреттердің орнына
+              қабырғадағы кілемдер — атмосфераны ұстап тұратын детальдар.
             </p>
             <p className="about__text">
-              Вкусная еда, атмосфера и гостеприимство — то, ради чего сюда возвращаются
-              снова и снова.
+              Дәмді тағам, атмосфера және қонақжайлылық — осы жерге қайта-қайта
+              оралатын себеп.
             </p>
             <blockquote className="about__quote">
               <Swash className="about__quote-swash" />
-              «Хороший стол — это время, которое не хочется торопить.»
+              «Жақсы дастархан — асықпағың келмейтін уақыт.»
             </blockquote>
           </Reveal>
           <Reveal>
             <div className="about__media">
               <Image
                 src={STOCK.about}
-                alt="Кирпичная стена и тёплый свет в интерьере кафе"
+                alt="Кафе интерьеріндегі кірпіш қабырға және жылы жарық"
                 fill
                 sizes="(max-width: 900px) 100vw, 44vw"
                 className="about__media-img"
@@ -464,7 +468,7 @@ export default function Home() {
       <section className="formula">
         <Reveal>
           <p className="eyebrow eyebrow--center">Атмосфера</p>
-          <h2 className="features__title">Из чего складывается зал</h2>
+          <h2 className="features__title">Зал неден тұрады</h2>
         </Reveal>
         <div className="formula__row">
           {features
@@ -491,7 +495,7 @@ export default function Home() {
           <Reveal className="formula__result">
             <Swash className="formula__result-swash" />
             <span className="formula__result-word">MAKAN</span>
-            <span className="formula__result-sub">Атмосфера, которую узнаёшь с порога</span>
+            <span className="formula__result-sub">Табалдырықтан-ақ танылатын атмосфера</span>
           </Reveal>
         </div>
       </section>
@@ -500,7 +504,7 @@ export default function Home() {
       <section className="real">
         <Reveal>
           <p className="eyebrow eyebrow--center">Зал</p>
-          <h2 className="features__title">Как здесь на самом деле</h2>
+          <h2 className="features__title">Мұнда шын мәнінде қалай</h2>
         </Reveal>
         <div className="real__board">
           {gallery.map((g, i) => (
@@ -514,7 +518,7 @@ export default function Home() {
           ))}
         </div>
         <Link href="/gallery" className="real__link">
-          Вся галерея →
+          Барлық галерея →
         </Link>
       </section>
 
@@ -522,12 +526,12 @@ export default function Home() {
       <section id="contacts" className="contacts">
         <div className="contacts__grid">
           <Reveal className="contacts__info">
-            <p className="eyebrow">Контакты</p>
-            <h2 className="contacts__title">Приходите</h2>
+            <p className="eyebrow">Байланыс</p>
+            <h2 className="contacts__title">Келіңіз</h2>
 
             <dl className="contacts__list">
               <div className="contacts__row">
-                <dt>Адрес</dt>
+                <dt>Мекенжай</dt>
                 <dd>{ADDRESS}</dd>
               </div>
               <div className="contacts__row">
@@ -537,7 +541,7 @@ export default function Home() {
                 </dd>
               </div>
               <div className="contacts__row">
-                <dt>Часы работы</dt>
+                <dt>Жұмыс уақыты</dt>
                 <dd>
                   {hours.map((h) => (
                     <span className="contacts__hours-row" key={h.day}>
@@ -551,7 +555,7 @@ export default function Home() {
 
             <div className="contacts__actions">
               <a href={WHATSAPP} className="btn btn--solid" target="_blank" rel="noopener noreferrer" {...magnetProps}>
-                Написать в WhatsApp
+                WhatsApp-қа жазу
               </a>
               <a href={INSTAGRAM} className="btn btn--ghost" target="_blank" rel="noopener noreferrer" {...magnetProps}>
                 Instagram
@@ -562,7 +566,7 @@ export default function Home() {
           <Reveal className="contacts__map-wrap">
             <iframe
               className="contacts__map"
-              title="MAKAN на карте"
+              title="Картадағы MAKAN"
               src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d46458.795829963325!2d77.19963585900013!3d43.3001328!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38839d5342ea7abf%3A0x55966906347a055c!2z0JrQsNGE0LUgIk1BS0FOIg!5e0!3m2!1sru!2skz!4v1784189106432!5m2!1sru!2skz`}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
@@ -574,8 +578,8 @@ export default function Home() {
       {/* 6. ДАЛЬШЕ ПО САЙТУ */}
       <section className="explore">
         <Reveal>
-          <p className="eyebrow eyebrow--center">Дальше по сайту</p>
-          <h2 className="features__title">Погрузитесь глубже</h2>
+          <p className="eyebrow eyebrow--center">Сайт бойынша әрі қарай</p>
+          <h2 className="features__title">Тереңірек танысыңыз</h2>
         </Reveal>
 
         <div className="explore__inner">
@@ -621,13 +625,13 @@ export default function Home() {
             <div className="footer__mark">
               MAKAN <span>кафесі</span>
             </div>
-            <p className="footer__tag">Вкусная еда и атмосфера, в которой хочется задержаться</p>
+            <p className="footer__tag">Дәмді тағам және асықпай аялдағың келетін атмосфера</p>
           </div>
 
           <div className="footer__col footer__col--meta">
             <p>{ADDRESS}</p>
             <p><a href={PHONE_HREF}>{PHONE}</a></p>
-            <p>Ежедневно, 10:00 — 23:00</p>
+            <p>Күн сайын, 10:00 — 23:00</p>
           </div>
 
           <div className="footer__col footer__col--social">

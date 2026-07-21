@@ -6,50 +6,54 @@ import Link from 'next/link';
 import { Cormorant_Garamond, Manrope } from 'next/font/google';
 
 /**
- * MAKAN — главная страница
+ * MAKAN — home page
  * =========================================================================
- * СТРУКТУРА (сверху вниз, каждая секция отвечает на один вопрос гостя):
- *  1. Hero        — что это за место, с первого взгляда
- *  2. О нас        — атмосфера и характер места (+ цитата)
- *  3. Атмосфера     — состав зала как визуальное уравнение (фото + фото + фото = MAKAN)
- *  4. Галерея       — "стол" с разбросанными карточками-фото, на мобильных — лента со скролл-снапом
- *  5. Контакты      — адрес, телефон, часы, карта
- *  6. Дальше по сайту — переходы на Меню / Галерею / Историю
+ * STRUCTURE (top to bottom, each section answers one question a guest has):
+ *  1. Hero          — what this place is, at first glance
+ *  2. About us      — the mood and character of the place (+ a quote)
+ *  3. Atmosphere    — the hall's makeup as a visual equation (photo + photo + photo = MAKAN)
+ *  4. Gallery       — a "table" with scattered photo cards, on mobile — a scroll-snap strip
+ *  5. Contacts      — address, phone, hours, map
+ *  6. Explore more  — links to Menu / Gallery / History
  *  7. Footer
  *
- * ФОТОГРАФИИ — ЗАМЕНИТЕ ПЕРЕД ПУБЛИКАЦИЕЙ:
- *  Раньше здесь были ссылки на /public/images/makan-interior.jpg и
- *  makan-interior-detail-1.jpg — этих файлов физически не было в проекте,
- *  из-за чего сайт падал с ошибкой "isn't a valid image". Временно везде
- *  подставлены рабочие стоковые фото (см. список ниже). Как только появятся
- *  реальные кадры зала MAKAN — положите их в /public/images/ и верните
- *  локальные пути вместо STOCK.hero / STOCK.detail.
+ * PHOTOS — REPLACE BEFORE PUBLISHING:
+ *  This used to link to /public/images/makan-interior.jpg and
+ *  makan-interior-detail-1.jpg — those files didn't actually exist in the
+ *  project, which made the site crash with an "isn't a valid image" error.
+ *  Working stock photos have been temporarily substituted everywhere (see
+ *  the list below). Once real shots of the MAKAN hall are available, put
+ *  them in /public/images/ and swap back to local paths instead of
+ *  STOCK.hero / STOCK.detail.
  *
- *  Временные стоковые (Unsplash, лицензия позволяет использовать бесплатно,
- *  но это ЧУЖОЙ интерьер — только для демонстрации вёрстки, вставьте свои):
- *   - about:    Kris Tian, "Cozy cafe interior with brick and light"
- *   - feature1: Raymond Yeung, "A cozy restaurant interior with string lights"
- *   - feature2: Andy Kennedy, "Luxurious bar interior with red velvet seating"
- *   - gallery:  Nimal Mathew, "Cozy booth seating with warm lighting in a cafe"
+ *  Temporary stock photos (Unsplash, license allows free use, but this is
+ *  SOMEONE ELSE'S interior — for layout demo purposes only, swap in your own):
+ *   - about:       Kris Tian, "Cozy cafe interior with brick and light"
+ *   - feature1:    Raymond Yeung, "A cozy restaurant interior with string lights"
+ *   - feature2:    Andy Kennedy, "Luxurious bar interior with red velvet seating"
+ *   - gallery:     Nimal Mathew, "Cozy booth seating with warm lighting in a cafe"
  *   - menu-teaser: Shafia Rizvi, "Coffee with latte art, spoon and napkin"
- *   - hero / detail: временно переиспользуют about и feature1 (см. STOCK ниже)
- *  (все — Unsplash License, unsplash.com/license)
+ *   - hero / detail: temporarily reuse about and feature1 (see STOCK below)
+ *  (all — Unsplash License, unsplash.com/license)
  *
- * ВАЖНО: next/image используется и для стоковых фото с images.unsplash.com —
- * добавьте домен в next.config.js, иначе будет ошибка сборки:
+ * IMPORTANT: next/image is also used for stock photos from
+ * images.unsplash.com — add the domain to next.config.js, otherwise the
+ * build will fail:
  *   const nextConfig = {
  *     images: { remotePatterns: [{ protocol: 'https', hostname: 'images.unsplash.com' }] },
  *   };
- * Когда замените стоки на свои локальные фото — эту настройку можно убрать.
+ * Once the stock photos are replaced with your own local ones, this setting
+ * can be removed.
  *
- * ФИКС "РАСТЯНУТОГО" HERO-ФОТО (2026-07-19):
- *  object-fit: cover обрезает фото под размеры блока (почти весь экран).
- *  Если пропорции кадра сильно отличаются от контейнера, получается сильный
- *  "зум" — как было со шторами крупным планом. Добавлен objectPosition на
- *  <Image> в Hero — двигайте значение ('center 35%' и т.п.), пока в кадр не
- *  попадёт нужная часть интерьера. Это самый быстрый фикс без переобрезки
- *  самого файла. Если своя фотография портретная/квадратная — лучше заранее
- *  обрезать её под широкий формат (~16:9 или шире) перед загрузкой.
+ * "STRETCHED" HERO PHOTO FIX (2026-07-19):
+ *  object-fit: cover crops the photo to fit the block's dimensions (almost
+ *  the whole screen). If the frame's proportions differ a lot from the
+ *  container, you get a heavy "zoom" — like the close-up curtains before.
+ *  An objectPosition was added to the <Image> in Hero — adjust the value
+ *  ('center 35%' etc.) until the right part of the interior lands in frame.
+ *  This is the fastest fix without re-cropping the file itself. If your own
+ *  photo is portrait/square, it's better to crop it to a wide format
+ *  (~16:9 or wider) before uploading.
  * =========================================================================
  */
 
@@ -66,31 +70,31 @@ const body = Manrope({
   variable: '--font-body',
 });
 
-const ADDRESS = 'г. Талгар, ул. Гагарина 67';
+const ADDRESS = '67 Gagarina St, Talgar';
 const PHONE = '+7 708 605 9354';
 const PHONE_HREF = 'tel:+77086059354';
 const INSTAGRAM = 'https://www.instagram.com/makan_talgar/';
 const WHATSAPP = 'https://wa.me/77086059354';
-const MAP_QUERY = encodeURIComponent('Талгар, ул. Гагарина 67');
+const MAP_QUERY = encodeURIComponent('Talgar, Gagarina St.67');
 
-// Временные стоковые фото (см. комментарий вверху файла — заменить на свои)
+// Temporary stock photos (see the comment at the top of the file — replace with your own)
 const STOCK = {
   about: '/images/makan-about1.jpg',
   feature1: '/images/makan-photo4.jpg',
   feature2: '/images/makan-photo.jpg',
   gallerySide: '/images/makan-photo2.jpg',
   menuTeaser: '/images/makan-photo4.jpg',
-  // Временная замена для отсутствующих локальных файлов makan-interior*.jpg —
-  // как появятся реальные фото зала, замените на локальные пути.
+  // Temporary replacement for the missing local makan-interior*.jpg files —
+  // once real photos of the hall are available, swap in local paths.
   hero: '/images/makan-hero11.jpg',
   detail: '/images/makan-photo3.jpg',
 };
 
-// Точка фокуса для hero-фото (object-position). Подберите под свой кадр:
-// 'center center' — центр, 'center top' — верх, 'center 30%' — ближе к верху.
+// Focal point for the hero photo (object-position). Adjust for your own frame:
+// 'center center' — center, 'center top' — top, 'center 30%' — closer to the top.
 const HERO_IMAGE_FOCUS = 'center 30%';
 
-/** Волнистая линия из логотипа — единственный узнаваемый узор страницы. Используется точечно. */
+/** The wavy line from the logo — the only recognizable pattern on the page. Used sparingly. */
 function Swash({ className = '' }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true">
@@ -105,7 +109,7 @@ function Swash({ className = '' }: { className?: string }) {
   );
 }
 
-/** Плавное появление секций при скролле, без внешних зависимостей */
+/** Smooth section reveal on scroll, no external dependencies */
 function Reveal({ children, className = '' }: { children: ReactNode; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
@@ -153,55 +157,55 @@ function Reveal({ children, className = '' }: { children: ReactNode; className?:
 
 const features = [
   {
-    title: 'Кирпич и латунь',
-    text: 'Тёплая кладка, тёмный потолок и матовая латунь — фон, который не нуждается в объяснениях.',
+    title: 'Brick and brass',
+    text: 'Warm brickwork, a dark ceiling and matte brass — a backdrop that needs no explanation.',
     image: STOCK.feature1,
-    alt: 'Тёплый свет, деревянные балки и латунные светильники в зале',
+    alt: 'Warm light, wooden beams and brass fixtures in the hall',
   },
   {
-    title: 'Внимание к деталям',
-    text: 'Детали интерьера не просто украшают, а создают атмосферу, в которой хочется задержаться',
+    title: 'Attention to detail',
+    text: 'The interior details don\'t just decorate — they create an atmosphere you want to linger in.',
     image: STOCK.feature2,
-    alt: 'Диваны цвета вина и тёмно-зелёная обивка в приглушённом свете',
+    alt: 'Wine-colored sofas and dark green upholstery in muted light',
   },
   {
-    title: 'Ковры на стенах',
-    text: 'Тканые узоры и подвесной свет вместо картин — деталь, которая держит атмосферу, а не украшает её.',
+    title: 'Carpets on the walls',
+    text: 'Woven patterns and pendant lighting instead of paintings — a detail that holds the atmosphere rather than just decorating it.',
     image: STOCK.detail,
-    alt: 'Тканый ковёр на кирпичной стене и подвесной светильник',
+    alt: 'Textile carpet on a brick wall and a suspended light fixture',
   },
 ];
 
 const gallery = [
-  { src: STOCK.hero, alt: 'Общий вид зала MAKAN', caption: 'Здесь задерживаются дольше, чем планировали' },
-  { src: STOCK.gallerySide, alt: 'Диван и тёплый свет за угловым столиком', caption: 'Столик у окна занимают первым' },
-  { src: STOCK.detail, alt: 'Деталь интерьера: свет и текстиль', caption: 'Ковёр помнит больше разговоров, чем мы' },
-  { src: STOCK.feature1, alt: 'Тёплый свет и латунные светильники в зале', caption: 'Свет здесь никогда не бывает резким' },
+  { src: STOCK.hero, alt: 'Overall view of the MAKAN hall', caption: 'Here you stay longer than you planned' },
+  { src: STOCK.gallerySide, alt: 'Sofa and warm light behind the corner table', caption: 'The table by the window is taken first' },
+  { src: STOCK.detail, alt: 'Interior detail: light and textiles', caption: 'The carpet remembers more conversations than we do' },
+  { src: STOCK.feature1, alt: 'Warm light and brass fixtures in the hall', caption: 'The light here is never harsh' },
 ];
 
 const explore = [
-  { label: 'Меню', href: '/menu', text: 'Блюда и напитки, которые мы подаём каждый день.', thumb: STOCK.menuTeaser },
-  { label: 'Галерея', href: '/gallery', text: 'Зал, детали интерьера и атмосфера MAKAN.', thumb: STOCK.gallerySide },
-  { label: 'История', href: '/history', text: 'Как появилось кафе и почему оно выглядит именно так.', thumb: STOCK.about },
+  { label: 'Menu', href: '/menu', text: 'Dishes and drinks we serve every day.', thumb: STOCK.menuTeaser },
+  { label: 'Gallery', href: '/gallery', text: 'The hall, interior details and atmosphere of MAKAN.', thumb: STOCK.gallerySide },
+  { label: 'History', href: '/history', text: 'How the café came to be and why it looks exactly like this.', thumb: STOCK.about },
 ];
 
 const hours = [
-  { day: 'Понедельник — Воскресенье', time: '10:00 — 23:00' },
+  { day: 'Monday — Sunday', time: '10:00 — 23:00' },
 ];
 
 const navLinks = [
-  { href: '/', label: 'Главная' },
-  { href: '/menu', label: 'Меню' },
-  { href: '/gallery', label: 'Галерея' },
-  { href: '/history', label: 'История' },
-  { href: '#contacts', label: 'Контакты' },
+  { href: '/', label: 'Home' },
+  { href: '/menu', label: 'Menu' },
+  { href: '/gallery', label: 'Gallery' },
+  { href: '/history', label: 'History' },
+  { href: '#contacts', label: 'Contacts' },
 ];
 
-// Часы работы для живого статуса "открыто/закрыто" — те же данные, что в
-// блоке `hours` выше, но по дням недели (0 = вс … 6 = сб) для расчёта в JS.
-// close: 24 значит "до полуночи".
+// Opening hours for the live "open/closed" status — the same data as in the
+// `hours` block above, but by day of week (0 = Sun … 6 = Sat) for the JS calculation.
+// close: 24 means "until midnight".
 const WEEKLY_HOURS: Record<number, [number, number]> = {
-  0: [10, 23], // воскресенье
+  0: [10, 23], // Sunday
   1: [10, 23],
   2: [10, 23],
   3: [10, 23],
@@ -214,7 +218,7 @@ function formatHour(h: number) {
   return `${String(h % 24).padStart(2, '0')}:00`;
 }
 
-/** Живой статус "открыто/закрыто сейчас", посчитанный по фактическому времени гостя. */
+/** Live "open/closed now" status, computed from the guest's actual local time. */
 function useOpenStatus() {
   const [status, setStatus] = useState<{ open: boolean; text: string } | null>(null);
 
@@ -225,10 +229,10 @@ function useOpenStatus() {
       const t = now.getHours() + now.getMinutes() / 60;
       const [open, close] = WEEKLY_HOURS[day];
       if (t >= open && t < close) {
-        setStatus({ open: true, text: `Открыто · до ${formatHour(close)}` });
+        setStatus({ open: true, text: `Open · until ${formatHour(close)}` });
       } else {
         const nextOpen = t < open ? open : WEEKLY_HOURS[(day + 1) % 7][0];
-        setStatus({ open: false, text: `Закрыто · с ${formatHour(nextOpen)}` });
+        setStatus({ open: false, text: `Closed · from ${formatHour(nextOpen)}` });
       }
     };
     compute();
@@ -258,8 +262,8 @@ export default function Home() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Тёплое пятно света, следующее за курсором — как свеча на столе. Только
-  // для устройств с мышью: на тач-экранах эффект бессмысленен и отключается CSS-медиа-запросом.
+  // Warm spot of light following the cursor — like a candle on the table. Only
+  // for pointer devices: on touch screens the effect is meaningless and is disabled via a CSS media query.
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
       spotlightRef.current?.style.setProperty('--x', `${e.clientX}px`);
@@ -269,7 +273,7 @@ export default function Home() {
     return () => window.removeEventListener('mousemove', onMove);
   }, []);
 
-  // Блокируем скролл страницы, пока открыто полноэкранное мобильное меню
+  // Lock page scroll while the full-screen mobile menu is open
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
     return () => {
@@ -277,7 +281,7 @@ export default function Home() {
     };
   }, [menuOpen]);
 
-  /** Лёгкое "магнитное" притяжение кнопки к курсору — работает только при наведении мышью. */
+  /** Light "magnetic" pull of the button toward the cursor — only works with mouse hover. */
   const magnetProps = {
     onMouseMove: (e: ReactMouseEvent<HTMLElement>) => {
       const el = e.currentTarget;
@@ -302,16 +306,16 @@ export default function Home() {
           <Link href="/" className="nav__mark">
             MAKAN <span>кафесі</span>
           </Link>
-          <nav className="nav__links" aria-label="Основная навигация">
-            <Link href="/" className="nav__link nav__link--active">Главная</Link>
-            <Link href="/menu" className="nav__link">Меню</Link>
-            <Link href="/gallery" className="nav__link">Галерея</Link>
-            <Link href="/history" className="nav__link">История</Link>
-            <a href="#contacts" className="nav__link nav__link--cta">Контакты</a>
-            <div className="nav__lang" aria-label="Выбор языка">
+          <nav className="nav__links" aria-label="Main navigation">
+            <Link href="/en_main" className="nav__link nav__link--active">Home</Link>
+            <Link href="/en_menu" className="nav__link">Menu</Link>
+            <Link href="/en_gallery" className="nav__link">Gallery</Link>
+            <Link href="/en_history" className="nav__link">History</Link>
+             <a href="/en_main#contacts" className="nav__link nav__link--cta">Contacts</a>
+            <div className="nav__lang" aria-label="Language selector">
               <Link href="/kz_main" className="nav__lang-btn">ҚАЗ</Link>
               <span className="nav__lang-dot" aria-hidden="true">·</span>
-              <Link href="/en_main" className="nav__lang-btn">ENG</Link>
+              <Link href="/" className="nav__lang-btn">РУС</Link>
             </div>
             {status && (
               <span className={`nav__status ${status.open ? 'nav__status--open' : ''}`}>
@@ -323,7 +327,7 @@ export default function Home() {
           <button
             type="button"
             className={`nav__toggle ${menuOpen ? 'nav__toggle--open' : ''}`}
-            aria-label={menuOpen ? 'Закрыть меню' : 'Открыть меню'}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen((v) => !v)}
           >
@@ -334,9 +338,9 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Полноэкранное мобильное меню */}
+      {/* Full-screen mobile menu */}
       <div className={`mobile-menu ${menuOpen ? 'mobile-menu--open' : ''}`}>
-        <nav className="mobile-menu__links" aria-label="Мобильная навигация">
+        <nav className="mobile-menu__links" aria-label="Mobile navigation">
           {navLinks.map((l, i) => (
             <Link
               key={l.href}
@@ -354,7 +358,7 @@ export default function Home() {
           <div className="mobile-menu__lang">
             <Link href="/kz_main" className="mobile-menu__lang-btn" onClick={() => setMenuOpen(false)}>ҚАЗ</Link>
             <span className="mobile-menu__lang-dot" aria-hidden="true">·</span>
-            <Link href="/en_main" className="mobile-menu__lang-btn" onClick={() => setMenuOpen(false)}>ENG</Link>
+            <Link href="/" className="mobile-menu__lang-btn" onClick={() => setMenuOpen(false)}>РУС</Link>
           </div>
           {status && (
             <span className={`mobile-menu__status ${status.open ? 'mobile-menu__status--open' : ''}`}>
@@ -369,11 +373,11 @@ export default function Home() {
         </div>
       </div>
 
-      {/* 1. HERO — что это за место */}
+      {/* 1. HERO — what this place is */}
       <section className="hero">
         <Image
           src={STOCK.hero}
-          alt="Зал кафе MAKAN: кирпичные стены, кожаные диваны бордового и зелёного цвета, тёплый свет"
+          alt="The MAKAN café hall: brick walls, burgundy and green leather sofas, warm light"
           fill
           priority
           sizes="100vw"
@@ -388,19 +392,19 @@ export default function Home() {
               {status.text}
             </span>
           )}
-          <p className="eyebrow">Кафе в центре Талгара</p>
+          <p className="eyebrow">A café in the center of Talgar</p>
           <h1 className="hero__title">
-            Место, где не смотрят на часы.
+            A place where nobody watches the clock.
             <br />
-            <em>Еда, теплые разговоры и вечера, которые не хочется торопить.</em>
+            <em>Food, warm conversations, and evenings you don't want to rush.</em>
           </h1>
           <p className="hero__text">
-            Кирпичные стены, тёплый свет и кожаные диваны — атмосфера,
-            в которой хочется задержаться подольше.
+            Brick walls, warm light and leather sofas — an atmosphere
+            you'll want to linger in a little longer.
           </p>
           <div className="hero__actions">
-            <Link href="/menu" className="btn btn--solid" {...magnetProps}>Смотреть меню</Link>
-            <a href="#contacts" className="btn btn--ghost" {...magnetProps}>Как нас найти</a>
+            <Link href="/menu" className="btn btn--solid" {...magnetProps}>View menu</Link>
+            <a href="#contacts" className="btn btn--ghost" {...magnetProps}>How to find us</a>
           </div>
         </div>
         <div className="hero__scroll" aria-hidden="true">
@@ -408,12 +412,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Бегущая строка — короткая пауза для глаза между hero и текстом */}
+      {/* Marquee — a short visual pause for the eye between the hero and the text */}
       <div className="marquee" aria-hidden="true">
         <div className="marquee__track">
           {Array.from({ length: 2 }).map((_, rep) => (
             <span className="marquee__group" key={rep}>
-              {['MAKAN', 'Азербайджанский шашлык', 'Европейская и восточная кухня', 'Грузинский стиль', 'Гостеприимство'].map((w) => (
+              {['MAKAN', 'Azerbaijani shashlik', 'European and Eastern cuisine', 'Georgian style', 'Hospitality'].map((w) => (
                 <span className="marquee__item" key={w}>
                   {w}
                   <Swash className="marquee__swash" />
@@ -424,32 +428,33 @@ export default function Home() {
         </div>
       </div>
 
-      {/* 2. О НАС — атмосфера и характер места + цитата внутри */}
+      {/* 2. ABOUT US — the mood and character of the place + an embedded quote */}
       <section id="about" className="about">
         <div className="about__grid">
           <Reveal className="about__text-col">
-            <p className="eyebrow">О нас</p>
-            <h2 className="about__title">Место для тех, кто никуда не спешит</h2>
+            <p className="eyebrow">About us</p>
+            <h2 className="about__title">A place for those who are never in a hurry</h2>
             <p className="about__text">
-              MAKAN — кафе в самом сердце Талгара, где интерьер и подача выросли
-              из одной идеи: гостя встречают неторопливо и щедро, будто он уже
-              свой. Кирпич, тяжёлая кожа диванов, приглушённый свет и ковры на
-              стенах вместо картин — детали, которые держат атмосферу.
+              MAKAN is a café at the very heart of Talgar, where the interior and
+              the service both grew out of one idea: the guest is welcomed
+              unhurriedly and generously, as if they already belong. Brick,
+              heavy leather sofas, muted light and carpets on the walls
+              instead of paintings — details that hold the atmosphere together.
             </p>
             <p className="about__text">
-              Вкусная еда, атмосфера и гостеприимство — то, ради чего сюда возвращаются
-              снова и снова.
+              Good food, atmosphere and hospitality — the reasons people
+              keep coming back.
             </p>
             <blockquote className="about__quote">
               <Swash className="about__quote-swash" />
-              «Хороший стол — это время, которое не хочется торопить.»
+              "A good table is time you don't want to rush."
             </blockquote>
           </Reveal>
           <Reveal>
             <div className="about__media">
               <Image
                 src={STOCK.about}
-                alt="Кирпичная стена и тёплый свет в интерьере кафе"
+                alt="Brick wall and warm light in the café's interior"
                 fill
                 sizes="(max-width: 900px) 100vw, 44vw"
                 className="about__media-img"
@@ -460,11 +465,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3. АТМОСФЕРА — состав зала как визуальное уравнение, а не типовая сетка карточек */}
+      {/* 3. ATMOSPHERE — the hall's makeup as a visual equation, not a typical card grid */}
       <section className="formula">
         <Reveal>
-          <p className="eyebrow eyebrow--center">Атмосфера</p>
-          <h2 className="features__title">Из чего складывается зал</h2>
+          <p className="eyebrow eyebrow--center">Atmosphere</p>
+          <h2 className="features__title">What the hall is made of</h2>
         </Reveal>
         <div className="formula__row">
           {features
@@ -491,16 +496,16 @@ export default function Home() {
           <Reveal className="formula__result">
             <Swash className="formula__result-swash" />
             <span className="formula__result-word">MAKAN</span>
-            <span className="formula__result-sub">Атмосфера, которую узнаёшь с порога</span>
+            <span className="formula__result-sub">An atmosphere you recognize from the doorway</span>
           </Reveal>
         </div>
       </section>
 
-      {/* 4. ГАЛЕРЕЯ — не витрина, а стол с разбросанными карточками-фото на плёнке "как есть" */}
+      {/* 4. GALLERY — not a showcase, but a table with scattered photo cards on film "as is" */}
       <section className="real">
         <Reveal>
-          <p className="eyebrow eyebrow--center">Зал</p>
-          <h2 className="features__title">Как здесь на самом деле</h2>
+          <p className="eyebrow eyebrow--center">The hall</p>
+          <h2 className="features__title">What it's really like here</h2>
         </Reveal>
         <div className="real__board">
           {gallery.map((g, i) => (
@@ -514,30 +519,30 @@ export default function Home() {
           ))}
         </div>
         <Link href="/gallery" className="real__link">
-          Вся галерея →
+          Full gallery →
         </Link>
       </section>
 
-      {/* 5. КОНТАКТЫ */}
+      {/* 5. CONTACTS */}
       <section id="contacts" className="contacts">
         <div className="contacts__grid">
           <Reveal className="contacts__info">
-            <p className="eyebrow">Контакты</p>
-            <h2 className="contacts__title">Приходите</h2>
+            <p className="eyebrow">Contacts</p>
+            <h2 className="contacts__title">Come visit</h2>
 
             <dl className="contacts__list">
               <div className="contacts__row">
-                <dt>Адрес</dt>
+                <dt>Address</dt>
                 <dd>{ADDRESS}</dd>
               </div>
               <div className="contacts__row">
-                <dt>Телефон</dt>
+                <dt>Phone</dt>
                 <dd>
                   <a href={PHONE_HREF}>{PHONE}</a>
                 </dd>
               </div>
               <div className="contacts__row">
-                <dt>Часы работы</dt>
+                <dt>Hours</dt>
                 <dd>
                   {hours.map((h) => (
                     <span className="contacts__hours-row" key={h.day}>
@@ -551,7 +556,7 @@ export default function Home() {
 
             <div className="contacts__actions">
               <a href={WHATSAPP} className="btn btn--solid" target="_blank" rel="noopener noreferrer" {...magnetProps}>
-                Написать в WhatsApp
+                Message on WhatsApp
               </a>
               <a href={INSTAGRAM} className="btn btn--ghost" target="_blank" rel="noopener noreferrer" {...magnetProps}>
                 Instagram
@@ -562,7 +567,7 @@ export default function Home() {
           <Reveal className="contacts__map-wrap">
             <iframe
               className="contacts__map"
-              title="MAKAN на карте"
+              title="MAKAN on the map"
               src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d46458.795829963325!2d77.19963585900013!3d43.3001328!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38839d5342ea7abf%3A0x55966906347a055c!2z0JrQsNGE0LUgIk1BS0FOIg!5e0!3m2!1sru!2skz!4v1784189106432!5m2!1sru!2skz`}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
@@ -571,11 +576,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6. ДАЛЬШЕ ПО САЙТУ */}
+      {/* 6. EXPLORE MORE */}
       <section className="explore">
         <Reveal>
-          <p className="eyebrow eyebrow--center">Дальше по сайту</p>
-          <h2 className="features__title">Погрузитесь глубже</h2>
+          <p className="eyebrow eyebrow--center">Explore more</p>
+          <h2 className="features__title">Dive deeper</h2>
         </Reveal>
 
         <div className="explore__inner">
@@ -621,13 +626,13 @@ export default function Home() {
             <div className="footer__mark">
               MAKAN <span>кафесі</span>
             </div>
-            <p className="footer__tag">Вкусная еда и атмосфера, в которой хочется задержаться</p>
+            <p className="footer__tag">Delicious food and an atmosphere that invites you to linger</p>
           </div>
 
           <div className="footer__col footer__col--meta">
             <p>{ADDRESS}</p>
             <p><a href={PHONE_HREF}>{PHONE}</a></p>
-            <p>Ежедневно, 10:00 — 23:00</p>
+            <p>Daily, 10:00 — 23:00</p>
           </div>
 
           <div className="footer__col footer__col--social">
@@ -666,23 +671,23 @@ export default function Home() {
       `}</style>
 
       <style jsx>{`
-        /* Плёночное зерно поверх всего сайта — убирает "стерильность" стоковых
-           градиентов и делает тёмный фон живым, как печатная фактура. */
+        /* Film grain over the whole site — removes the "sterile" feel of the
+           stock gradients and makes the dark background feel alive, like a printed texture. */
         .grain {
           position: fixed; inset: 0; z-index: 90; pointer-events: none;
           opacity: 0.05; mix-blend-mode: overlay;
           background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
         }
 
-        /* Тёплое пятно света за курсором — как свеча на столе. Только для
-           устройств с точным указателем (мышь); на тач-экранах отключено. */
+        /* Warm spot of light behind the cursor — like a candle on the table. Only
+           for devices with a precise pointer (mouse); disabled on touch screens. */
         .spotlight {
           position: fixed; inset: 0; z-index: 5; pointer-events: none;
           background: radial-gradient(480px circle at var(--x, 50%) var(--y, 40%), rgba(217, 184, 120, 0.10), transparent 70%);
         }
         @media (hover: none), (pointer: coarse) { .spotlight { display: none; } }
 
-        /* Тонкая золотая полоса прогресса прокрутки под шапкой */
+        /* Thin gold scroll-progress bar under the header */
         .progress {
           position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 55;
           background: var(--gold-light); transform-origin: left;
@@ -761,7 +766,7 @@ export default function Home() {
 .nav__lang-btn:hover, .nav__lang-btn:focus-visible { color: var(--gold-light); }
 .nav__lang-dot { color: var(--gold); opacity: 0.55; font-size: 0.65rem; }
 
-        /* Живой индикатор "открыто/закрыто" — считается из реальных часов работы */
+        /* Live "open/closed" indicator — computed from the actual opening hours */
         .nav__status {
           display: inline-flex; align-items: center; gap: 0.5rem;
           font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
@@ -780,7 +785,7 @@ export default function Home() {
           50% { box-shadow: 0 0 0 6px rgba(217, 184, 120, 0.06); }
         }
 
-        /* Гамбургер — три линии, морфящиеся в крестик */
+        /* Hamburger — three lines morphing into an X */
         .nav__toggle {
           display: none; position: relative; width: 26px; height: 18px;
           background: none; border: 0; padding: 0; cursor: pointer; z-index: 70;
@@ -801,7 +806,7 @@ export default function Home() {
           .nav__toggle { display: block; }
         }
 
-        /* Полноэкранное мобильное меню */
+        /* Full-screen mobile menu */
         .mobile-menu {
           position: fixed; inset: 0; z-index: 60;
           background: var(--ink); display: flex; flex-direction: column; justify-content: space-between;
@@ -846,8 +851,8 @@ export default function Home() {
         .mobile-menu__social a { color: var(--parchment-dim); text-decoration: none; font-size: 0.85rem; letter-spacing: 0.04em; }
         .mobile-menu__social a:hover { color: var(--gold-light); }
 
-        /* Переключатель языка в мобильном меню — тот же курсивный акцентный
-           стиль, что и остальной текст меню, без рамок и подложек */
+        /* Language switcher in the mobile menu — the same italic accent
+           style as the rest of the menu text, no borders or backgrounds */
         .mobile-menu__lang {
           display: flex; align-items: center; gap: 0.85rem; margin-bottom: 0.6rem;
         }
@@ -866,10 +871,10 @@ export default function Home() {
         /* HERO */
         .hero {
           position: relative; min-height: 100vh; display: flex; align-items: flex-end; overflow: hidden;
-          /* Гарантированный отступ сверху под фиксированную шапку — не даёт
-             контенту хиро "выехать" выше навигации на коротких/сжатых
-             вьюпортах (нав прозрачная до скролла, поэтому без этого отступа
-             текст хиро визуально накладывается на пункты меню). */
+          /* Guaranteed top padding under the fixed header — prevents the
+             hero content from "riding up" above the nav on short/cramped
+             viewports (the nav is transparent until scroll, so without this
+             padding the hero text visually overlaps the menu items). */
           padding-top: 6.5rem;
         }
         .hero__img { object-fit: cover; filter: saturate(0.85) brightness(0.62); }
@@ -934,7 +939,7 @@ export default function Home() {
         .btn--ghost:hover, .btn--ghost:focus-visible { border-color: var(--gold-light); color: var(--gold-light); }
         .btn:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 2px; }
 
-        /* БЕГУЩАЯ СТРОКА — короткий визуальный акцент между hero и текстом */
+        /* MARQUEE — a short visual accent between the hero and the text */
         .marquee {
           overflow: hidden; background: var(--ink-soft);
           border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline);
@@ -956,7 +961,7 @@ export default function Home() {
           .marquee__track { animation: none; }
         }
 
-        /* ABOUT (текст + фото + встроенная цитата) */
+        /* ABOUT (text + photo + embedded quote) */
         .about { padding: var(--space-section) 2rem; background: var(--ink); }
         .about__grid {
           max-width: 1180px; margin: 0 auto;
@@ -986,7 +991,7 @@ export default function Home() {
           font-size: clamp(1.6rem, 3vw, 2.1rem); margin: 0 0 3.5rem; color: var(--parchment);
         }
 
-        /* FORMULA — состав зала как визуальное уравнение: фото + фото + фото = MAKAN */
+        /* FORMULA — the hall's makeup as a visual equation: photo + photo + photo = MAKAN */
         .formula { background: var(--ink-soft); padding: var(--space-section) 2rem; text-align: center; border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
         .formula__row {
           max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: center;
@@ -1025,10 +1030,10 @@ export default function Home() {
           .formula__item, .formula__result { width: 100%; max-width: 280px; }
         }
 
-        /* REAL — стол с разбросанными карточками-фото вместо витринной сетки.
-           Простой flex-wrap с явной фиксированной шириной карточек — без
-           CSS Grid и без анимации на весь блок, чтобы ничего не могло
-           схлопнуться в невидимое состояние. */
+        /* REAL — a table with scattered photo cards instead of a showcase grid.
+           A simple flex-wrap with an explicit fixed card width — no
+           CSS Grid and no animation on the whole block, so nothing can
+           collapse into an invisible state. */
         .real { position: relative; padding: var(--space-section) 2rem; background: var(--ink); text-align: center; }
         .real__board {
           display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: center;
@@ -1108,8 +1113,8 @@ export default function Home() {
           .contacts__map-wrap { min-height: 280px; }
         }
 
-        /* EXPLORE — редакторский список с изображением, которое подгружается
-           сбоку при наведении, вместо типовых карточек с картинкой сверху */
+        /* EXPLORE — an editorial list with an image that loads in
+           beside it on hover, instead of typical cards with an image on top */
         .explore { padding: var(--space-section-sm) 2rem var(--space-section); background: var(--ink); text-align: center; }
         .explore__inner {
           max-width: 1180px; margin: 3.4rem auto 0; text-align: left;
@@ -1199,7 +1204,7 @@ export default function Home() {
           .footer__swash { width: 80px; }
         }
 
-        /* Плотнее подгоняем боковые отступы секций на самых узких экранах */
+        /* Tighten side padding on the narrowest screens */
         @media (max-width: 480px) {
           .about, .formula, .real, .contacts, .explore, .hero__content {
             padding-left: 1.25rem; padding-right: 1.25rem;
