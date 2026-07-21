@@ -51,8 +51,8 @@ const STOCK = {
   details_6: '/images/makan-photo.jpg',
 
   // TABLE — food, drinks, table setting
-  table_1: '/images/skoro.jpg',
-  table_2: '/images/zhuirda.jpg',
+  table_1: '/images/food1.jpg',
+  table_2: '/images/food2.jpg',
 };
 
 const HERO_IMAGE_FOCUS = 'center 30%';
@@ -89,8 +89,8 @@ const photos: {
   { src: STOCK.details_6, alt: 'MAKAN interior detail', caption: 'Little things you notice only after a while', category: 'details', aspect: '3 / 4' },
   
   // — ON THE TABLE —
-  { src: STOCK.table_1, alt: 'Dessert and drink on the table', caption: 'This is why people keep coming back', category: 'table', aspect: '4 / 3' },
-  { src: STOCK.table_2, alt: 'Coffee with latte art on the table', caption: 'The morning starts with this cup', category: 'table', aspect: '4 / 3' },
+  { src: STOCK.table_1, alt: 'Dessert and drink on the table', caption: 'This is why people keep coming back', category: 'table', aspect: '3 / 4' },
+  { src: STOCK.table_2, alt: 'Coffee with latte art on the table', caption: 'The morning starts with this soup', category: 'table', aspect: '3 / 4' },
 ];
 
 const explore = [

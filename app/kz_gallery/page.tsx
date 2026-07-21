@@ -51,8 +51,8 @@ const STOCK = {
   details_6: '/images/makan-photo.jpg',
 
   // НА СТОЛЕ — тағамдар, сусындар, дастарқан сәні
-  table_1: '/images/skoro.jpg',
-  table_2: '/images/zhuirda.jpg',
+  table_1: '/images/food1.jpg',
+  table_2: '/images/food2.jpg',
 };
 
 const HERO_IMAGE_FOCUS = 'center 30%';
@@ -89,8 +89,8 @@ const photos: {
   { src: STOCK.details_6, alt: 'MAKAN интерьерінің бөлшегі', caption: 'Бірден байқала бермейтін ұсақ-түйектер', category: 'details', aspect: '3 / 4' },
   
   // — ҮСТЕЛ ҮСТІ —
-  { src: STOCK.table_1, alt: 'Үстел үстіндегі десерт пен сусын', caption: 'Мұнда осы үшін де қайта оралады', category: 'table', aspect: '4 / 3' },
-  { src: STOCK.table_2, alt: 'Үстел үстіндегі латте-арты бар кофе', caption: 'Таң осы шыныаяқтан басталады', category: 'table', aspect: '4 / 3' },
+  { src: STOCK.table_1, alt: 'Үстел үстіндегі десерт пен сусын', caption: 'Мұнда осы үшін де қайта оралады', category: 'table', aspect: '3 / 4' },
+  { src: STOCK.table_2, alt: 'Үстел үстіндегі латте-арты бар кофе', caption: 'Таң осы сорпадан басталады', category: 'table', aspect: '3 / 4' },
 ];
 
 const explore = [

@@ -81,8 +81,8 @@ const STOCK = {
   details_6: '/images/makan-photo.jpg',
 
   // НА СТОЛЕ — еда, напитки, сервировка
-  table_1: '/images/skoro.jpg',
-  table_2: '/images/zhuirda.jpg',
+  table_1: '/images/food1.jpg',
+  table_2: '/images/food2.jpg',
 };
 
 const HERO_IMAGE_FOCUS = 'center 30%';
@@ -122,8 +122,8 @@ const photos: {
   { src: STOCK.details_6, alt: 'Деталь интерьера MAKAN', caption: 'Мелочи, которые замечают не сразу', category: 'details', aspect: '3 / 4' },
   
   // — НА СТОЛЕ —
-  { src: STOCK.table_1, alt: 'Десерт и напиток на столе', caption: 'Ради этого сюда возвращаются', category: 'table', aspect: '4 / 3' },
-  { src: STOCK.table_2, alt: 'Кофе с латте-артом на столе', caption: 'Утро начинается с этой чашки', category: 'table', aspect: '4 / 3' },
+  { src: STOCK.table_1, alt: 'Десерт и напиток на столе', caption: 'Ради этого сюда возвращаются', category: 'table', aspect: '3 / 4' },
+  { src: STOCK.table_2, alt: 'Кофе с латте-артом на столе', caption: 'Утро начинается с этого супа', category: 'table', aspect: '3 / 4' },
 ];
 
 const explore = [
