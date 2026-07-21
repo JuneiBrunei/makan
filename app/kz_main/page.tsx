@@ -163,13 +163,13 @@ const features = [
   },
   {
     title: 'Детальдарға назар',
-    text: 'Интерьер детальдары тек әсемдеп қана қоймай, отырғың келетін атмосфера жасайды',
+    text: 'Интерьер детальдары тек әсемдеп қана қоймай, отырғың келетін атмосфераны құрайды',
     image: STOCK.feature2,
     alt: 'Күңгірт жарықтағы шарап түсті диван мен күңгірт жасыл жапсырма',
   },
   {
     title: 'Қабырғадағы кілемдер',
-    text: 'Суреттердің орнына тоқыма өрнектер мен ілінген жарық — атмосфераны әсемдеп қана қоймай, ұстап тұратын деталь.',
+    text: 'Суреттердің орнына тоқыма өрнектер мен ілінген жарық — атмосфераны әсемдеп қана қоймай, іргетасын құрайтын деталь.',
     image: STOCK.detail,
     alt: 'Кірпіш қабырғадағы тоқыма кілем және ілінген шам',
   },
@@ -183,9 +183,9 @@ const gallery = [
 ];
 
 const explore = [
-  { label: 'Мәзір', href: '/menu', text: 'Біз күн сайын ұсынатын тағамдар мен сусындар.', thumb: STOCK.menuTeaser },
-  { label: 'Галерея', href: '/gallery', text: 'MAKAN залы, интерьер детальдары және атмосферасы.', thumb: STOCK.gallerySide },
-  { label: 'Тарих', href: '/history', text: 'Кафе қалай пайда болды және неге дәл осылай көрінеді.', thumb: STOCK.about },
+  { label: 'Мәзір', href: '/kz_menu', text: 'Біз күн сайын ұсынатын тағамдар мен сусындар.', thumb: STOCK.menuTeaser },
+  { label: 'Галерея', href: '/kz_gallery', text: 'MAKAN залы, интерьер детальдары және атмосферасы.', thumb: STOCK.gallerySide },
+  { label: 'Тарих', href: '/kz_history', text: 'Кафе қалай пайда болды және неге дәл осылай көрінеді.', thumb: STOCK.about },
 ];
 
 const hours = [
@@ -402,7 +402,7 @@ export default function Home() {
             отырғың келетін атмосфера.
           </p>
           <div className="hero__actions">
-            <Link href="/menu" className="btn btn--solid" {...magnetProps}>Мәзірді көру</Link>
+            <Link href="/kz_menu" className="btn btn--solid" {...magnetProps}>Мәзірді көру</Link>
             <a href="#contacts" className="btn btn--ghost" {...magnetProps}>Бізді қалай табуға болады</a>
           </div>
         </div>
@@ -416,7 +416,7 @@ export default function Home() {
         <div className="marquee__track">
           {Array.from({ length: 2 }).map((_, rep) => (
             <span className="marquee__group" key={rep}>
-              {['MAKAN', 'Әзірбайжан шашлығы', 'Еуропалық және шығыс асханасы', 'Грузин стилі', 'Қонақжайлылық'].map((w) => (
+              {['MAKAN', 'Әзірбайжан шашлығы', 'Еуропалық және шығыс елдері асханасы', 'Грузин стилі', 'Қонақжайлылық'].map((w) => (
                 <span className="marquee__item" key={w}>
                   {w}
                   <Swash className="marquee__swash" />
@@ -436,8 +436,8 @@ export default function Home() {
             <p className="about__text">
               MAKAN — Талғардың дәл жүрегінде орналасқан кафе, мұнда интерьер
               мен қызмет көрсету бір идеядан туындаған: қонақты асықпай әрі
-              жомарттықпен, өз адамындай қарсы алады. Кірпіш, диван­дардың
-              ауыр былғарысы, күңгірт жарық және суреттердің орнына
+              жомарттықпен, өз адамындай қарсы алу. Кірпіш, былғары
+            дивандар , күңгірт жарық және суреттердің орнына
               қабырғадағы кілемдер — атмосфераны ұстап тұратын детальдар.
             </p>
             <p className="about__text">
@@ -517,7 +517,7 @@ export default function Home() {
             </div>
           ))}
         </div>
-        <Link href="/gallery" className="real__link">
+        <Link href="/kz_gallery" className="real__link">
           Барлық галерея →
         </Link>
       </section>

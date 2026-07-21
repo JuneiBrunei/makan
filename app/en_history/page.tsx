@@ -75,9 +75,9 @@ const milestones = [
 ];
 
 const explore = [
-  { label: 'Menu', href: '/menu', text: 'Georgian dishes, shashlik, and desserts served daily.' },
-  { label: 'Gallery', href: '/gallery', text: 'Our dining hall, interior details, and mountain atmosphere.' },
-  { label: 'Contacts', href: '/#contacts', text: 'Address, opening hours, and directions.' },
+  { label: 'Menu', href: '/en_menu', text: 'Georgian dishes, shashlik, and desserts served daily.' },
+  { label: 'Gallery', href: '/en_gallery', text: 'Our dining hall, interior details, and mountain atmosphere.' },
+  { label: 'Contacts', href: '/en_main#contacts', text: 'Address, opening hours, and directions.' },
 ];
 
 const navLinks = [

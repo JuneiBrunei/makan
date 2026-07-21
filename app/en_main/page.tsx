@@ -184,9 +184,9 @@ const gallery = [
 ];
 
 const explore = [
-  { label: 'Menu', href: '/menu', text: 'Dishes and drinks we serve every day.', thumb: STOCK.menuTeaser },
-  { label: 'Gallery', href: '/gallery', text: 'The hall, interior details and atmosphere of MAKAN.', thumb: STOCK.gallerySide },
-  { label: 'History', href: '/history', text: 'How the café came to be and why it looks exactly like this.', thumb: STOCK.about },
+  { label: 'Menu', href: '/en_menu', text: 'Dishes and drinks we serve every day.', thumb: STOCK.menuTeaser },
+  { label: 'Gallery', href: '/en_gallery', text: 'The hall, interior details and atmosphere of MAKAN.', thumb: STOCK.gallerySide },
+  { label: 'History', href: '/en_history', text: 'How the café came to be and why it looks exactly like this.', thumb: STOCK.about },
 ];
 
 const hours = [
@@ -403,7 +403,7 @@ export default function Home() {
             you'll want to linger in a little longer.
           </p>
           <div className="hero__actions">
-            <Link href="/menu" className="btn btn--solid" {...magnetProps}>View menu</Link>
+            <Link href="/en_menu" className="btn btn--solid" {...magnetProps}>View menu</Link>
             <a href="#contacts" className="btn btn--ghost" {...magnetProps}>How to find us</a>
           </div>
         </div>
@@ -438,7 +438,7 @@ export default function Home() {
               MAKAN is a café at the very heart of Talgar, where the interior and
               the service both grew out of one idea: the guest is welcomed
               unhurriedly and generously, as if they already belong. Brick,
-              heavy leather sofas, muted light and carpets on the walls
+            leather sofas, muted light and carpets on the walls
               instead of paintings — details that hold the atmosphere together.
             </p>
             <p className="about__text">
@@ -518,7 +518,7 @@ export default function Home() {
             </div>
           ))}
         </div>
-        <Link href="/gallery" className="real__link">
+        <Link href="/en_gallery" className="real__link">
           Full gallery →
         </Link>
       </section>

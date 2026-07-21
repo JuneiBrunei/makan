@@ -94,9 +94,9 @@ const photos: {
 ];
 
 const explore = [
-  { label: 'Menu', href: '/menu', text: 'Dishes and drinks we serve every day.' },
-  { label: 'Story', href: '/history', text: 'How the café came to be and why it looks this way.' },
-  { label: 'Contacts', href: '/#contacts', text: 'Address, opening hours, and how to reach us.' },
+  { label: 'Menu', href: '/en_menu', text: 'Dishes and drinks we serve every day.' },
+  { label: 'Story', href: '/en_history', text: 'How the café came to be and why it looks this way.' },
+  { label: 'Contacts', href: '/en_main#contacts', text: 'Address, opening hours, and how to reach us.' },
 ];
 
 const navLinks = [

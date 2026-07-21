@@ -75,14 +75,14 @@ const photos: {
 }[] = [
   // — ЗАЛ —
   { src: STOCK.hall_1, alt: 'MAKAN залының жалпы көрінісі', caption: 'Мұндағы жарық ешқашан тым артық болмайды', category: 'hall', aspect: '4 / 5' },
-  { src: STOCK.hall_2, alt: 'Шегіршін түсті дивандар мен күңгірт-жасыл қаптама', caption: 'Терезе жанындағы үстел бірінші болып босайды', category: 'hall', aspect: '3 / 4' },
+  { src: STOCK.hall_2, alt: 'Шегіршін түсті дивандар мен күңгірт-жасыл қаптама', caption: 'Терезе жанындағы орындарға бірінші болып отырады', category: 'hall', aspect: '3 / 4' },
   { src: STOCK.hall_3, alt: 'MAKAN залы', caption: 'Асықпай өткізгің келетін кеш', category: 'hall', aspect: '3 / 4' },
   { src: STOCK.hall_4, alt: 'MAKAN залы', caption: 'Ұзағырақ аялдағың келетін орын', category: 'hall', aspect: '1 / 1' },
   { src: STOCK.hall_5, alt: 'MAKAN залы кешке', caption: 'Шегіршін мен зүбаржат түсті былғары қонақты босағадан қарсы алады', category: 'hall', aspect: '3 / 4' },
 
   // — БӨЛШЕКТЕР —
-  { src: STOCK.details_1, alt: 'MAKAN интерьерінің бөлшегі', caption: 'Бұрыш сайын қонақтарға жайлылық сыйлаймыз', category: 'details', aspect: '1 / 1' },
-  { src: STOCK.details_2, alt: 'MAKAN интерьерінің бөлшегі', caption: 'Мұнда жоспарлағаннан да ұзақ кідіреді', category: 'details', aspect: '4 / 5' },
+  { src: STOCK.details_1, alt: 'MAKAN интерьерінің бөлшегі', caption: 'Әр бұрышта қонақтарға жайлылық сыйлаймыз', category: 'details', aspect: '1 / 1' },
+  { src: STOCK.details_2, alt: 'MAKAN интерьерінің бөлшегі', caption: 'Мұнда жоспарлағаннан да ұзақ демалады', category: 'details', aspect: '4 / 5' },
   { src: STOCK.details_3, alt: 'MAKAN интерьерінің бөлшегі', caption: 'Біз әрбір детальға көңіл бөлеміз', category: 'details', aspect: '4 / 5' },
   { src: STOCK.details_4, alt: 'MAKAN интерьерінің бөлшегі', caption: 'Төсеніш бізге қарағанда көп сырды біледі', category: 'details', aspect: '3 / 4' },
   { src: STOCK.details_5, alt: 'MAKAN интерьерінің бөлшегі', caption: 'Кірпіш пен жез — сөзсіз түсінікті фон', category: 'details', aspect: '1 / 1' },
@@ -94,9 +94,9 @@ const photos: {
 ];
 
 const explore = [
-  { label: 'Мәзір', href: '/menu', text: 'Күн сайын ұсынатын тағамдарымыз бен сусындарымыз.' },
-  { label: 'Тарихы', href: '/history', text: 'Кафе қалай ашылды және неге дәл осылай көрінеді.' },
-  { label: 'Байланыс', href: '/#contacts', text: 'Мекенжай, жұмыс уақыты және бізге қалай жетуге болады.' },
+  { label: 'Мәзір', href: '/kz_menu', text: 'Күн сайын ұсынатын тағамдарымыз бен сусындарымыз.' },
+  { label: 'Тарихы', href: '/kz_history', text: 'Кафе қалай ашылды және неге дәл осылай көрінеді.' },
+  { label: 'Байланыс', href: '/kz_main#contacts', text: 'Мекенжай, жұмыс уақыты және бізге қалай жетуге болады.' },
 ];
 
 const navLinks = [
