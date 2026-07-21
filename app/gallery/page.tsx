@@ -107,19 +107,19 @@ const photos: {
   aspect: string;
 }[] = [
   // — ЗАЛ —
-  { src: STOCK.hall_1, alt: 'Общий вид зала MAKAN', caption: 'Столик у окна занимают первым', category: 'hall', aspect: '4 / 5' },
-  { src: STOCK.hall_2, alt: 'Диваны цвета вина и тёмно-зелёная обивка', caption: 'Кожа цвета вина встречает гостя с порога', category: 'hall', aspect: '3 / 4' },
-  { src: STOCK.hall_3, alt: 'Зал MAKAN', caption: 'Свет здесь никогда не бывает резким', category: 'hall', aspect: '3 / 4' },
+  { src: STOCK.hall_1, alt: 'Общий вид зала MAKAN', caption: 'Свет здесь никогда не бывает резким', category: 'hall', aspect: '4 / 5' },
+  { src: STOCK.hall_2, alt: 'Диваны цвета вина и тёмно-зелёная обивка', caption: 'Столик у окна занимают первым', category: 'hall', aspect: '3 / 4' },
+  { src: STOCK.hall_3, alt: 'Зал MAKAN', caption: 'Вечер, который не хочется торопить', category: 'hall', aspect: '3 / 4' },
   { src: STOCK.hall_4, alt: 'Зал MAKAN', caption: 'Место, где хочется задержаться подольше', category: 'hall', aspect: '1 / 1' },
-  { src: STOCK.hall_5, alt: 'Зал MAKAN вечером', caption: 'Вечер, который не хочется торопить', category: 'hall', aspect: '3 / 4' },
+  { src: STOCK.hall_5, alt: 'Зал MAKAN вечером', caption: 'Кожа цвета вина и изумруда встречает гостя с самого порога', category: 'hall', aspect: '3 / 4' },
 
   // — ДЕТАЛИ —
-  { src: STOCK.details_1, alt: 'Деталь интерьера MAKAN', caption: 'Кирпич и латунь — фон, который не объясняют', category: 'details', aspect: '1 / 1' },
+  { src: STOCK.details_1, alt: 'Деталь интерьера MAKAN', caption: 'Мы создаем уют для гостей в каждом уголке', category: 'details', aspect: '1 / 1' },
   { src: STOCK.details_2, alt: 'Деталь интерьера MAKAN', caption: 'Здесь задерживаются дольше, чем планировали', category: 'details', aspect: '4 / 5' },
-  { src: STOCK.details_3, alt: 'Деталь интерьера MAKAN', caption: 'Свет расставлен так же тщательно, как стол', category: 'details', aspect: '4 / 5' },
+  { src: STOCK.details_3, alt: 'Деталь интерьера MAKAN', caption: 'Мы обращаем внимание на каждую деталь', category: 'details', aspect: '4 / 5' },
   { src: STOCK.details_4, alt: 'Деталь интерьера MAKAN', caption: 'Ковёр помнит больше разговоров, чем мы', category: 'details', aspect: '3 / 4' },
-  { src: STOCK.details_5, alt: 'Деталь интерьера MAKAN', caption: 'Мелочи, которые замечают не сразу', category: 'details', aspect: '1 / 1' },
-  { src: STOCK.details_6, alt: 'Деталь интерьера MAKAN', caption: 'Ковёр помнит больше разговоров, чем мы', category: 'details', aspect: '3 / 4' },
+  { src: STOCK.details_5, alt: 'Деталь интерьера MAKAN', caption: 'Кирпич и латунь — фон, который не объясняют', category: 'details', aspect: '1 / 1' },
+  { src: STOCK.details_6, alt: 'Деталь интерьера MAKAN', caption: 'Мелочи, которые замечают не сразу', category: 'details', aspect: '3 / 4' },
   
   // — НА СТОЛЕ —
   { src: STOCK.table_1, alt: 'Десерт и напиток на столе', caption: 'Ради этого сюда возвращаются', category: 'table', aspect: '4 / 3' },
@@ -553,7 +553,7 @@ export default function GalleryPage() {
             <div className="footer__mark">
               MAKAN <span>кафесі</span>
             </div>
-            <p className="footer__tag">Кофе, десерты и атмосфера, в которой хочется задержаться</p>
+            <p className="footer__tag">Вкусная еда и атмосфера, в которой хочется задержаться</p>
           </div>
 
           <div className="footer__col footer__col--meta">
