@@ -236,16 +236,16 @@ const FOOD_CATEGORIES: MenuCategory[] = [
   {
     title: 'Shashlik / Kebabs',
     groups: items(
-      ['Lamb Kebab', '1499 ₸'],
-      ['Lamb Rib Kebab / Chops', '2499 ₸'],
-      ['Minced Lamb Lyulya Kebab', '1499 ₸'],
-      ['Caucasian Pork/Beef Kebab', '2399 ₸'],
-      ['Chicken Thigh Kebab', '1199 ₸'],
-      ['Chicken Wing Kebab', '1299 ₸'],
-      ['Duck Kebab', '1299 ₸'],
-      ['Wrapped Beef Liver Kebab', '1399 ₸'],
-      ['Grilled Mushrooms', '1599 ₸'],
-      ['Grilled Vegetables', '1199 ₸']
+      ['Lamb Kebab', '1650 ₸'],
+      ['Lamb Rib Kebab / Chops', '2800 ₸'],
+      ['Minced Lamb Lyulya Kebab', '1500 ₸'],
+      ['Caucasian Kebab', '2400 ₸'],
+      ['Chicken Thigh Kebab', '1200 ₸'],
+      ['Chicken Wing Kebab', '1300 ₸'],
+      ['Duck Kebab', '1400 ₸'],
+      ['Wrapped Beef Liver Kebab', '1600 ₸'],
+      ['Grilled Mushrooms', '1600 ₸'],
+      ['Grilled Vegetables', '1200 ₸']
     ),
   },
   {
