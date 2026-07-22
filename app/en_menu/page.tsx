@@ -236,7 +236,7 @@ const FOOD_CATEGORIES: MenuCategory[] = [
   {
     title: 'Shashlik / Kebabs',
     groups: items(
-      ['Lamb Kebab', '1650 ₸'],
+      ['Lamb Kebab', '1700 ₸'],
       ['Lamb Rib Kebab / Chops', '2800 ₸'],
       ['Minced Lamb Lyulya Kebab', '1500 ₸'],
       ['Caucasian Kebab', '2400 ₸'],
