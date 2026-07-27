@@ -121,8 +121,6 @@ const FOOD_CATEGORIES: MenuCategory[] = [
       ['Syrniki / Cottage Cheese Pancakes (jam, honey, sour cream on request)', '2299 ₸'],
       ['Oatmeal with Seasonal Fruit', '1199 ₸'],
       ['Shakshuka (eggs, tomatoes, bell peppers, onions, spices)', '2299 ₸'],
-      ['Crepes with Cottage Cheese', '1599 ₸'],
-      ['Crepes with Minced Meat', '1799 ₸'],
       ['Turkish Breakfast (feta cheese, olives, boiled eggs, cherry tomatoes, cucumbers, greens)', '1599 ₸']
     ),
   },
@@ -146,7 +144,7 @@ const FOOD_CATEGORIES: MenuCategory[] = [
       ['Homemade Chicken Noodle Soup', '1299 ₸'],
       ['Bozbash (lamb, chickpeas, potatoes, onions, tomatoes, spices)', '2099 ₸'],
       ['Homemade Pelmeni (beef dumplings, onions, dough, sour cream, spices)', '1699 ₸'],
-      ['Beshbarmak / Kazakh Meat (beef/horsemeat, kazy, pasta sheets, broth, onion sauce)', '1899 ₸'],
+      ['Kazakh Meat (beef/horsemeat, kazy, pasta sheets, broth, onion sauce)', '2199 ₸'],
       ['Khash — Traditional Caucasian Soup (beef feet, garlic, herbs, broth, lavash)', '2499 ₸'],
       ['Tom Yum (shrimp, mushrooms, cherry tomatoes, onions, coconut milk, tom yum paste, lime, cilantro, chili optional)', '3799 ₸']
     ),
@@ -159,7 +157,6 @@ const FOOD_CATEGORIES: MenuCategory[] = [
       ['Chicken Caesar (iceberg lettuce, crispy chicken fillet, cherry tomatoes, parmesan, croutons, Caesar dressing, egg)', '2699 ₸'],
       ['Greek Salad (tomatoes, cucumbers, bell peppers, olives, lemon, salad leaves, red onion, olive oil, feta)', '2299 ₸'],
       ['Spicy "Arzu" Salad (cucumbers, sweet peppers, red onion, garlic, beef, hot pepper, soy sauce, oil)', '2299 ₸'],
-      ['Georgian "Tsitsibeli" Salad (mushrooms, chicken fillet, cucumbers, shoe-string potatoes, sauce)', '2699 ₸'],
       ['Chef\'s Special Salad (seared feta, cherry tomatoes, mushrooms, garlic, oil)', '2699 ₸'],
       ['Turmeric Salad (cauliflower, broccoli, bell peppers, cherry tomatoes, chicken fillet, turmeric dressing)', '2599 ₸'],
       ['"Tbilisi" Salad (beef, red kidney beans, bell pepper, cilantro, walnuts, lemon juice, oil)', '2799 ₸'],
@@ -172,8 +169,6 @@ const FOOD_CATEGORIES: MenuCategory[] = [
     groups: items(
       ['Spicy Chicken Wings', '2499 ₸'],
       ['Garlic Butter Shrimp', '3099 ₸'],
-      ['Mini Meat Chebureks', '3 pcs — 1399 ₸ · 5 pcs — 2199 ₸'],
-      ['Mini Cheese & Herb Chebureks', '3 pcs — 1399 ₸ · 5 pcs — 1999 ₸'],
       ['Mini Meat Samsa', '5 pcs — 2199 ₸'],
       ['Chicken Nuggets', '6 pcs — 1399 ₸']
     ),
@@ -183,20 +178,19 @@ const FOOD_CATEGORIES: MenuCategory[] = [
     groups: items(
       ['Megrelian Khachapuri', '3099 ₸'],
       ['Imeretian Khachapuri', '2799 ₸'],
-      ['Meat Khachapuri', '3499 ₸'],
       ['Adjaruli Khachapuri', '2999 ₸'],
-      ['Cheese & Potato Khychins', '1599 ₸']
+      ['Cheese Khychins', '1599 ₸']
     ),
   },
   {
     title: 'Main Courses',
     groups: items(
-      ['Sizzling Beef Skillet', '2599 ₸'],
+      ['Sizzling Beef Skillet', '2799 ₸'],
       ['Thai-Style Sizzling Beef (beef, bell peppers, onions, garlic, chili on request, soy sauce)', '2399 ₸'],
-      ['Meat Khinkali (Georgian Dumplings)', '2599 ₸'],
-      ['Georgian-Style Lamb (lamb, bell peppers, tomato paste, Georgian spices, onions)', '2499 ₸'],
-      ['Beef Stroganoff (beef, onions, cream; side dish separate)', '2199 ₸'],
-      ['Chakhokhbili (stewed chicken, bell peppers, Georgian spices, onions)', '2599 ₸'],
+      ['Meat Khinkali (Georgian Dumplings)', '2799 ₸'],
+      ['Georgian-Style Lamb (lamb, bell peppers, tomato paste, Georgian spices, onions)', '2799 ₸'],
+      ['Beef Stroganoff (beef, onions, cream; side dish separate)', '2399 ₸'],
+      ['Chakhokhbili (chicken fillet, bell peppers, Georgian spices, onions)', '2599 ₸'],
       ['Sizzling Chicken Skillet (chicken fillet, bell peppers, herbs, spices)', '2599 ₸'],
       ['Ojdakhuri (meat, onions, potatoes, tomatoes, herbs, spices)', '2599 ₸'],
       ['Creamy Mushroom Chicken Breast', '2899 ₸'],
@@ -204,14 +198,12 @@ const FOOD_CATEGORIES: MenuCategory[] = [
       ['Kazan Kebab', '3099 ₸'],
       ['Meat with French Fries', '2699 ₸'],
       ['Veal with Sour Cream and Mushrooms', '2399 ₸'],
-      ['Dolma (stuffed grape leaves)', '2499 ₸']
+      ['Dolma', '2799 ₸']
     ),
   },
   {
     title: 'Oriental Cuisine',
     groups: items(
-      ['Tsomian (Pan-fried Lagman noodles)', '1799 ₸'],
-      ['Guyru Lagman', '2499 ₸'],
       ['Steamed Manti Dumplings', '2499 ₸'],
       ['Kuyrdak (roasted organ meats and meat with potatoes)', '3499 ₸'],
       ['Syrne (slow-cooked tender lamb)', '3499 ₸']
@@ -220,10 +212,10 @@ const FOOD_CATEGORIES: MenuCategory[] = [
   {
     title: 'Pizza',
     groups: items(
-      ['Pepperoni Pizza', '2599 ₸'],
-      ['Margherita Pizza', '2399 ₸'],
+      ['Pepperoni Pizza', '2799 ₸'],
+      ['Margherita Pizza', '2599 ₸'],
       ['Chicken Pizza', '3299 ₸'],
-      ['Four Seasons Pizza', '2799 ₸'],
+      ['Four Seasons Pizza', '2999 ₸'],
       ['Caesar Pizza', '3399 ₸']
     ),
   },
@@ -239,14 +231,14 @@ const FOOD_CATEGORIES: MenuCategory[] = [
   {
     title: 'Shashlik / Kebabs',
     groups: items(
-      ['Lamb Kebab', '1700 ₸'],
+      ['Lamb Kebab', '1800 ₸'],
       ['Lamb Rib Kebab / Chops', '2800 ₸'],
-      ['Minced Lamb Lyulya Kebab', '1500 ₸'],
-      ['Caucasian Kebab', '2400 ₸'],
-      ['Chicken Thigh Kebab', '1200 ₸'],
-      ['Chicken Wing Kebab', '1300 ₸'],
+      ['Minced Lamb Lyulya Kebab', '1700 ₸'],
+      ['Caucasian Kebab', '2700 ₸'],
+      ['Chicken Thigh Kebab', '1350 ₸'],
+      ['Chicken Wing Kebab', '1400 ₸'],
       ['Duck Kebab', '1400 ₸'],
-      ['Wrapped Beef Liver Kebab', '1600 ₸'],
+      ['Wrapped Beef Liver Kebab', '1700 ₸'],
       ['Grilled Mushrooms', '1600 ₸'],
       ['Grilled Vegetables', '1200 ₸']
     ),
@@ -257,76 +249,55 @@ const FOOD_CATEGORIES: MenuCategory[] = [
       ['Traditional Beshbarmak', 'for 6 pers. — 18999 ₸ · for 4 pers. — 13999 ₸'],
       ['Lamb Kuyrdak', 'for 6 pers. — 19499 ₸ · for 4 pers. — 13499 ₸'],
       ['Syrne (Slow-cooked Lamb)', 'for 6 pers. — 19499 ₸ · for 4 pers. — 14499 ₸'],
-      ['Dapanji with Rice (spicy chicken stew)', 'for 6 pers. — 13999 ₸ · for 4 pers. — 10999 ₸'],
-      ['Festive Beef Plov (Pilaf)', 'for 6 pers. — 16999 ₸ · for 4 pers. — 12999 ₸'],
-      ['Steamed Manti Dumplings', 'for 6 pers. — 13800 ₸'],
-      ['Koktal (Smoked Whole Fish)', '27999 ₸']
+      ['Day and night (beef, chicken fillet, mushrooms, pepper, onions)', 'for 6 pers. — 18999 ₸'],
+      ['Steamed Manti Dumplings', 'for 6 pers. — 13800 ₸']
     ),
   },
   {
     title: 'Sauces',
     groups: items(
-      ['Homemade Adjika', '499 ₸'],
       ['Garlic Sauce', '399 ₸'],
-      ['White Herb Sauce', '399 ₸'],
-      ['Red Herb Sauce', '399 ₸'],
+      ['White Herb Sauce', '499 ₸'],
+      ['Shashlik Sauce', '499 ₸'],
       ['Cheese Sauce', '399 ₸'],
       ['Ketchup', '299 ₸'],
-      ['Mayonnaise', '299 ₸'],
-      ['Soy Sauce', '350 ₸']
+      ['Mayonnaise', '299 ₸']
     ),
   },
   {
     title: 'Fish Dishes',
     groups: items(
-      ['Trout in Cream Sauce', '3599 ₸'],
-      ['Pan-seared Pike-perch (served over mashed potatoes)', '3599 ₸'],
-      ['Dorado in Sweet and Sour Sauce', '4599 ₸']
-    ),
-  },
-  {
-    title: 'Sets for 8 Persons',
-    groups: items(
-      ['Meat Set (lamb ribs, chops, beef medallions, chicken thighs, grilled horsemeat sausages, dolma, grilled vegetables, baked potatoes, sauces)', '27999 ₸'],
-      ['Seafood Platter (trout, salmon, pike-perch fillet, lemons, grilled vegetables, rice)', '33999 ₸'],
-      ['Poultry Set (chicken thighs, wings, fillet, duck, greens, french fries)', '22999 ₸']
-    ),
-  },
-  {
-    title: 'Desserts',
-    groups: items(
-      ['Honey Cake (Medovik)', '1599 ₸'],
-      ['Napoleon Cake', '1599 ₸'],
-      ['Baklava', '1899 ₸']
+      ['Trout in Cream Sauce', '4599 ₸'],
+      ['Pike-perch fillet (side dish seperate)', '2399 ₸'],
     ),
   },
   {
     title: 'Steaks',
     groups: items(
       ['Ribeye Steak with Grilled Vegetables', '6099 ₸'],
-      ['T-Bone Steak with Vegetables', '5799 ₸'],
-      ['Trout Steak', '4799 ₸'],
-      ['Salmon Steak', '4799 ₸']
+      ['T-Bone Steak with Vegetables', '6099 ₸'],
+      ['Trout Steak', '5299 ₸'],
+      ['Salmon Steak', '5299 ₸']
     ),
   },
   {
     title: 'Pasta',
     groups: items(
-      ['Fettuccine Alfredo with Salmon', '3599 ₸'],
-      ['Fettuccine Alfredo with Chicken', '2199 ₸'],
-      ['Fettuccine Alfredo with Shrimp', '3099 ₸'],
-      ['Spaghetti Bolognese', '2199 ₸']
+      ['Fettuccine Alfredo with Salmon', '4199 ₸'],
+      ['Fettuccine Alfredo with Chicken', '2999 ₸'],
+      ['Fettuccine Alfredo with Shrimp', '3999 ₸'],
+      ['Spaghetti Bolognese', '2899 ₸']
     ),
   },
   {
     title: 'Side Dishes',
     groups: items(
-      ['French Fries', '799 ₸'],
-      ['Steamed Rice', '599 ₸'],
-      ['Grilled Vegetables', '899 ₸'],
-      ['Potato Wedges', '799 ₸'],
-      ['Mashed Potatoes', '599 ₸'],
-      ['Combo Side Dish', '799 ₸']
+      ['French Fries', '950 ₸'],
+      ['Steamed Rice', '799 ₸'],
+      ['Grilled Vegetables', '1199 ₸'],
+      ['Potato Wedges', '950 ₸'],
+      ['Mashed Potatoes', '799 ₸'],
+      ['Combo Side Dish', '1099 ₸']
     ),
   },
   {
