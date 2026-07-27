@@ -245,7 +245,7 @@ const FOOD_CATEGORIES: MenuCategory[] = [
   {
     title: 'Sharing Platters (Group Meals)',
     groups: items(
-      ['Traditional Beshbarmak', 'for 6 pers. — 18999 ₸ · for 4 pers. — 13999 ₸'],
+      ['Traditional Besbarmak', 'for 6 pers. — 18999 ₸ · for 4 pers. — 13999 ₸'],
       ['Lamb Kuyrdak', 'for 6 pers. — 19499 ₸ · for 4 pers. — 13499 ₸'],
       ['Syrne (Slow-cooked Lamb)', 'for 6 pers. — 19499 ₸ · for 4 pers. — 14499 ₸'],
       ['Day and night (beef, chicken fillet, mushrooms, pepper, onions)', 'for 6 pers. — 18999 ₸'],
