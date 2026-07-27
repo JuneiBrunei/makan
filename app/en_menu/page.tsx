@@ -130,7 +130,6 @@ const FOOD_CATEGORIES: MenuCategory[] = [
       ['Caucasian Platter (tomatoes, cucumbers, feta cheese, black olives, green onions, dill, cilantro, lemon, bell peppers)', '3499 ₸'],
       ['Assorted Pickles (pickled cucumbers, tomatoes, sauerkraut, spicy peppers)', '3299 ₸'],
       ['Horse Meat Platter (zhaya, kazy, horse tongue)', '6599 ₸'],
-      ['Fish Platter', '5499 ₸'],
       ['Eggplant Rolls with Walnut Filling', '3099 ₸'],
       ['Russian Appetizer (herring, potatoes, pickled cucumbers, onions, lemon, sauerkraut)', '3399 ₸']
     ),
