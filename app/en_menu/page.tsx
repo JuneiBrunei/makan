@@ -141,7 +141,7 @@ const FOOD_CATEGORIES: MenuCategory[] = [
       ['Lentil Soup', '1350 ₸'],
       ['Assorted solyanka', '1699 ₸'],
       ['Homemade Chicken Noodle Soup', '1299 ₸'],
-      ['Bozbash (lamb, chickpeas, potatoes, onions, tomatoes, spices)', '2099 ₸'],
+      ['Bozbash (lamb, chickpeas, potatoes, onions, tomatoes, spices)', '2799 ₸'],
       ['Homemade Pelmeni (beef dumplings, onions, dough, sour cream, spices)', '1699 ₸'],
       ['Kazakh Meat (beef/horsemeat, kazy, pasta sheets, broth, onion sauce)', '2199 ₸'],
       ['Khash — Traditional Caucasian Soup (beef feet, garlic, herbs, broth, lavash)', '2499 ₸'],
@@ -160,7 +160,8 @@ const FOOD_CATEGORIES: MenuCategory[] = [
       ['Turmeric Salad (cauliflower, broccoli, bell peppers, cherry tomatoes, chicken fillet, turmeric dressing)', '2599 ₸'],
       ['"Tbilisi" Salad (beef, red kidney beans, bell pepper, cilantro, walnuts, lemon juice, oil)', '2799 ₸'],
       ['Caucasian Salad (tomatoes, cucumbers, red onion, cilantro, basil, oil)', '2199 ₸'],
-      ['Fresh Garden Salad (tomatoes, cucumbers, onions)', '1599 ₸']
+      ['Malibu (smoked chicken breast, tomato, cucumbers, cheese)', '2199 ₸'],
+      ['Fresh Garden Salad (tomatoes, cucumbers, onions)', '1199 ₸']
     ),
   },
   {
@@ -196,6 +197,7 @@ const FOOD_CATEGORIES: MenuCategory[] = [
       ['Homemade Meat Patties, 2 pcs (side dish separate)', '1599 ₸'],
       ['Kazan Kebab', '3099 ₸'],
       ['Meat with French Fries', '2699 ₸'],
+      ['Chicken tabaka', '2599 ₸'],
       ['Veal with Sour Cream and Mushrooms', '2399 ₸'],
       ['Dolma', '2799 ₸']
     ),
@@ -243,13 +245,13 @@ const FOOD_CATEGORIES: MenuCategory[] = [
     ),
   },
   {
-    title: 'Sharing Platters (Group Meals)',
+    title: 'Group Meals (6 persons)',
     groups: items(
-      ['Traditional Besbarmak', 'for 6 pers. — 18999 ₸ · for 4 pers. — 13999 ₸'],
-      ['Lamb Kuyrdak', 'for 6 pers. — 19499 ₸ · for 4 pers. — 13499 ₸'],
-      ['Syrne (Slow-cooked Lamb)', 'for 6 pers. — 19499 ₸ · for 4 pers. — 14499 ₸'],
-      ['Day and night (beef, chicken fillet, mushrooms, pepper, onions)', 'for 6 pers. — 18999 ₸'],
-      ['Steamed Manti Dumplings', 'for 6 pers. — 13800 ₸']
+      ['Traditional Besbarmak', '18999 ₸'],
+      ['Lamb Kuyrdak', '19499 ₸'],
+      ['Syrne (Slow-cooked Lamb)', '19499 ₸'],
+      ['Day and night (beef, chicken fillet, mushrooms, pepper, onions)', '18999 ₸'],
+      ['Steamed Manti Dumplings', '13799 ₸']
     ),
   },
   {
