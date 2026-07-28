@@ -143,7 +143,7 @@ const FOOD_CATEGORIES: MenuCategory[] = [
       ['Homemade Chicken Noodle Soup', '1299 ₸'],
       ['Bozbash (lamb, chickpeas, potatoes, onions, tomatoes, spices)', '2799 ₸'],
       ['Homemade Pelmeni (beef dumplings, onions, dough, sour cream, spices)', '1699 ₸'],
-      ['Kazakh Meat (beef/horsemeat, kazy, pasta sheets, broth, onion sauce)', '2199 ₸'],
+      ['Kazakh Meat (meat, kazy, pasta sheets, broth, onion sauce)', '2199 ₸'],
       ['Khash — Traditional Caucasian Soup (beef feet, garlic, herbs, broth, lavash)', '2499 ₸'],
       ['Tom Yum (shrimp, mushrooms, cherry tomatoes, onions, coconut milk, tom yum paste, lime, cilantro, chili optional)', '3799 ₸']
     ),
@@ -226,7 +226,7 @@ const FOOD_CATEGORIES: MenuCategory[] = [
       ['Baursaks (fried dough puffs)', '999 ₸'],
       ['Bread Basket', '1499 ₸'],
       ['Lavash Flatbread', '299 ₸'],
-      ['Traditional Tandoor Bread', '299 ₸']
+      ['Homemade flatbread', '299 ₸']
     ),
   },
   {
@@ -239,7 +239,7 @@ const FOOD_CATEGORIES: MenuCategory[] = [
       ['Chicken Thigh Kebab', '1350 ₸'],
       ['Chicken Wing Kebab', '1400 ₸'],
       ['Duck Kebab', '1400 ₸'],
-      ['Wrapped Beef Liver Kebab', '1700 ₸'],
+      ['Wrapped Liver Kebab', '1700 ₸'],
       ['Grilled Mushrooms', '1600 ₸'],
       ['Grilled Vegetables', '1200 ₸']
     ),
@@ -261,7 +261,7 @@ const FOOD_CATEGORIES: MenuCategory[] = [
     groups: items(
       ['Garlic Sauce', '399 ₸'],
       ['White Herb Sauce', '499 ₸'],
-      ['Shashlik Sauce', '499 ₸'],
+      ['Shashlik Sauce (red)', '499 ₸'],
       ['Cheese Sauce', '399 ₸'],
       ['Ketchup', '299 ₸'],
       ['Mayonnaise', '299 ₸']
