@@ -251,6 +251,8 @@ const FOOD_CATEGORIES: MenuCategory[] = [
       ['Lamb Kuyrdak', '19499 ₸'],
       ['Syrne (Slow-cooked Lamb)', '19499 ₸'],
       ['Day and night (beef, chicken fillet, mushrooms, pepper, onions)', '18999 ₸'],
+      ['Khashlama (beef, potatoes, onions, semi-spicy pepper)', '17999 ₸'],
+      ['Sach (lamb, bell peppers, grilled vegetables)', '18999 ₸'],
       ['Steamed Manti Dumplings', '13799 ₸']
     ),
   },
