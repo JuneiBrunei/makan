@@ -118,8 +118,8 @@ const FOOD_CATEGORIES: MenuCategory[] = [
     title: 'Breakfast',
     groups: items(
       ['Georgian Breakfast (sausages, fried eggs, vegetable omelet, greens, beans)', '2599 ₸'],
-      ['Syrniki / Cottage Cheese Pancakes (jam, honey, sour cream on request)', '2299 ₸'],
-      ['Oatmeal with Seasonal Fruit', '1199 ₸'],
+      ['Rice porridge', '1199 ₸'],
+      ['Oatmeal', '1199 ₸'],
       ['Shakshuka (eggs, tomatoes, bell peppers, onions, spices)', '2299 ₸'],
       ['Turkish Breakfast (feta cheese, olives, boiled eggs, cherry tomatoes, cucumbers, greens)', '1599 ₸']
     ),
@@ -169,7 +169,6 @@ const FOOD_CATEGORIES: MenuCategory[] = [
     groups: items(
       ['Spicy Chicken Wings', '2499 ₸'],
       ['Garlic Butter Shrimp', '3099 ₸'],
-      ['Mini Meat Samsa', '5 pcs — 2199 ₸'],
       ['Chicken Nuggets', '6 pcs — 1399 ₸']
     ),
   },
@@ -185,20 +184,20 @@ const FOOD_CATEGORIES: MenuCategory[] = [
   {
     title: 'Main Courses',
     groups: items(
-      ['Sizzling Beef Skillet', '2799 ₸'],
-      ['Thai-Style Sizzling Beef (beef, bell peppers, onions, garlic, chili on request, soy sauce)', '2399 ₸'],
+      ['Sizzling Beef Skillet', '2999 ₸'],
+      ['Thai-Style Sizzling Beef (beef, bell peppers, onions, garlic, chili on request, soy sauce)', '2599 ₸'],
       ['Meat Khinkali (Georgian Dumplings)', '2799 ₸'],
       ['Georgian-Style Lamb (lamb, bell peppers, tomato paste, Georgian spices, onions)', '2799 ₸'],
       ['Beef Stroganoff (beef, onions, cream; side dish separate)', '2399 ₸'],
       ['Chakhokhbili (chicken fillet, bell peppers, Georgian spices, onions)', '2599 ₸'],
       ['Sizzling Chicken Skillet (chicken fillet, bell peppers, herbs, spices)', '2599 ₸'],
       ['Ojdakhuri (meat, onions, potatoes, tomatoes, herbs, spices)', '2599 ₸'],
-      ['Creamy Mushroom Chicken Breast', '2899 ₸'],
+      ['Creamy Mushroom Chicken Breast', '2999 ₸'],
       ['Homemade Meat Patties, 2 pcs (side dish separate)', '1599 ₸'],
       ['Kazan Kebab', '3099 ₸'],
       ['Meat with French Fries', '2699 ₸'],
       ['Chicken tabaka', '2599 ₸'],
-      ['Veal with Sour Cream and Mushrooms', '2399 ₸'],
+      ['Veal with Sour Cream and Mushrooms', '2999 ₸'],
       ['Dolma', '2799 ₸']
     ),
   },
@@ -251,7 +250,7 @@ const FOOD_CATEGORIES: MenuCategory[] = [
       ['Lamb Kuyrdak', '19499 ₸'],
       ['Syrne (Slow-cooked Lamb)', '19499 ₸'],
       ['Day and night (beef, chicken fillet, mushrooms, pepper, onions)', '18999 ₸'],
-      ['Khashlama (beef, potatoes, onions, semi-spicy pepper)', '17999 ₸'],
+      ['Khashlama (beef, potatoes, onions, semi-spicy pepper)', '18999 ₸'],
       ['Sach (lamb, bell peppers, grilled vegetables)', '18999 ₸'],
       ['Steamed Manti Dumplings', '13799 ₸']
     ),
