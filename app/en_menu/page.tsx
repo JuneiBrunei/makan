@@ -161,7 +161,7 @@ const FOOD_CATEGORIES: MenuCategory[] = [
       ['"Tbilisi" Salad (beef, red kidney beans, bell pepper, cilantro, walnuts, lemon juice, oil)', '2799 ₸'],
       ['Caucasian Salad (tomatoes, cucumbers, red onion, cilantro, basil, oil)', '2199 ₸'],
       ['Malibu (smoked chicken breast, tomato, cucumbers, cheese)', '2199 ₸'],
-      ['Fresh Garden Salad (tomatoes, cucumbers, onions)', '1199 ₸']
+      ['Fresh Garden Salad (tomatoes, cucumbers, onions)', '1599 ₸']
     ),
   },
   {
